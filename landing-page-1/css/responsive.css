@@ -1,0 +1,178 @@
+/* Responsive Styles - Mobile First Design */
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+}
+
+/* Tablet & Small Desktop */
+@media (max-width: 1024px) {
+    .banner img {
+        max-width: 850px;
+    }
+    
+    .slideshow-container {
+        max-width: 750px;
+    }
+    
+    .single-package {
+        max-width: 320px;
+    }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+    }
+    
+    .contact-header {
+        font-size: 1.75rem;
+    }
+    
+    .banner {
+        padding: var(--spacing-md);
+    }
+    
+    .banner img {
+        max-width: 95%;
+    }
+    
+    .single-package {
+        max-width: 300px;
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .package-amount {
+        font-size: 1.75rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-width: 600px;
+    }
+    
+    .close {
+        top: 15px;
+        right: 25px;
+        font-size: 2.5rem;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .footer-logo img {
+        max-width: 200px;
+    }
+}
+
+/* Mobile Landscape & Large Phone */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .highlight-box {
+        padding: var(--spacing-md);
+    }
+    
+    .slideshow-container {
+        max-width: 95%;
+        padding: 0.5rem;
+    }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .contact-container {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .contact-header {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .single-package {
+        max-width: 280px;
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .package-amount {
+        font-size: 1.625rem;
+    }
+    
+    .package-button {
+        padding: 10px 20px;
+        font-size: 0.9375rem;
+    }
+    
+    .whatsapp-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    .social-links, .footer-links {
+        gap: var(--spacing-sm);
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .close {
+        top: 10px;
+        right: 15px;
+        font-size: 2rem;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .banner img {
+        border-radius: var(--radius-md);
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+    body {
+        font-size: 13px;
+    }
+    
+    .contact-header {
+        font-size: 1.25rem;
+    }
+    
+    .single-package {
+        max-width: 260px;
+        padding: var(--spacing-xs);
+    }
+    
+    .package-amount {
+        font-size: 1.5rem;
+    }
+    
+    .package-button {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+    }
+    
+    .whatsapp-button {
+        padding: 10px 20px;
+        font-size: 0.9375rem;
+    }
+    
+    .footer-logo img {
+        max-width: 160px;
+    }
+}
