@@ -3,5 +3,6 @@ deployment:
     - export FXPATH=/home/idnafevn/fx.idnads.pro
     - export TRADEPATH=/home/idnafevn/tradecenter.idnads.pro
     - /bin/mkdir -p $FXPATH $TRADEPATH
-    - /usr/bin/rsync -a --delete --exclude 'data/' --exclude 'config.php' --exclude 'secret.txt' fx.idnads.pro/ $FXPATH/
-    - /usr/bin/rsync -a --delete --exclude 'config.php' --exclude 'secret.txt' tradecenter.idnads.pro/ $TRADEPATH/
+    - /bin/rm -rf $FXPATH/invest $FXPATH/data $TRADEPATH/go
+    - /usr/bin/rsync -a --delete --exclude 'invest/' --exclude 'data/' --exclude 'config.php' --exclude 'db.php' --exclude 'installer.php' --exclude 'expired.html' --exclude 'secret.txt' fx.idnads.pro/ $FXPATH/
+    - /usr/bin/rsync -a --delete --exclude 'go/' --exclude 'config.php' --exclude 'installer.php' --exclude 'secret.txt' tradecenter.idnads.pro/ $TRADEPATH/
