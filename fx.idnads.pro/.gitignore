@@ -1,0 +1,9 @@
+# Git ignore for fx.idnads.pro
+config.php
+data/
+*.db
+*.sqlite
+*.sqlite3
+.DS_Store
+Thumbs.db
+error_log

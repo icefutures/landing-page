@@ -1,0 +1,48 @@
+# Git ignore for entire project
+
+# Config files with secrets
+fx.idnads.pro/config.php
+tradecenter.idnads.pro/config.php
+
+# Database files
+fx.idnads.pro/data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Test files
+.secret
+.test-token
+
+# Debug/Inspector files (should be deleted after use)
+fx.idnads.pro/db-inspector.php
+fx.idnads.pro/cleanup.php
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+error_log
+*.log
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# cPanel files
+.cpanel/
+.htpasswds/
+.trash/
+cgi-bin/
+
+# Temporary files
+tmp/
+temp/
