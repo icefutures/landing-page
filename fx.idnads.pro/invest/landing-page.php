@@ -50,7 +50,7 @@
                     <div class="package-divider"></div>
                     <p class="package-amount">Rp500.000</p>
                     <p class="package-description">Paket menengah dengan potensi profit lebih besar</p>
-                    <button class="package-button" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Silver', '_blank')">Daftar Sekarang</button>
+                    <button class="package-button" onclick="window.open('https://wa.me/6281234567899?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Silver', '_blank')">Daftar Sekarang</button>
                 </div>
 
                 <div class="single-package">
