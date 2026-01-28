@@ -6,6 +6,17 @@
 [![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite&logoColor=white)](https://sqlite.org)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 
+## ⚡ READY TO UPLOAD - NO EDIT NEEDED!
+
+**Project ini 100% siap upload!** Tidak perlu edit apapun.
+
+**Setup hanya 5 menit:**
+1. Upload 2 ZIP files
+2. Run installer di browser
+3. Done! ✅
+
+👉 **Baca:** [SETUP_CEPAT.md](SETUP_CEPAT.md) untuk langkah upload lengkap
+
 ---
 
 ## 📖 Tentang Sistem
