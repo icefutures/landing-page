@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Guardian - Pelaburan Selamat & Pulangan Menarik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17496817565"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-17496817565');
+</script>
+    <style>
+        :root {
+            --primary: #2A5C82;
+            --secondary: #5CB85C;
+            --accent: #FFD700;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: #f8f9fa;
+            color: #111;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1E3A5F 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="%23f8f9fa"/></svg>');
+            background-size: 50px 50px;
+            opacity: 0.06;
+        }
+
+        .hero h1, .hero h2, .hero h3 {
+            margin: 0 0 12px 0;
+        }
+
+        .hero h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .hero-badge {
+            background: var(--secondary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(92,184,92,0.3);
+            animation: bounce 2s infinite;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .hero-stat {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 15px;
+            width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .hero-stat i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .cta-button {
+            background: var(--secondary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 20px 0;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.03);
+        }
+
+        /* Features Section */
+.features {
+    padding: 60px 20px;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    transition: transform 0.25s;
+    box-sizing: border-box;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+.feature-icon {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+/* Media Queries for Responsive Design */
+@media (min-width: 768px) {
+    .feature-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .feature-card {
+        width: calc(33.333% - 20px);
+    }
+}
+
+        /* Profit Calculator */
+        .profit-calc {
+            background: linear-gradient(135deg, var(--secondary) 0%, #4CAF50 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .calc-table {
+            max-width: 800px;
+            margin: 30px auto;
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .calc-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+            background: var(--accent);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .guarantee:before {
+            content: "★";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            color: var(--primary);
+        }
+
+        /* Testimonial Section */
+        .testimonial {
+            padding: 60px 20px;
+            background: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 24px;
+            margin: 0 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            flex: 0 0 calc(100% - 20px);
+            min-width: calc(100% - 20px);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .testimonial-card:after {
+            content: '"';
+            position: absolute;
+            top: -16px;
+            left: 18px;
+            font-size: 70px;
+            color: var(--primary);
+            opacity: 0.06;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
+            gap: 12px;
+        }
+
+        .testimonial-controls button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .testimonial-controls button:hover {
+            background: var(--secondary);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 14px;
+            gap: 8px;
+        }
+
+        .testimonial-dots .dot {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+
+        .testimonial-dots .dot.active {
+            background: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h3 { font-size: 1.25rem; }
+            .hero p { font-size: 0.95rem; }
+            .hero-stat { width: 80%; }
+            .feature-card { width: 100%; }
+        }
+
+        .faq-section {
+            padding: 30px 10px;
+            background-color: #f1f5f9;
+            text-align: center;
+        }
+        .faq-item {
+            max-width: 90%;
+            margin: 10px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question i { transition: transform 0.3s; }
+        .faq-answer {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        .faq-item.active .faq-answer { padding: 15px; max-height: 260px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        /* Dark Mode */
+        .dark-mode {
+            background: #0f1720;
+            color: #e6eef6;
+        }
+        .dark-mode .feature-card,
+        .dark-mode .testimonial-card,
+        .dark-mode .faq-item {
+            background: #12121a !important;
+            color: #e6eef6 !important;
+            box-shadow: none !important;
+        }
+        .dark-mode-toggle {
+            position: fixed;
+            top: 10px;
+            right: 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .countdown-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(6px);
+            width: 90%;
+            max-width: 300px;
+            margin: 16px auto 0;
+        }
+
+        .countdown-title { font-size: 1.05rem; margin-bottom: 6px; font-weight: 600; }
+        .countdown { display: flex; justify-content: center; gap: 10px; }
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 10px;
+            border-radius: 8px;
+            width: 70px;
+            text-align: center;
+        }
+        .countdown-item span { display: block; font-size: 1.4rem; font-weight: 700; }
+
+        .responsive { width: 100%; height: auto; }
+        .price-tag {
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 12px;
+            margin: 18px auto;
+            max-width: 260px;
+            border: 2px dashed var(--accent);
+            color: #fff;
+        }
+        .price-amount { font-size: 2rem; font-weight: 700; color: var(--accent); margin: 8px 0; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://go.idnads.pro/img/khalid.jpg" class="responsive" alt="Banner">
+
+        <h3>Jana Keuntungan 30–80% Setiap Hari<br>Bersama Pasukan Analyst Profesional</h3>
+        <p>
+            Mahu tambah pendapatan setiap hari tanpa perlu keluar rumah? Dengan Profit Guardian, anda boleh mula hanya menggunakan telefon pintar.
+            Kami sediakan panduan langkah demi langkah, sokongan analyst dan sistem yang mudah untuk anda mula mendapat pulangan.
+        </p>
+
+        <div class="price-tag" aria-hidden="true">
+            <h4 style="margin:0;">Mula Dengan Modal Kecil</h4>
+            <div class="price-amount">RM100</div>
+            <p style="margin:0; font-size:0.95rem;">Modal permulaan mampu milik untuk mula menjana keuntungan</p>
+        </div>
+
+        <p style="margin-top:14px;">
+            Kos hidup semakin meningkat — masa untuk ambil tindakan. Sertai ramai rakyat Malaysia yang sudah menjana pendapatan tambahan setiap hari.
+        </p>
+
+        <a href="https://url01.xyz/a/uJxQpPav5076" class="cta-button" aria-label="Hubungi via WhatsApp">
+            <i class="fab fa-whatsapp"></i> Hubungi melalui WhatsApp
+        </a>
+
+        <div class="countdown-container" role="status" aria-live="polite">
+            <div class="countdown-title">Tawaran Terhad</div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span id="minutes">07</span>
+                    <small>min</small>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <small>saat</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" aria-label="Kelebihan">
+        <div class="feature-card">
+            <i class="fas fa-shield-alt feature-icon" aria-hidden="true"></i>
+            <h3>Jaminan Keselamatan Modal</h3>
+            <p>Kami utamakan keselamatan dana anda — mekanisme pulangan modal tersedia sekiranya berlaku perkara tidak dijangka.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fas fa-chart-line feature-icon" aria-hidden="true"></i>
+            <h3>Pulangan Harian Menarik</h3>
+            <p>Sistem kami direka untuk memberikan pulangan harian yang kompetitif dengan pemantauan pakar.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fas fa-users feature-icon" aria-hidden="true"></i>
+            <h3>Analyst Berpengalaman</h3>
+            <p>Pasukan kami mempunyai pengalaman bertahun-tahun dalam pengurusan risiko dan strategi pasaran.</p>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee" aria-label="Kenapa pilih kami">
+        <h2 style="margin:0 0 8px 0;">Mengapa Pilih Profit Guardian?</h2>
+        <div style="max-width:900px;margin:0 auto;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+            <div class="feature-card" style="max-width:420px;">
+                <h3>✅ Pematuhan & Ketelusan</h3>
+                <p>Kami beroperasi mengikut garis panduan industri dan menyediakan laporan transaksi yang telus setiap hari.</p>
+            </div>
+            <div class="feature-card" style="max-width:420px;">
+                <h3>✅ Sokongan Penuh</h3>
+                <p>Pasukan sokongan kami sedia membantu anda 7 hari seminggu — dari pendaftaran hingga pengeluaran keuntungan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial" aria-label="Testimoni pelanggan">
+        <h2>Apa Kata Mereka</h2>
+        <div class="testimonial-slider" id="testimonialSlider" aria-live="polite">
+            <div class="testimonial-card">
+                <h3>“Pulangan Konsisten Setiap Hari”</h3>
+                <p>Sejak mula melabur, saya menerima pulangan setiap hari. Sistemnya mudah dan support pantas.</p>
+                <p><strong>- Amran, KL</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>“Sangat Profesional”</h3>
+                <p>Analyst jelaskan setiap langkah dan laporan sangat telus. Rasa selamat menyerahkan modal di sini.</p>
+                <p><strong>- Siti, Selangor</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>“Modal Mampu Milik”</h3>
+                <p>Dengan modal serendah RM100 saya boleh cuba dan lihat hasil sebelum tambah pelaburan.</p>
+                <p><strong>- Hafiz, Johor</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>“Sokongan Mesra & Responsif”</h3>
+                <p>Setiap soalan dijawab dengan cepat. Proses daftar dan terima profit sangat mudah.</p>
+                <p><strong>- Nabila, Penang</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>“Rezeki Tambahan Untuk Keluarga”</h3>
+                <p>Pendapatan lebih membantu tanggung kos harian keluarga — sangat membantu!</p>
+                <p><strong>- Ismail, Melaka</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>“Terbaik Untuk Side Income”</h3>
+                <p>Saya bekerja sambil memantau pelaburan — sistem buat kerja untuk saya.</p>
+                <p><strong>- Farah, Ipoh</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>“Pulangan Konsisten”</h3>
+                <p>Dalam beberapa minggu saya lihat hasil yang konsisten. Rasa yakin untuk tambah modal nanti.</p>
+                <p><strong>- Zulkifli, Kuching</strong></p>
+            </div>
+        </div>
+
+        <div class="testimonial-controls" aria-hidden="false">
+            <button onclick="prevSlide()" aria-label="Slide sebelumnya"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="nextSlide()" aria-label="Slide seterusnya"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="testimonial-dots" id="testimonialDots" role="tablist" aria-label="Navigasi testimoni">
+            <span class="dot active" onclick="goToSlide(0)" role="tab" aria-selected="true"></span>
+            <span class="dot" onclick="goToSlide(1)" role="tab"></span>
+            <span class="dot" onclick="goToSlide(2)" role="tab"></span>
+            <span class="dot" onclick="goToSlide(3)" role="tab"></span>
+            <span class="dot" onclick="goToSlide(4)" role="tab"></span>
+            <span class="dot" onclick="goToSlide(5)" role="tab"></span>
+            <span class="dot" onclick="goToSlide(6)" role="tab"></span>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="hero" style="background: var(--primary); padding: 60px 20px;">
+        <h2>Mulakan Pelaburan Anda Sekarang</h2>
+        <p>Daftar dalam 2 minit — selesaikan tugas dan mula terima pulangan.</p>
+        <a href="https://url01.xyz/a/uJxQpPav5076" class="cta-button">
+            <i class="fab fa-whatsapp"></i> Hubungi Analyst Kami
+        </a>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" aria-label="Soalan Lazim">
+        <h2>Soalan Lazim</h2>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Program ini selamat ke?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Ya — kami utamakan keselamatan dana pelanggan. Kami sediakan laporan transaksi yang telus dan mekanisme pulangan modal sekiranya berlaku perkara tidak dijangka.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Bolehkah mula dengan modal RM100?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Boleh. Anda boleh mula dengan modal serendah RM100 dan cuba sistem kami sebelum meningkatkan pelaburan.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Berapa lama untuk mula nampak hasil?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Peserta biasanya mula menerima pulangan selepas menyelesaikan tugas dalam lingkungan 10–15 minit, bergantung kepada tahap aktiviti.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Adakah yuran pendaftaran dikenakan?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Tiada yuran pendaftaran. Anda hanya perlu menyediakan modal untuk memulakan tugasan dan menerima pulangan.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Bagaimana cara untuk mendaftar?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Klik butang "Hubungi melalui WhatsApp" di atas dan ikuti arahan yang diberikan oleh pasukan kami.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Adakah had umur untuk menyertai?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Program ini sesuai untuk individu berumur 18 tahun ke atas. Sila rujuk syarat penuh di halaman pendaftaran.</p>
+            </div>
+        </div>
+    </section>
+
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-pressed="false" aria-label="Tukar mod gelap">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Skrip Testimonial & FAQ & Countdown & Dark Mode -->
+    <script>
+        // Testimonial Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-card');
+        const dots = document.querySelectorAll('.testimonial-dots .dot');
+        const slider = document.querySelector('.testimonial-slider');
+        let slideInterval;
+
+        function getCardsPerSlide() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 768) return 2;
+            return 1;
+        }
+
+        function showSlide(index) {
+            const cardsPerSlide = getCardsPerSlide();
+            const maxSlide = Math.ceil(slides.length / cardsPerSlide) - 1;
+            if (index > maxSlide) index = 0;
+            if (index < 0) index = maxSlide;
+            const offset = -index * 100;
+            slider.style.transform = `translateX(${offset}%)`;
+            currentSlide = index;
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            const cardsPerSlide = getCardsPerSlide();
+            const maxSlide = Math.ceil(slides.length / cardsPerSlide) - 1;
+            showSlide(currentSlide + 1 > maxSlide ? 0 : currentSlide + 1);
+        }
+
+        function prevSlide() {
+            const cardsPerSlide = getCardsPerSlide();
+            const maxSlide = Math.ceil(slides.length / cardsPerSlide) - 1;
+            showSlide(currentSlide - 1 < 0 ? maxSlide : currentSlide - 1);
+        }
+
+        function goToSlide(index) { showSlide(index); }
+
+        function startAutoSlide() { slideInterval = setInterval(nextSlide, 3000); }
+        function stopAutoSlide() { clearInterval(slideInterval); }
+        startAutoSlide();
+        slider.addEventListener('mouseenter', stopAutoSlide);
+        slider.addEventListener('mouseleave', startAutoSlide);
+        window.addEventListener('resize', () => { showSlide(currentSlide); });
+
+        // FAQ Toggle (single open)
+        function toggleFAQ(question) {
+            const faqItem = question.parentElement;
+            const allFAQ = document.querySelectorAll('.faq-item');
+            allFAQ.forEach(item => {
+                if (item !== faqItem) item.classList.remove('active');
+            });
+            faqItem.classList.toggle('active');
+        }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            const isDark = document.body.classList.contains('dark-mode');
+            if (isDark) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                document.querySelector('.dark-mode-toggle').setAttribute('aria-pressed', 'true');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                document.querySelector('.dark-mode-toggle').setAttribute('aria-pressed', 'false');
+            }
+        }
+
+        // Countdown (7 min)
+        let countdownTime = 7 * 60 * 1000;
+        function startCountdown() {
+            const minutesElement = document.getElementById("minutes");
+            const secondsElement = document.getElementById("seconds");
+            const countdownInterval = setInterval(() => {
+                const minutes = Math.floor(countdownTime / (1000 * 60));
+                const seconds = Math.floor((countdownTime % (1000 * 60)) / 1000);
+                minutesElement.innerText = minutes < 10 ? `0${minutes}` : minutes;
+                secondsElement.innerText = seconds < 10 ? `0${seconds}` : seconds;
+                countdownTime -= 1000;
+                if (countdownTime < 0) {
+                    clearInterval(countdownInterval);
+                    resetCountdown();
+                }
+            }, 1000);
+        }
+        function resetCountdown() {
+            countdownTime = 7 * 60 * 1000;
+            startCountdown();
+        }
+        startCountdown();
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+
+</body>
+</html>

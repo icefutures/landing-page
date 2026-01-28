@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surat Jaminan Ganti Rugi Digital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1e3a8a;
+      --secondary: #0e9f6e;
+      --accent: #06b6d4;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --gray: #64748b;
+      --light-gray: #e2e8f0;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      color: var(--dark);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .content-wrapper {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* Header Baru */
+    .document-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .document-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+    }
+
+    .brand-text {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .document-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 180px;
+      justify-content: center;
+    }
+
+    .action-btn.print {
+      background: linear-gradient(135deg, #4b5563, #374151);
+    }
+
+    .action-btn.screenshot {
+      background: linear-gradient(135deg, var(--secondary), #059669);
+    }
+
+    .action-btn.edit {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Letter Container - Desain Baru */
+    .letter-container {
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .letter-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      padding: 30px;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      transform: rotate(30deg);
+    }
+
+    .letter-header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    .letter-header p {
+      margin: 10px 0 0;
+      opacity: 0.9;
+      font-size: 16px;
+      letter-spacing: 0.3px;
+      position: relative;
+    }
+
+    .letter-body {
+      padding: 40px;
+      position: relative;
+    }
+
+    .watermark {
+      position: absolute;
+      opacity: 0.03;
+      font-size: 180px;
+      font-weight: 800;
+      color: var(--primary);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .letter-content {
+      line-height: 1.7;
+      font-size: 15px;
+      color: var(--dark);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Client Info - Desain Baru */
+    .client-info {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 25px;
+      margin: 25px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border-left: 5px solid var(--primary);
+    }
+
+    .info-row {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .info-label {
+      font-weight: 600;
+      min-width: 160px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-label i {
+      font-size: 18px;
+    }
+
+    .info-value {
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    /* Highlight Sections - Desain Baru */
+    .highlight {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      padding: 25px;
+      border-radius: 16px;
+      margin: 25px 0;
+      border: 1px solid #bae6fd;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+    }
+
+    .highlight p {
+      margin: 12px 0;
+      text-align: justify;
+    }
+
+    /* Approval Section - Desain Baru */
+    .approval-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 40px;
+      padding: 0 20px;
+    }
+
+    .logo-section {
+      text-align: left;
+    }
+
+    .approval-section {
+      text-align: right;
+    }
+
+    .company-logo {
+      height: 70px;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    }
+
+    .approval-stamp {
+      display: inline-block;
+      padding: 18px 28px;
+      background: #f0fdf4;
+      border: 2px dashed #22c55e;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      /* Pastikan ini selalu terlihat untuk screenshot */
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .approval-stamp p {
+      margin: 0;
+      font-weight: 600;
+      color: #166534;
+      font-size: 15px;
+    }
+
+    .approval-qr {
+      width: 90px;
+      margin-top: 12px;
+      border-radius: 10px;
+    }
+
+    /* Footer - Desain Baru */
+    .letter-footer {
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--gray);
+      border-top: 1px solid var(--light-gray);
+      background: var(--light);
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      color: #166534;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .loading-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    .loading-text {
+      font-size: 18px;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--dark);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 12px;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* Edit Mode */
+    .edit-mode .info-value {
+      display: none;
+    }
+
+    .edit-mode .info-input {
+      display: block !important;
+    }
+
+    .info-input {
+      display: none;
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      font-family: inherit;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Animations */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .letter-body {
+        padding: 30px;
+      }
+      
+      .approval-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+      
+      .logo-section, .approval-section {
+        text-align: center;
+      }
+      
+      .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+      
+      .info-label {
+        min-width: unset;
+      }
+      
+      .action-btn {
+        min-width: 160px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+      
+      .letter-header {
+        padding: 25px;
+      }
+      
+      .letter-header h1 {
+        font-size: 26px;
+      }
+      
+      .document-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .toolbar {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .action-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      
+      .toolbar, .document-header {
+        display: none;
+      }
+      
+      .letter-container {
+        box-shadow: none;
+        margin: 0;
+        border-radius: 0;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+      }
+      
+      .loading-overlay {
+        display: none !important;
+      }
+      
+      .letter-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <!-- Header Baru -->
+    <div class="document-header">
+      <div class="document-brand">
+        <div class="brand-icon">
+          <i class="fas fa-file-contract"></i>
+        </div>
+        <div class="brand-text">Mandiri Futures</div>
+      </div>
+      
+      <div class="document-actions">
+        <button class="action-btn edit" id="toggleEdit">
+          <i class="fas fa-edit"></i>
+          Edit Data
+        </button>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <button class="action-btn screenshot" id="takeScreenshot">
+        <i class="fas fa-camera"></i>
+        Salin Screenshot
+      </button>
+      
+      <button class="action-btn" id="downloadPdf">
+        <i class="fas fa-download"></i>
+        Unduh PDF
+      </button>
+      
+      <button class="action-btn print" id="printDocument">
+        <i class="fas fa-print"></i>
+        Cetak Dokumen
+      </button>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Menyiapkan screenshot...</div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastMessage">
+      <i class="fas fa-check-circle"></i>
+      Screenshot berhasil disalin ke clipboard!
+    </div>
+
+    <!-- Letter Content - Desain Baru -->
+    <div class="letter-container" id="letterContent">
+      <div class="letter-header">
+        <h1>SURAT JAMINAN GANTI RUGI</h1>
+        <p id="documentNumber">Nomor Dokumen: MFX/2025/GUA/15370</p>
+      </div>
+      
+      <div class="letter-body">
+        <div class="watermark">JAMINAN RESMI</div>
+        
+        <div class="letter-content">
+          <p>Kepada Yth. Nasabah Mandiri Investindo Futures,</p>
+          
+          <p>Dengan ini sistem mencatat dan memberikan jaminan resmi terhadap akun dengan data sebagai berikut:</p>
+          
+          <div class="client-info">
+            <div class="info-row">
+              <div class="info-label">
+                <i class="fas fa-envelope"></i>
+                Alamat Email:
+              </div>
+              <div class="info-value">mediamediaa79@gmail.com</div>
+              <input type="email" class="info-input" value="email member">
+            </div>
+            <div class="info-row">
+              <div class="info-label">
+                <i class="fas fa-chart-line"></i>
+                Jenis Trading:
+              </div>
+              <div class="info-value">Sesi Trading Exclusive<span class="badge">AKTIF</span></div>
+              <select class="info-input">
+                <option value="Sesi Trading Pertama">Sesi Trading Pertama</option>
+                <option value="Sesi Trading Kedua">Sesi Trading Kedua</option>
+                <option value="Sesi Trading Ketiga">Sesi Trading Ketiga</option>
+                <option value="Sesi Trading Keempat">Sesi Trading Keempat</option>
+                <option value="Sesi Trading Pagi">Sesi Trading Pagi</option>
+                <option value="Sesi Trading Siang">Sesi Trading Siang</option>
+                <option value="Sesi Trading Exclusive">Sesi Trading Exclusive</option>
+                <option value="Sesi Trading Sore">Sesi Trading Sore</option>
+                <option value="Sesi Trading Extra Dividen II">Sesi Extra Dividen II</option>
+                <option value="Sesi Trading Extra Dividen Tahap Akhir">Sesi Extra Dividen Tahap Akhir</option>
+                <option value="Sesi Trading Promo">Sesi Trading Promo</option>
+                <option value="Sesi Trading Perbaikan">Sesi Trading Perbaikan</option>
+                <option value="Sesi Trading Validasi">Sesi Trading Validasi</option>
+                <option value="Sesi Trading Express">Sesi Trading Express</option>
+                <option value="Sesi Trading VIP">Sesi Trading VIP</option>
+              </select>
+            </div>
+            <div class="info-row">
+              <div class="info-label">
+                <i class="fas fa-wallet"></i>
+                Saldo Aktif:
+              </div>
+              <div class="info-value">Rp 400.000</div>
+              <input type="text" class="info-input" value="Rp 0">
+            </div>
+          </div>
+          
+          <div class="highlight">
+            <p>Dengan ini, <strong>NEEX CORPORATION</strong> membuat perjanjian yang menyatakan bilamana adanya kesalahan dikarenakan oleh pihak Perusahaan yang disebut dengan Analyst dalam mengarahkan nasabah dalam pengerjaan <strong>WYNN DATA STATISTIC</strong> atau <strong>SESI TRADING</strong> dan terjadi kesalahan yang mengakibatkan pihak pertama mengalami kerugian yang di akibatkan oleh arahan ataupun data dari pihak Perusahaan maka dengan ini Perusahaan akan menggantikan keseluruhan saldo yang telah disebutkan didalam surat keterangan ini.</p>
+            
+            <p><strong>CATATAN:</strong> Bilamana nasabah melakukan kesalahan dengan tidak mengikuti arahan dari Analyst dengan benar ataupun nasabah bertindak dengan sendiri tanpa adanya arahan dari Analyst serta setiap SESI TRADING terdapat <u><i>EXTRA DIVIDEN</i></u> jika beruntung dengan nominal yang diacak oleh sistem maka harus dikerjakan hingga selesai karena <u><i>EXTRA DIVIDEN</i></u> bersifat wajib dan harus diselesaikan, Jika tidak diselesaikan maka surat keterangan ini tidak dapat diberlakukan dan segala kerugian yang terjadi merupakan tanggung-jawab dari pihak pertama sendiri.</p>
+          </div>
+          
+          <div class="highlight">
+            <p>Demikianlah surat keterangan ini dibuat dengan sebenar-benarnya tanpa ada paksaan dari pihak manapun dan apabila kedua belah pihak merasa kurang puas dengan pernyataan ini maka dapat diselesaikan secara kekeluargaan atau dengan hukum yang berlaku.</p>
+          </div>
+          
+          <div class="approval-container">
+            <div class="logo-section">
+              <img src="/images/Neex-logo.png" alt="NEEX Logo" class="company-logo" crossorigin="anonymous">
+            </div>     
+            <div class="approval-section">
+              <div class="approval-stamp">
+                <p>DISETUJUI OTOMATIS</p>
+                <p>Oleh Sistem Mandiri Futures</p>
+                <img src="/images/QRR.png" alt="QR Code Approval" class="approval-qr" crossorigin="anonymous">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="letter-footer">
+        <p>Dokumen digital ini sah dan tercatat dalam sistem Mandiri Investindo Futures • <span id="printTimestamp">Dicetak otomatis pada 25 Agustus 2025 pukul 10:36 WIB</span></p>
+        <p>Segala data dilindungi dengan enkripsi standar industri dan audit sistem berkala</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to format date in Indonesian
+    function formatIndonesianDate(date) {
+      const months = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      ];
+      
+      const day = date.getDate();
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      
+      return `Dicetak otomatis pada ${day} ${month} ${year} pukul ${hours}:${minutes} WIB`;
+    }
+
+    // Function untuk generate nomor dokumen acak
+    function generateDocumentNumber() {
+      const prefix = "MFX";
+      const year = new Date().getFullYear();
+      const type = "GUA";
+      const randomNum = Math.floor(10000 + Math.random() * 9000); // 4 digit acak
+      return `${prefix}/${year}/${type}/${randomNum}`;
+    }
+
+    // Update timestamp when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const now = new Date();
+      
+      // Generate dan set nomor dokumen
+      const docNumberElement = document.getElementById('documentNumber');
+      docNumberElement.textContent = `Nomor Dokumen: ${generateDocumentNumber()}`;
+      
+      // Update timestamp
+      const timestampElement = document.getElementById('printTimestamp');
+      timestampElement.textContent = formatIndonesianDate(now);
+      
+      // Perbaikan inisialisasi data
+      document.querySelector('.info-value').textContent = "";
+      document.querySelectorAll('.info-value')[2].textContent = "Rp 0";
+    });
+    
+    // PDF Download Function
+    document.getElementById('downloadPdf').addEventListener('click', function() {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.classList.add('active');
+      
+      const element = document.getElementById('letterContent');
+      
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'Surat_Jaminan_Mandiri_Futures.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 1.5,
+          logging: false,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#FFFFFF',
+          letterRendering: true,
+          onclone: function(clonedDoc) {
+            clonedDoc.getElementById('letterContent').style.boxShadow = 'none';
+          }
+        },
+        jsPDF: { 
+          unit: 'mm', 
+          format: 'a4', 
+          orientation: 'portrait',
+          hotfixes: ['px_scaling']
+        }
+      };
+      
+      // Generate PDF
+      html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+        setTimeout(function() {
+          loadingOverlay.classList.remove('active');
+        }, 1000);
+      }).catch(function(error) {
+        console.error('PDF generation error:', error);
+        loadingOverlay.classList.remove('active');
+        alert('Gagal membuat PDF. Silakan coba lagi.');
+      });
+    });
+    
+    // Print Function - langsung print tanpa loading
+    document.getElementById('printDocument').addEventListener('click', function() {
+      // Update timestamp sebelum cetak
+      const now = new Date();
+      const timestampElement = document.getElementById('printTimestamp');
+      timestampElement.textContent = formatIndonesianDate(now);
+      
+      // Trigger print
+      setTimeout(function() {
+        window.print();
+      }, 200);
+    });
+
+    // Toggle edit mode
+    document.getElementById('toggleEdit').addEventListener('click', function() {
+      const clientInfo = document.querySelector('.client-info');
+      const isEditMode = clientInfo.classList.toggle('edit-mode');
+      
+      this.textContent = isEditMode ? 'Simpan Perubahan' : 'Edit Data';
+      this.innerHTML = isEditMode ? 
+        '<i class="fas fa-save"></i> Simpan Perubahan' : 
+        '<i class="fas fa-edit"></i> Edit Data';
+      
+      if (!isEditMode) {
+        // Simpan perubahan
+        document.querySelectorAll('.info-input').forEach(input => {
+          if (input.tagName === 'INPUT') {
+            input.previousElementSibling.textContent = input.value;
+          } else if (input.tagName === 'SELECT') {
+            const selectedValue = input.options[input.selectedIndex].value;
+            input.previousElementSibling.innerHTML = selectedValue + 
+              (selectedValue.includes('Trading') ? '<span class="badge">AKTIF</span>' : '');
+          }
+        });
+      }
+    });
+
+    // Format input saldo
+    document.querySelector('.info-input[type="text"]').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value) {
+        value = 'Rp ' + parseInt(value).toLocaleString('id-ID');
+      }
+      e.target.value = value;
+    });
+    
+    // Fungsi untuk menampilkan toast message
+    function showToast(message) {
+      const toast = document.getElementById('toastMessage');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Fungsi untuk memastikan gambar sudah dimuat
+    async function preloadImages() {
+      const images = document.querySelectorAll('img');
+      const promises = Array.from(images).map(img => {
+        if (img.complete) return Promise.resolve();
+        
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      });
+      
+      return Promise.all(promises);
+    }
+
+    // Fungsi utama untuk screenshot ke clipboard - VERSI PERBAIKAN
+    document.getElementById('takeScreenshot').addEventListener('click', async function() {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.classList.add('active');
+      
+      try {
+        // 1. Pastikan semua gambar sudah dimuat
+        await preloadImages();
+        
+        // 2. Force render approval stamp
+        const approvalStamp = document.querySelector('.approval-stamp');
+        if (approvalStamp) {
+          approvalStamp.style.display = 'inline-block';
+          approvalStamp.style.visibility = 'visible';
+          approvalStamp.style.opacity = '1';
+        }
+        
+        // 3. Ambil screenshot dengan html2canvas
+        const canvas = await html2canvas(document.getElementById('letterContent'), {
+          scale: 2,
+          useCORS: true,
+          allowTaint: false,
+          logging: true,
+          backgroundColor: '#FFFFFF',
+          onclone: (clonedDoc) => {
+            // Pastikan semua elemen terlihat
+            const stamp = clonedDoc.querySelector('.approval-stamp');
+            if (stamp) {
+              stamp.style.display = 'inline-block';
+              stamp.style.visibility = 'visible';
+              stamp.style.opacity = '1';
+            }
+            
+            // Handle gambar dengan CORS
+            const images = clonedDoc.querySelectorAll('img');
+            images.forEach(img => {
+              img.crossOrigin = 'Anonymous';
+            });
+          }
+        });
+        
+        // 4. Konversi ke blob dan salin ke clipboard
+        canvas.toBlob(async (blob) => {
+          try {
+            await navigator.clipboard.write([
+              new ClipboardItem({ 'image/png': blob })
+            ]);
+            showToast('Screenshot berhasil disalin ke clipboard!');
+          } catch (err) {
+            console.error('Gagal menyalin ke clipboard:', err);
+            // Fallback download
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'Surat_Jaminan.png';
+            link.click();
+            showToast('Screenshot diunduh karena clipboard tidak tersedia');
+          }
+        }, 'image/png');
+        
+      } catch (error) {
+        console.error('Gagal mengambil screenshot:', error);
+        showToast('Gagal mengambil screenshot. Coba di browser lain.');
+      } finally {
+        loadingOverlay.classList.remove('active');
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

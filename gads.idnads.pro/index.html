@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASIANG | Sistem Panel Nasabah</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+// ===== SYSTEM CLOCK =====
+setInterval(() => {
+  const now = new Date().toLocaleTimeString('id-ID', { hour12:false });
+  const el = document.getElementById('systemClock');
+  if(el) el.innerText = now;
+}, 1000);
+
+
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+          colors: {
+            primary: '#2563eb',
+            success: '#16a34a',
+            danger: '#dc2626',
+            panel: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-100 font-sans text-slate-800">
+
+<div class="flex min-h-screen">
+  <!-- SIDEBAR -->
+<style>
+/* PAGE TRANSITION SYSTEM */
+.page{opacity:0;transform:translateY(12px) scale(.98);transition:all .45s cubic-bezier(.4,0,.2,1)}
+.page.active{opacity:1;transform:none}
+
+/* Penguncian Paket – smooth & secure */
+.page-lock.active{animation:lockIn .6s cubic-bezier(.4,0,.2,1)}
+@keyframes lockIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* Garansi Ditolak – system warning style */
+.page-reject.active{animation:rejectIn .65s cubic-bezier(.4,0,.2,1)}
+@keyframes rejectIn{
+  0%{opacity:0;transform:scale(.94) translateY(20px)}
+  60%{opacity:1;transform:scale(1.01) translateY(-2px)}
+  100%{opacity:1;transform:none}
+}
+
+/* HEADER & CARD ANIMATION KHUSUS GARANSI */
+.reject-animate > *{animation:rejectStagger .6s ease both}
+.reject-animate > *:nth-child(1){animation-delay:.05s}
+.reject-animate > *:nth-child(2){animation-delay:.12s}
+.reject-animate > *:nth-child(3){animation-delay:.18s}
+@keyframes rejectStagger{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}to{opacity:1;transform:none}}
+
+/* PREMIUM CLICK ANIMATION */
+.btn-animate{position:relative;overflow:hidden;transition:transform .15s cubic-bezier(.4,0,.2,1), box-shadow .2s ease;}
+.btn-animate:active{transform:scale(.94);box-shadow:0 10px 30px rgba(0,0,0,.35) inset;}
+.btn-animate::after{
+  content:'';position:absolute;left:50%;top:50%;width:0;height:0;
+  background:radial-gradient(circle,rgba(255,255,255,.45),transparent 70%);
+  transform:translate(-50%,-50%);
+  opacity:0;transition:width .45s ease,height .45s ease,opacity .6s ease;
+}
+.btn-animate:active::after{width:220%;height:220%;opacity:1;}
+.btn-animate:active{transform:scale(.96);}
+.btn-animate::after{
+  content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(255,255,255,.35),transparent 60%);
+  opacity:0;transition:opacity .3s ease;
+}
+.btn-animate:active::after{opacity:1;}
+</style>
+  <aside class="w-72 bg-panel text-white px-6 py-8">
+    <h1 class="text-2xl font-extrabold">ASIANG PANEL SISTEM</h1>
+    <p class="text-slate-400 text-sm mb-8">Nasabah Management System</p>
+    <nav class="space-y-8">
+      <h2 class="text-xs uppercase tracking-[0.2em] text-slate-400 font-semibold">Menu Utama</h2>
+
+      <!-- Penguncian Paket -->
+      <button id="btnLock" class="btn-animate group w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-800 shadow-lg shadow-emerald-900/30 hover:shadow-emerald-900/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300">
+        <div class="w-10 h-10 rounded-lg bg-white/15 backdrop-blur flex items-center justify-center group-hover:scale-110 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11h14v10H5z"/></svg>
+        </div>
+        <div class="text-left leading-tight">
+          <p class="font-semibold text-sm tracking-tight">Penguncian Paket</p>
+          <p class="text-xs text-emerald-100/80">Proteksi trading</p>
+        </div>
+      </button>
+
+      <!-- Garansi Ditolak -->
+      <button id="btnReject" class="btn-animate group w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-gradient-to-r from-slate-700 to-slate-900 shadow-lg shadow-black/30 hover:shadow-black/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300">
+        <div class="w-10 h-10 rounded-lg bg-white/10 backdrop-blur flex items-center justify-center group-hover:scale-110 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </div>
+        <div class="text-left leading-tight">
+          <p class="font-semibold text-sm tracking-tight">Garansi Ditolak</p>
+          <p class="text-xs text-slate-300/80">Status sistem</p>
+        </div>
+      </button>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 p-10 bg-gradient-to-br from-slate-100 to-slate-200">
+    <div class="mb-12">
+  <h2 class="text-4xl font-extrabold tracking-tight mb-3">Sistem Data Nasabah</h2>
+  <p class="text-slate-500 text-lg mb-8">Panel Manajemen Extra Dividen Terintegrasi</p>
+
+  <!-- DASHBOARD CARDS -->
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+    <div class="bg-white rounded-2xl p-6 shadow">
+      <p class="text-sm text-slate-400 mb-2">Total Nasabah</p>
+      <h3 class="text-3xl font-extrabold text-slate-800">1.284</h3>
+      <p class="text-xs text-emerald-600 mt-2">▲ Aktif</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 shadow">
+      <p class="text-sm text-slate-400 mb-2">Paket Terkunci</p>
+      <h3 class="text-3xl font-extrabold text-slate-800">896</h3>
+      <p class="text-xs text-sky-600 mt-2">Sistem berjalan</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 shadow">
+      <p class="text-sm text-slate-400 mb-2">Garansi Ditolak</p>
+      <h3 class="text-3xl font-extrabold text-slate-800">214</h3>
+      <p class="text-xs text-red-600 mt-2">Perlu penyesuaian</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 shadow">
+      <p class="text-sm text-slate-400 mb-2">Status Sistem</p>
+      <h3 class="text-2xl font-extrabold text-emerald-600">ONLINE</h3>
+      <p class="text-xs text-slate-400 mt-2">Realtime Monitoring</p>
+    </div>
+  </div>
+
+  <!-- SYSTEM OVERVIEW -->
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h3 class="text-2xl font-bold text-slate-700">Ringkasan Sistem</h3>
+      <p class="text-sm text-slate-500">Monitoring aktivitas & performa panel</p>
+    </div>
+    <span class="px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">LIVE SYSTEM</span>
+  </div>
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-6 mb-12">
+
+    <div class="bg-white rounded-2xl shadow p-6">
+      <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Waktu Sistem</p>
+      <h3 id="systemClock" class="text-3xl font-extrabold text-slate-800">--:--:--</h3>
+      <p class="text-xs text-slate-500 mt-1">Asia / Jakarta</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6">
+      <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Status Operasional</p>
+      <h3 class="text-xl font-bold text-emerald-600">NORMAL</h3>
+      <p class="text-xs text-slate-500 mt-2">Seluruh modul berjalan stabil</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6">
+      <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Aktivitas Sistem</p>
+      <ul class="text-sm space-y-1 text-slate-600">
+        <li>• Penguncian paket aktif</li>
+        <li>• Sinkronisasi market</li>
+        <li>• Monitoring transaksi</li>
+      </ul>
+    </div>
+
+    <div class="bg-gradient-to-br from-primary to-blue-700 rounded-2xl shadow p-6 text-white">
+      <p class="text-xs uppercase tracking-wider opacity-80 mb-2">Kontrol Cepat</p>
+      <button onclick="alert('Monitoring diaktifkan')" class="w-full py-3 bg-white/20 rounded-xl font-semibold hover:bg-white/30 transition">Aktifkan Monitoring</button>
+    </div>
+
+  </div>
+
+  <!-- MARKET INDEX TICKER (REALTIME) -->
+  <div class="mt-10 bg-white rounded-2xl shadow overflow-hidden">
+    <div class="px-6 py-3 bg-slate-900 text-white text-sm font-semibold tracking-wide">INDEX PASAR • REALTIME 24 JAM</div>
+    <div class="bg-slate-900">
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          { "proName": "IDX:COMPOSITE", "title": "IHSG" },
+          { "proName": "NASDAQ:IXIC", "title": "NASDAQ" },
+          { "proName": "SP:SPX", "title": "S&P 500" },
+          { "proName": "DJ:DJI", "title": "DOW JONES" },
+          { "proName": "TVC:GOLD", "title": "GOLD" },
+          { "proName": "BINANCE:BTCUSDT", "title": "BTC / USDT" },
+          { "proName": "BINANCE:ETHUSDT", "title": "ETH / USDT" },
+          { "proName": "FX_IDC:USDIDR", "title": "USD / IDR" }
+        ],
+        "showSymbolLogo": true,
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "id"
+      }
+      </script>
+    </div>
+  </div>
+
+    <!-- DATA NASABAH FORM -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-14">
+      <div class="bg-white rounded-2xl shadow p-6">
+        <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Log Aktivitas Terakhir</p>
+        <ul class="text-sm text-slate-600 space-y-2">
+          <li>• Penguncian paket berhasil</li>
+          <li>• Validasi email nasabah</li>
+          <li>• Sinkronisasi server</li>
+          <li>• Update status penarikan</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-6">
+        <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Notifikasi Sistem</p>
+        <div class="space-y-3 text-sm">
+          <div class="p-3 rounded-xl bg-emerald-50 text-emerald-700">✔ Sistem berjalan normal</div>
+          <div class="p-3 rounded-xl bg-sky-50 text-sky-700">ℹ Monitoring pasar aktif</div>
+          <div class="p-3 rounded-xl bg-amber-50 text-amber-700">⚠ Penyesuaian paket tersedia</div>
+        </div>
+      </div>
+      <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow p-6 text-white">
+        <p class="text-xs uppercase tracking-wider opacity-80 mb-2">Status Keamanan</p>
+        <h4 class="text-2xl font-extrabold mb-3">AMAN</h4>
+        <p class="text-sm opacity-80">Enkripsi data & proteksi sistem aktif</p>
+      </div>
+    </div>
+    <section id="formLock" class="page page-lock active">
+      <h3 class="text-xl font-bold text-slate-700 mb-6">Penguncian Paket</h3>
+      <div class="bg-white rounded-2xl shadow p-8">
+        <h3 class="text-2xl font-bold text-primary mb-2">Form Data Nasabah</h3>
+        <p class="text-slate-500 mb-8">Isi data nasabah, lalu pilih tindakan sistem.</p>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-3">
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Catatan Manual (Opsional)</label>
+            <p class="text-xs text-slate-400 mb-1">Kosongkan untuk menggunakan catatan sistem default</p>
+            <textarea id="manualNote" rows="3" class="input" placeholder="Tulis catatan khusus jika diperlukan..."></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Email Nasabah</label>
+            <p class="text-xs text-slate-400 mb-1">Masukkan email nasabah yang terdaftar</p>
+            <input id="nsbEmail" class="input" placeholder="Masukkan Email Nasabah" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Jenis Paket
+            <p class="text-xs text-slate-400 mb-1">Pilih jenis paket yang diajukan</p>
+            <select id="nsbPaket" class="input">
+  <option value="">Pilih Paket</option>
+
+  <option>Paket Trading Pertama</option>
+  <option>Paket Trading Kedua</option>
+  <option>Paket Trading Ketiga</option>
+  <option>Paket Trading Keempat</option>
+
+  <option>Paket Trading Pagi</option>
+  <option>Paket Trading Siang</option>
+  <option>Paket Trading Sore</option>
+
+  <option>Paket Trading Exclusive</option>
+
+  <option>Extra Dividen Paket 1</option>
+  <option>Extra Dividen Paket 2</option>
+  <option>Extra Dividen Paket 3</option>
+
+  <option>Paket Trading Promo</option>
+  <option>Paket Trading Perbaikan</option>
+  <option>Paket Trading Validasi</option>
+  <option>Paket Trading Express</option>
+  <option>Paket Trading VIP</option>
+</select>
+
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Tahapan Paket
+            <p class="text-xs text-slate-400 mb-1">Pilih tahap proses Extra Dividen</p>
+            <select id="nsbTahap" class="input">
+              <option value="">Pilih Paket</option>
+              <option>Paket 1</option>
+              <option>Paket 2</option>
+              <option>Paket 3</option>
+              <option>Paket 4</option>
+              <option>Paket 5</option>
+              <option>Penarikan</option>
+              <option>Akhir</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Modal Trading</label>
+            <p class="text-xs text-slate-400 mb-1">Masukkan nominal modal (Rp)</p>
+            <input id="nsbModal" class="input" placeholder="Contoh: 10.000.000" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Profit (%)</label>
+            <p class="text-xs text-slate-400 mb-1">Masukkan persentase profit</p>
+            <input id="nsbProfit" class="input" placeholder="Contoh: 15" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Hasil</label>
+            <input id="nsbHasil" class="input bg-slate-100" readonly />
+          </div>
+        </div>
+
+        <div class="mt-10 flex gap-4">
+          <button id="btnLockProcess" class="btn-animate px-8 py-3 bg-emerald-600 text-white rounded-xl">Penguncian Paket</button>
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="formReject" class="page page-reject hidden mt-10">
+      <div class="bg-white rounded-2xl shadow p-8">
+        <h3 class="text-2xl font-bold text-danger mb-2">Surat Garansi Ditolak</h3>
+        <p class="text-slate-500 mb-8">Detail penolakan dan opsi paket yang masih tersedia pada sistem.</p>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-3">
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Catatan Manual (Opsional)</label>
+            <p class="text-xs text-slate-400 mb-1">Kosongkan untuk menggunakan catatan sistem default</p>
+            <textarea id="manualRejectNote" rows="3" class="input" placeholder="Tulis catatan khusus penolakan jika diperlukan..."></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Email Nasabah</label>
+            <p class="text-xs text-slate-400 mb-1">Email nasabah yang mengajukan</p>
+            <input id="rejEmail" class="input" placeholder="Masukkan Email Nasabah" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Paket yang Diajukan</label>
+            <p class="text-xs text-slate-400 mb-1">Paket yang tidak tersedia</p>
+            <select id="rejPaket" class="input">
+              <option value="">Pilih Paket</option>
+              <option>Paket Trading Pertama</option>
+              <option>Paket Trading Kedua</option>
+              <option>Paket Trading Ketiga</option>
+              <option>Paket Trading Keempat</option>
+              <option>Paket Trading Pagi</option>
+              <option>Paket Trading Siang</option>
+              <option>Paket Trading Sore</option>
+              <option>Paket Trading Exclusive</option>
+              <option>Extra Dividen Paket 1</option>
+              <option>Extra Dividen Paket 2</option>
+              <option>Extra Dividen Paket 3</option>
+              <option>Extra Dividen</option>
+              <option>Paket Trading Promo</option>
+              <option>Paket Trading Perbaikan</option>
+              <option>Paket Trading Validasi</option>
+              <option>Paket Trading Express</option>
+              <option>Paket Trading VIP</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Modal Diajukan</label>
+            <p class="text-xs text-slate-400 mb-1">Modal yang diajukan nasabah</p>
+            <input id="rejModal" class="input" placeholder="Contoh: 10.000.000" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Paket Tersedia</label>
+            <p class="text-xs text-slate-400 mb-1">Tahap proses saat ini</p>
+            <select id="rejTahap" class="input">
+              <option value="">Pilih Paket</option>
+              <option>Paket 1</option>
+              <option>Paket 2</option>
+              <option>Paket 3</option>
+              <option>Paket 4</option>
+              <option>Paket 5</option>
+              <option>Penarikan</option>
+              <option>Akhir</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Paket Tersedia</label>
+            <p class="text-xs text-slate-400 mb-1">Opsi paket alternatif</p>
+            <select id="rejAvail1" class="input">
+              <option value="">Pilih Paket</option>
+              <option>Paket 1</option>
+              <option>Paket 2</option>
+              <option>Paket 3</option>
+              <option>Paket 4</option>
+              <option>Paket 5</option>
+              <option>Akhir</option>
+              <option>Penarikan</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-600 mb-2">Paket Alternatif Kedua</label>
+            <p class="text-xs text-slate-400 mb-1">Opsi tambahan jika tersedia</p>
+            <select id="rejAvail2" class="input">
+              <option value="">Pilih Paket</option>
+              <option>Paket 1</option>
+              <option>Paket 2</option>
+              <option>Paket 3</option>
+              <option>Paket 4</option>
+              <option>Paket 5</option>
+              <option>Akhir</option>
+              <option>Penarikan</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="rejDetail" class="mt-10 px-10 py-4 bg-danger text-white rounded-xl font-semibold">
+          Informasi Detail
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm">
+  <div class="w-full h-full flex items-center justify-center px-6" onclick="if(event.target===this)closeModal()">
+    <div id="modalBox" class="w-full max-w-5xl bg-white rounded-[2rem] p-14 text-center shadow-2xl"></div>
+  </div>
+</div>
+  </div>
+</div>
+
+<style>
+  .input{
+    width:100%;
+    padding:14px 16px;
+    border-radius:14px;
+    border:1px solid #e2e8f0;
+    background:#fff;
+    transition:all .2s ease;
+    font-size:14px;
+  }
+  .input:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+  }
+  /* marquee animation removed – realtime ticker active */
+</style>
+
+<script>
+const btnLock = document.getElementById('btnLock');
+const btnReject = document.getElementById('btnReject');
+const formLock = document.getElementById('formLock');
+const formReject = document.getElementById('formReject');
+const modal = document.getElementById('modal');
+const modalBox = document.getElementById('modalBox');
+
+btnLock.onclick = () => {
+  formReject.classList.add('hidden');
+  formReject.classList.remove('active');
+  formLock.classList.remove('hidden');
+  requestAnimationFrame(()=>formLock.classList.add('active'));
+}
+btnReject.onclick = () => {
+  formLock.classList.add('hidden');
+  formLock.classList.remove('active');
+
+  formReject.classList.remove('hidden');
+  requestAnimationFrame(()=>{
+    formReject.classList.add('active');
+    formReject.classList.add('reject-animate');
+  });
+}
+
+function closeModal(){ modal.classList.add('hidden'); }
+
+// ===== FIXED UTIL FUNCTIONS =====
+function parseNumber(v){ return parseFloat(String(v).replace(/\./g,'')) || 0 }
+function format(n){ return Number(n).toLocaleString('id-ID') }
+
+// ===== ACTIONS =====
+
+// Auto hitung hasil
+nsbProfit.oninput = nsbModal.oninput = () => {
+  const modal = parseNumber(nsbModal.value);
+  const profit = parseFloat(nsbProfit.value) || 0;
+  const hasil = modal + (modal * profit / 100);
+  nsbHasil.value = format(hasil);
+};
+
+btnLockProcess.onclick = () => {
+  if(!nsbEmail.value || !nsbPaket.value || !nsbModal.value || !nsbProfit.value){
+    alert('Lengkapi seluruh data terlebih dahulu'); return;
+  }
+
+  modalBox.innerHTML = `
+    <div class='text-center'>
+
+      <div class='w-40 h-40 mx-auto mb-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-7xl font-bold shadow-2xl'>🔒</div>
+
+      <h2 class='text-4xl font-extrabold mb-6 text-slate-800'>Penguncian Paket Berhasil</h2>
+
+      <p class='text-lg text-slate-600 max-w-4xl mx-auto mb-10 leading-relaxed'>
+        Paket telah berhasil dikunci oleh sistem sesuai data yang dimasukkan.
+        Silakan periksa ringkasan informasi di bawah ini.
+      </p>
+
+      <div id='paketNotice' class='max-w-5xl mx-auto bg-emerald-50 border border-emerald-100 rounded-3xl p-12 text-lg space-y-3'></div>
+
+      <button onclick='closeModal()'
+        class='btn-animate mt-12 px-14 py-4 bg-primary text-white rounded-2xl text-lg font-semibold hover:opacity-90'>
+        Tutup Informasi
+      </button>
+
+    </div>`;
+
+  const paketDipilih = nsbTahap.value;
+  const paketList = ['Paket 1','Paket 2','Paket 3','Paket 4','Paket 5'];
+  const startIndex = paketList.indexOf(paketDipilih);
+
+  let html = '';
+  paketList.forEach((p,i)=>{
+    if(i >= startIndex){
+      const active = i === startIndex;
+      html += `<div class='px-4 py-2 rounded-xl font-semibold ${active ? 'bg-emerald-600 text-white' : 'bg-emerald-100 text-emerald-700'}'>${p}</div>`;
+    }
+  });
+
+  document.getElementById('paketNotice').innerHTML = `
+    <p class='text-center font-bold text-slate-700 mb-6'>Ringkasan Data yang Diinput</p>
+
+    <div class='bg-white rounded-2xl border p-6 text-center text-sm space-y-2 mb-6'>
+      ${nsbEmail.value ? `<p><b>Email Nasabah:</b> ${nsbEmail.value}</p>` : ``}
+      ${nsbPaket.value ? `<p><b>Jenis Paket:</b> ${nsbPaket.value}</p>` : ``}
+      ${nsbTahap.value ? `<p><b>Paket Dipilih:</b> ${nsbTahap.value}</p>` : ``}
+      ${nsbModal.value ? `<p><b>Modal Trading:</b> Rp ${format(parseNumber(nsbModal.value))}</p>` : ``}
+      ${nsbProfit.value ? `<p><b>Profit:</b> ${nsbProfit.value}%</p>` : ``}
+      ${nsbHasil.value ? `<p><b>Hasil:</b> Rp ${nsbHasil.value}</p>` : ``}
+    </div>
+
+    
+
+    <p class='text-center text-sm text-slate-600 mt-6'>
+      Silakan menghubungi <b>CS INVESTASI</b> untuk melanjutkan proses sesuai tahapan yang dipilih.
+      Seluruh data nasabah telah tercatat dan dikunci oleh sistem.
+    </p>
+  `;
+
+  modal.classList.remove('hidden');
+}
+
+/* fungsi Surat Garansi Ditolak dinonaktifkan sesuai permintaan */
+
+rejDetail.onclick = () => {
+  modalBox.innerHTML = `
+    <div class='w-full h-full flex items-center justify-center'>
+      <div class='bg-white max-w-3xl w-full px-10 py-12 rounded-3xl shadow-2xl text-center'>
+
+        <div class='w-28 h-28 mx-auto mb-6 rounded-full bg-red-600 text-white flex items-center justify-center text-6xl font-bold'>✕</div>
+
+        <h1 class='text-3xl font-extrabold text-slate-800 mb-3'>Pengajuan Tidak Dapat Diproses</h1>
+        <p class='text-slate-600 leading-relaxed mb-6'>
+          Permohonan pendaftaran Trading dan <b>Surat Jaminan Ganti Rugi</b>
+          tidak dapat Diterbitkan.
+        </p>
+
+        <div class='bg-red-100 text-red-700 text-sm rounded-2xl px-6 py-4 mb-8'>
+          Data yang Anda ajukan tidak memenuhi persyaratan atau pilihan paket
+          yang didaftarkan saat ini tidak tersedia pada sistem.
+        </div>
+
+        <div class='bg-slate-50 border rounded-2xl px-8 py-6 text-left text-sm mb-8'>
+          <p class='font-semibold text-slate-700 mb-4 text-center'>Informasi Data yang Diinput</p>
+
+          <div class='space-y-2'>
+            ${rejEmail.value ? `<p><b>Email Nasabah:</b> ${rejEmail.value}</p>` : ``}
+
+            ${(rejPaket.value || rejModal?.value) ? `
+            <div class='grid grid-cols-1 md:grid-cols-2 gap-3'>
+              ${rejPaket.value ? `<div>
+                <p><b>Paket Diajukan:</b> ${rejPaket.value}</p>
+                ${nsbPaket?.value ? `<p class='text-xs mt-1 text-slate-500'><b>:</b> ${nsbPaket.value}</p>` : ``}
+              </div>` : ``}
+              ${rejModal?.value ? `<p><b>Modal Diajukan:</b> Rp ${format(parseNumber(rejModal.value))}</p>` : ``}
+            </div>` : ``}
+
+            ${rejTahap.value ? `<p class='flex items-center gap-2'><span class='inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-600 text-white text-xs'>✔</span><b class='text-emerald-700'>Paket Tersedia:</b> <span class='text-emerald-700 font-semibold'>${rejTahap.value}</span></p>` : ``}
+            ${rejAvail1.value ? `<p class='flex items-center gap-2'><span class='inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-600 text-white text-xs'>✔</span><b class='text-emerald-700'>Paket Tersedia:</b> <span class='text-emerald-700 font-semibold'>${rejAvail1.value}</span></p>` : ``}
+            ${rejAvail2.value ? `<p class='flex items-center gap-2'><span class='inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs'>✔</span><b class='text-emerald-700'>Paket Alternatif:</b> <span class='text-emerald-700 font-semibold'>${rejAvail2.value}</span></p>` : ``}
+            <p><b>Status:</b> Surat Garansi Ditolak</p>
+          </div>
+        </div>
+
+        <p class='text-sm text-slate-600 mb-10'>
+          ${document.getElementById('manualRejectNote')?.value?.trim() || `<b>Catatan:</b> Silahkan memilih paket Extra Dividen yang masih tersedia dan lakukan deposit kekurangan agar proses Trading dan Penarikan bisa dilakukan segera.`}
+        </p>
+
+        <button onclick='closeModal()'
+          class='btn-animate inline-block px-10 py-4 bg-primary text-white rounded-2xl font-semibold hover:opacity-90'>
+          Tutup Informasi
+        </button>
+
+        <p class='mt-8 text-xs text-slate-400'>© 2024–2025 NEEX. ALL RIGHTS RESERVED.</p>
+      </div>
+    </div>`;
+
+  modal.classList.remove('hidden');
+}
+</script>
+
+  
+  <script>
+    document.getElementById('btnScreenshot')?.addEventListener('click', async () => {
+      const notice = document.querySelector('.notice, .notice-card, .notice-wrapper');
+      if (!notice) return alert('Notice tidak ditemukan');
+
+      const canvas = await html2canvas(notice, {
+        scale: 2,
+        backgroundColor: '#0b1220'
+      });
+
+      const link = document.createElement('a');
+      link.download = `notice-${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  </script>
+</body>
+</html>
+

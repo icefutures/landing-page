@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Menghilangkan ekstensi .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)$ $1.php [L]
+
+# Menghilangkan ekstensi .html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)$ $1.html [L]
+RewriteCond %{HTTP_HOST} ^ts\.idnads\.pro$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.ts\.idnads\.pro$
+RewriteRule ^/?$ "https\:\/\/zth\.idnads\.pro\/" [R=302,L]

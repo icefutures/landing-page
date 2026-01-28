@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Surat Jaminan Ganti Rugi — E*TRADE / Mega Menara Mas</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+
+  <style>
+    :root{
+      --brand-600: #0d9488; /* Dark teal */
+      --brand-500: #0891b2; /* Cyan */
+      --brand-400: #06b6d4; /* Bright cyan */
+      --brand-300: #22d3ee; /* Light cyan */
+      --muted: #64748b; /* Slate blue */
+      --card-bg: #ffffff;
+      --glass: rgba(255,255,255,0.6);
+    }
+    html,body{height:100%;}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin:0;
+      padding:24px;
+      background: linear-gradient(180deg, #f8fafc 0%, #f0f9ff 100%); /* Light blue to very light cyan */
+      color:#0f172a; /* Dark blue-gray for text */
+    }
+
+    /* Navbar */
+    .navbar-custom{
+      background: linear-gradient(90deg, var(--brand-600), var(--brand-500));
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.15); /* Cyan shadow */
+      margin-bottom: 18px;
+      align-items:center;
+    }
+    .navbar-brand{
+      font-weight:700;
+      color:#fff !important;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .nav-link { color: rgba(255,255,255,0.9) !important; }
+    .nav-link:hover { color: #e0f2fe !important; } /* Light blue */
+
+    /* Toolbar */
+    .toolbar{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:18px; }
+    .action-btn{
+      min-width:170px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:10px;
+      border:0;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(6, 182, 212, 0.1);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .action-btn:active{ transform: translateY(1px); }
+    .action-btn.primary{ background: linear-gradient(90deg, var(--brand-500), #0d9488); }
+    .action-btn.positive{ background: linear-gradient(90deg,#0891b2,#0e7490); } /* Cyan to dark cyan */
+    .action-btn.dark{ background: linear-gradient(90deg,#0f172a,#1e293b); } /* Dark blue-gray */
+
+    /* Letter container */
+    .letter-container{
+      max-width:900px;
+      margin:0 auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), var(--card-bg));
+      border-radius:16px;
+      box-shadow: 0 18px 50px rgba(6, 182, 212, 0.08);
+      overflow:hidden;
+      position:relative;
+      border:1px solid rgba(6, 182, 212, 0.1);
+    }
+    .letter-header{
+      padding:28px 30px;
+      background: linear-gradient(180deg, rgba(8, 145, 178, 0.95), rgba(13, 148, 136, 0.95));
+      color:white;
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .hdr-left h1{ margin:0; font-size:20px; letter-spacing:0.4px; font-weight:800; }
+    .hdr-left p{ margin:2px 0 0; opacity:0.95; font-size:13px; }
+    .doc-meta{ text-align:right; font-size:13px; opacity:0.95; }
+
+    /* Verified badge */
+    .verified-badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background: rgba(255,255,255,0.15);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:13px;
+      color:#e0f2fe;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    .letter-body{ padding:28px 34px; position:relative; z-index:2; }
+    .watermark{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%) rotate(-15deg);
+      font-size:130px;
+      font-weight:800;
+      color: #0f172a;
+      opacity: 0.035;
+      pointer-events:none;
+      user-select:none;
+      z-index:0;
+      white-space:nowrap;
+    }
+
+    .client-info{
+      background:#f0f9ff; /* Light cyan background */
+      border-left:4px solid var(--brand-500);
+      padding:16px;
+      border-radius:8px;
+      margin:16px 0;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:8px;
+    }
+    .info-row{ display:flex; gap:12px; align-items:center; }
+    .info-label{ min-width:150px; color:var(--muted); font-weight:600; }
+    .info-value{ font-weight:700; color:#0f172a; }
+    .info-input{ display:none; width:100%; padding:8px 10px; border-radius:8px; border:1px solid #bae6fd; background:white; }
+
+    .highlight{
+      background: linear-gradient(180deg,#f0f9ff,#f8fafc);
+      border-radius:10px;
+      padding:16px;
+      border:1px solid rgba(6, 182, 212, 0.15);
+      margin:12px 0;
+      color:#0f172a;
+      line-height:1.6;
+    }
+
+    .approval-container{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:28px; gap:12px; }
+    .company-logo{ height:56px; object-fit:contain; display:block; }
+    .approval-stamp{
+      background: linear-gradient(180deg,#e0f2fe,#f0f9ff);
+      border:1px dashed #0891b2;
+      padding:10px 14px;
+      border-radius:8px;
+      text-align:center;
+      min-width:180px;
+      box-shadow: 0 8px 18px rgba(6, 182, 212, 0.08);
+    }
+    .approval-qr{ width:78px; height:78px; object-fit:cover; display:block; margin:8px auto 0; }
+
+    .footer{
+      padding:14px 20px;
+      background:#f0f9ff;
+      border-top:1px solid rgba(6, 182, 212, 0.08);
+      font-size:13px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      align-items:center;
+    }
+
+    /* Loading & Toast */
+    .loading-overlay{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(255,255,255,0.85);
+      z-index:1200;
+      gap:12px;
+      pointer-events:none;
+      opacity:0;
+      transition:opacity .15s ease;
+    }
+    .loading-overlay.active{ pointer-events:all; opacity:1; }
+    .loading-spinner{
+      width:54px; height:54px; border-radius:50%;
+      border:6px solid #f0f9ff; border-top-color:var(--brand-500);
+      animation:spin 1s linear infinite;
+    }
+    @keyframes spin{ to{ transform:rotate(360deg) } }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:28px;
+      background:#0f172a;
+      color:#e0f2fe;
+      padding:12px 16px;
+      border-radius:10px;
+      box-shadow:0 10px 30px rgba(6, 182, 212, 0.15);
+      z-index:1300;
+      opacity:0;
+      transition:opacity .12s ease;
+    }
+    .toast.show{ opacity:1; }
+
+    /* Edit mode */
+    .edit-mode .info-value{ display:none; }
+    .edit-mode .info-input{ display:block !important; }
+
+    /* Responsive */
+    @media (max-width:768px){
+      .letter-header{ flex-direction:column; align-items:flex-start; gap:8px; }
+      .approval-container{ flex-direction:column-reverse; align-items:flex-start; gap:8px; }
+    }
+    .navbar-custom .nav-link{
+  font-weight:600;
+  padding:8px 14px;
+  border-radius:999px;
+  transition:background .15s ease;
+}
+
+.navbar-custom .nav-link:hover{
+  background:rgba(255,255,255,.15);
+}
+
+.navbar-custom .nav-link.active{
+  background:rgba(255,255,255,.25);
+  color:#e0f2fe !important;
+}
+
+    /* Edit button special color */
+    #toggleEdit {
+      background: linear-gradient(90deg, #06b6d4, #0891b2) !important;
+      color: white !important;
+    }
+    /* Tambahkan ini di dalam style tag yang sudah ada */
+.approval-container .logo-section {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.approval-container .logo-section .company-logo {
+  margin-bottom: 8px;
+}
+
+/* Opsional: untuk menjaga alignment di responsive */
+@media (max-width: 768px) {
+  .approval-container .logo-section {
+    align-items: flex-start !important;
+    text-align: left;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+<nav class="navbar-custom d-flex align-items-center" role="navigation" aria-label="Main navigation">
+  
+  <!-- LEFT BRAND -->
+  <div class="navbar-brand">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" fill="white" opacity="0.06"></rect>
+      <path d="M6 12h12M12 6v12" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div style="font-size:14px">E*TRADE</div>
+      <div style="font-size:11px; opacity:0.9">
+        Mega Menara Mas Berjangka — Surat Jaminan
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER MENU -->
+  <ul class="nav mx-auto d-none d-md-flex gap-2">
+    <li class="nav-item">
+      <a class="nav-link active" href="/mmmbxextrade"><i class="bi bi-grid-fill me-1"></i>Jaminan</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/eventetrade"><i class="bi bi-file-earmark-text me-1"></i>Event</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/tugasetrade"><i class="bi bi-clock-history me-1"></i>Tugas</a>
+    </li>
+  </ul>
+
+  <!-- RIGHT SIDE -->
+  <div class="ms-auto d-flex gap-2 align-items-center">
+
+    <div class="verified-badge" title="Dokumen digital terverifikasi oleh sistem">
+      <i class="bi bi-shield-check"></i>
+      Terverifikasi
+    </div>
+
+  </div>
+</nav>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar" role="toolbar" aria-label="Tombol aksi">
+    <button id="takeScreenshot" class="action-btn positive" title="Salin screenshot ke clipboard (fallback: download)">
+      <i class="bi bi-camera-fill"></i> Salin Screenshot
+    </button>
+
+    <button id="downloadPdf" class="action-btn primary" title="Unduh dokumen sebagai PDF">
+      <i class="bi bi-file-earmark-pdf-fill"></i> Unduh PDF
+    </button>
+
+    <button id="printDocument" class="action-btn dark" title="Cetak dokumen">
+      <i class="bi bi-printer-fill"></i> Cetak Dokumen
+    </button>
+
+    <button id="toggleEdit" class="action-btn" title="Mode edit data">
+      <i class="bi bi-pencil-square"></i> Edit Data
+    </button>
+  </div>
+
+  <!-- Loading overlay & Toast -->
+  <div id="loadingOverlay" class="loading-overlay" aria-hidden="true">
+    <div class="loading-spinner" role="status" aria-hidden="true"></div>
+    <div style="font-weight:700; color:#0b1220">Sedang menyiapkan...</div>
+  </div>
+  <div id="toastMessage" class="toast" role="status" aria-live="polite">Operasi selesai</div>
+
+  <!-- LETTER -->
+  <main class="letter-container" id="letterContent" role="document" aria-label="Surat Jaminan Ganti Rugi">
+    <header class="letter-header">
+      <div class="hdr-left">
+        <h1>SURAT JAMINAN GANTI RUGI</h1>
+        <p id="documentNumber">Nomor Dokumen: —</p>
+      </div>
+
+      <div class="doc-meta">
+        <div id="printTimestamp">Dicetak otomatis pada —</div>
+        <div style="font-size:12px; opacity:0.85">ID Dokumen: <span id="shortId">—</span></div>
+      </div>
+    </header>
+
+    <div class="letter-body">
+      <div class="watermark" aria-hidden="true">JAMINAN</div>
+
+      <section class="letter-content" style="position:relative; z-index:2;">
+        <p>Kepada Yth. <strong>Nasabah Mega Menara Mas Berjangka</strong>,</p>
+
+        <p>Dengan ini sistem mencatat dan memberikan jaminan resmi terhadap akun dengan data sebagai berikut:</p>
+
+        <div class="client-info" id="clientInfo">
+          <div class="info-row">
+            <div class="info-label">Alamat Email</div>
+            <div class="info-value" id="emailView">email@mail.com</div>
+            <input type="email" id="emailInput" class="info-input" placeholder="email member">
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Jenis Trading</div>
+            <div class="info-value" id="sessionView">Sesi Trading Pertama <span class="badge bg-success ms-2">AKTIF</span></div>
+            <select id="sessionInput" class="info-input form-select form-select-sm" aria-label="Pilih sesi trading">
+              <option selected>Sesi Trading Pertama</option>
+              <option>Sesi Trading Kedua</option>
+              <option>Sesi Trading Ketiga</option>
+              <option>Sesi Trading Keempat</option>
+              <option>Sesi Trading Pagi</option>
+              <option>Sesi Trading Siang</option>
+              <option>Sesi Trading Exclusive</option>
+              <option>Sesi Trading Sore</option>
+              <option>Sesi Trading Bonus Dividen II</option>
+              <option>Sesi Trading Bonus Dividen Tahap Akhir</option>
+              <option>Sesi Trading Promo</option>
+              <option>Sesi Trading Perbaikan</option>
+              <option>Sesi Trading Validasi</option>
+              <option>Sesi Trading Express</option>
+              <option>Sesi Trading VIP</option>
+            </select>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Saldo Aktif</div>
+            <div class="info-value" id="balanceView">Rp 0</div>
+            <input type="text" id="balanceInput" class="info-input" inputmode="numeric" placeholder="Rp 0">
+          </div>
+        </div>
+
+        <div class="highlight" aria-live="polite">
+          <p>
+            Dengan ini, <strong>E*TRADE</strong> membuat perjanjian yang menyatakan bahwa apabila terdapat kesalahan dari pihak Perusahaan (Termasuk Analyst) dalam memberikan arahan atau data terkait <strong>E*TRADE DATA STATISTIC</strong> atau <strong>SESI TRADING</strong> yang mengakibatkan kerugian pada nasabah, maka Perusahaan akan menggantikan jumlah saldo yang tercantum di atas sesuai ketentuan yang berlaku.
+          </p>
+          <p><strong>CATATAN:</strong> Jika nasabah bertindak tanpa mengikuti arahan Analyst atau tidak menyelesaikan instruksi wajib seperti <em>BONUS DIVIDEN</em> yang bersifat wajib, maka jaminan ini tidak dapat diberlakukan dan segala kerugian menjadi tanggung jawab nasabah.</p>
+        </div>
+
+        <p style="margin-top:8px;">Demikian surat keterangan ini dibuat dengan sebenar-benarnya. Apabila terdapat perselisihan, diselesaikan secara kekeluargaan atau melalui hukum yang berlaku.</p>
+
+        <div class="approval-container">
+  <div class="logo-section d-flex flex-column align-items-center">
+    <img src="/images/extrade.png" alt="E*TRADE Logo" class="company-logo mb-2" id="companyLogo" crossorigin="anonymous" onerror="this.style.display='none'">
+    <div class="text-center">
+      <div style="font-size:13px; color:var(--muted)">Afiliasi: Mega Menara Mas Berjangka</div>
+    </div>
+  </div>
+
+  <div class="approval-section text-end">
+    <div class="approval-stamp" id="approvalStamp" aria-hidden="false">
+      <div style="font-weight:700">DISETUJUI OTOMATIS</div>
+      <div style="font-size:13px; color:var(--muted)">Oleh Sistem Mega Menara Mas</div>
+      <img src="/images/QRR.png" alt="QR Code Approval" class="approval-qr" id="qrImage" crossorigin="anonymous" onerror="this.style.display='none'">
+    </div>
+    <div style="font-size:12px; color:var(--muted); margin-top:8px;">Tanda tangan digital: <strong id="digitalSign">Sistem Otomatis</strong></div>
+  </div>
+</div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div>Dokumen digital sah & tercatat dalam sistem Mega Menara Mas Berjangka</div>
+      <div style="font-size:12px; color:var(--muted)">Enkripsi standar industri • Audit sistem berkala</div>
+    </footer>
+  </main>
+
+  <!-- SCRIPT -->
+  <script>
+    // ---------- UTIL & UI ----------
+    const $ = (sel) => document.querySelector(sel);
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const toast = document.getElementById('toastMessage');
+
+    function showLoading(active=true, text='Menyiapkan...'){
+      if(active){
+        loadingOverlay.classList.add('active');
+        loadingOverlay.querySelector('div:nth-child(2)').textContent = text;
+        loadingOverlay.setAttribute('aria-hidden','false');
+      } else {
+        loadingOverlay.classList.remove('active');
+        loadingOverlay.setAttribute('aria-hidden','true');
+      }
+    }
+    function showToast(msg, ms=3000){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), ms);
+    }
+
+    // ---------- Date & ID ----------
+    function formatIndonesianDate(d = new Date()){
+      const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+      const day = d.getDate().toString().padStart(2,'0');
+      const month = months[d.getMonth()];
+      const year = d.getFullYear();
+      const hours = d.getHours().toString().padStart(2,'0');
+      const minutes = d.getMinutes().toString().padStart(2,'0');
+      return `Dicetak otomatis pada ${day} ${month} ${year} pukul ${hours}:${minutes} WIB`;
+    }
+
+    function generateDocumentNumber(){
+      const prefix = 'MMET';
+      const year = new Date().getFullYear();
+      const type = 'SJG';
+      // 4-digit random (1000-9999)
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      // append short id
+      const short = Math.random().toString(36).slice(2,7).toUpperCase();
+      return `${prefix}/${year}/${type}/${randomNum}/${short}`;
+    }
+
+    // ---------- Initialization ----------
+    document.addEventListener('DOMContentLoaded', function(){
+      // Set doc meta
+      $('#documentNumber').textContent = 'Nomor Dokumen: ' + generateDocumentNumber();
+      $('#printTimestamp').textContent = formatIndonesianDate(new Date());
+      $('#shortId').textContent = Math.random().toString(36).slice(2,8).toUpperCase();
+
+      // Ensure initial view matches inputs (if any)
+      const email = $('#emailView').textContent.trim() || '—';
+      $('#emailInput').value = email === '—' ? '' : email;
+      const bal = $('#balanceView').textContent.trim() || 'Rp 0';
+      $('#balanceInput').value = bal.replace(/[^\d]/g,'') || '';
+
+      // Improve accessibility focus
+      $('#takeScreenshot').addEventListener('keydown', (e) => { if(e.key==='Enter') e.target.click(); });
+    });
+
+    // ---------- Edit Mode ----------
+    const toggleEditBtn = document.getElementById('toggleEdit');
+    toggleEditBtn.addEventListener('click', function(){
+      const clientInfo = document.getElementById('clientInfo');
+      const isEdit = clientInfo.classList.toggle('edit-mode');
+      toggleEditBtn.innerHTML = isEdit ? '<i class="bi bi-save-fill"></i> Simpan Perubahan' : '<i class="bi bi-pencil-square"></i> Edit Data';
+
+      if(!isEdit){
+        // save values back to view
+        const emailVal = document.getElementById('emailInput').value.trim();
+        document.getElementById('emailView').textContent = emailVal || '—';
+
+        const sel = document.getElementById('sessionInput');
+        const selVal = sel.options[sel.selectedIndex].value;
+        const sessionView = document.getElementById('sessionView');
+        sessionView.innerHTML = selVal.includes('Trading') ? selVal + ' <span class="badge bg-success ms-2">AKTIF</span>' : selVal;
+
+        const balRaw = document.getElementById('balanceInput').value.replace(/\D/g,'');
+        const balFormatted = balRaw ? 'Rp ' + parseInt(balRaw,10).toLocaleString('id-ID') : 'Rp 0';
+        document.getElementById('balanceView').textContent = balFormatted;
+      } else {
+        // populate inputs from view for editing
+        document.getElementById('emailInput').value = document.getElementById('emailView').textContent.trim() === '—' ? '' : document.getElementById('emailView').textContent.trim();
+        const sel = document.getElementById('sessionInput');
+        const currentSession = document.getElementById('sessionView').textContent.trim().replace('AKTIF','').trim();
+        for(let i=0;i<sel.options.length;i++){
+          if(sel.options[i].value === currentSession){ sel.selectedIndex = i; break; }
+        }
+        document.getElementById('balanceInput').value = document.getElementById('balanceView').textContent.replace(/[^\d]/g,'') || '';
+      }
+    });
+
+    // numeric formatting for balance input
+    document.getElementById('balanceInput').addEventListener('input', function(e){
+      const raw = e.target.value.replace(/\D/g,'');
+      e.target.value = raw ? parseInt(raw,10).toLocaleString('id-ID') : '';
+    });
+
+    // ---------- Preload images ----------
+    async function preloadImages() {
+      const images = Array.from(document.images);
+      return Promise.all(images.map(img => {
+        if(img.complete) return Promise.resolve();
+        return new Promise((res) => { img.onload = img.onerror = res; });
+      }));
+    }
+
+    // ---------- Screenshot to Clipboard (with fallback download) ----------
+    document.getElementById('takeScreenshot').addEventListener('click', async function(){
+      showLoading(true, 'Menyiapkan screenshot...');
+      try {
+        await preloadImages();
+        // ensure approval stamp visible
+        const stamp = document.getElementById('approvalStamp');
+        if(stamp){ stamp.style.visibility = 'visible'; stamp.style.opacity = '1'; }
+
+        const el = document.getElementById('letterContent');
+        // clone styles with onclone
+        const canvas = await html2canvas(el, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: '#ffffff',
+          logging: false,
+          onclone: (clonedDoc) => {
+            // set crossOrigin to anonymous for images to help with CORS
+            const imgs = clonedDoc.querySelectorAll('img');
+            imgs.forEach(i => { try { i.setAttribute('crossorigin','anonymous'); } catch(e){} });
+          }
+        });
+
+        // try clipboard write
+        await new Promise(async (resolve) => {
+          canvas.toBlob(async (blob) => {
+            if(!blob){
+              // fallback to dataURL download
+              const link = document.createElement('a');
+              link.href = canvas.toDataURL('image/png');
+              link.download = 'Surat_Jaminan.png';
+              link.click();
+              showToast('Hasil screenshot diunduh (clipboard tidak tersedia)');
+              return resolve();
+            }
+            // Clipboard API
+            try {
+              if(navigator.clipboard && window.ClipboardItem){
+                await navigator.clipboard.write([ new ClipboardItem({ 'image/png': blob }) ]);
+                showToast('Screenshot berhasil disalin ke clipboard!');
+                return resolve();
+              } else {
+                // fallback: trigger download
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'Surat_Jaminan.png';
+                link.click();
+                showToast('Clipboard tidak didukung — file diunduh');
+                return resolve();
+              }
+            } catch (err) {
+              // fallback download
+              const link = document.createElement('a');
+              link.href = URL.createObjectURL(blob);
+              link.download = 'Surat_Jaminan.png';
+              link.click();
+              showToast('Gagal salin ke clipboard — file diunduh');
+              console.error('Clipboard write failed:', err);
+              return resolve();
+            }
+          }, 'image/png');
+        });
+
+      } catch (err){
+        console.error('Screenshot error:', err);
+        showToast('Gagal mengambil screenshot. Coba browser lain.');
+      } finally {
+        showLoading(false);
+      }
+    });
+
+    // ---------- PDF Download (html2pdf) ----------
+    document.getElementById('downloadPdf').addEventListener('click', async function(){
+      showLoading(true, 'Membuat file PDF...');
+      try {
+        await preloadImages();
+
+        // update timestamp before export
+        document.getElementById('printTimestamp').textContent = formatIndonesianDate(new Date());
+
+        const element = document.getElementById('letterContent');
+        const opt = {
+          margin: [8,8,8,8],
+          filename: 'Surat_Jaminan_Mega_Menara_Mas.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 1.8,
+            useCORS: true,
+            logging: false,
+            backgroundColor: '#FFFFFF',
+            onclone: (clonedDoc) => {
+              const el = clonedDoc.getElementById('letterContent');
+              if(el) el.style.boxShadow = 'none';
+              // show stamp explicitly
+              const stamp = clonedDoc.querySelector('.approval-stamp');
+              if(stamp){ stamp.style.visibility='visible'; stamp.style.opacity='1'; }
+            }
+          },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', hotfixes: ['px_scaling'] }
+        };
+
+        await html2pdf().set(opt).from(element).save();
+        showToast('PDF berhasil diunduh.');
+      } catch (err){
+        console.error('PDF export error:', err);
+        showToast('Gagal membuat PDF. Coba lagi.');
+      } finally {
+        showLoading(false);
+      }
+    });
+
+    // ---------- Print ----------
+    document.getElementById('printDocument').addEventListener('click', function(){
+      // update timestamp
+      document.getElementById('printTimestamp').textContent = formatIndonesianDate(new Date());
+      // small delay to ensure DOM updates
+      setTimeout(()=> window.print(), 200);
+    });
+
+    // ---------- Accessibility & Keyboard shortcuts ----------
+    // Ctrl+P fallback: let browser handle print (no override)
+    // Ctrl+S => download PDF
+    window.addEventListener('keydown', function(e){
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's'){
+        e.preventDefault();
+        document.getElementById('downloadPdf').click();
+      }
+    });
+
+    // ---------- Safety & CORS notes ----------
+    // If images fail to load due to CORS, html2canvas/pdf may not include them.
+    // Recommend hosting logos/QR with proper CORS headers or using base64 images for guaranteed export.
+
+  </script>
+
+  <!-- Bootstrap JS (optional, for components) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+</html>

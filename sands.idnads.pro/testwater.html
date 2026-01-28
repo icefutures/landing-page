@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Statement Preview • Template Non-Resmi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1c;
+    --bg2: #0e1a30;
+    --glass: rgba(12, 22, 48, 0.85);
+    --edge: rgba(120, 92, 48, 0.3);
+    --gold-light: #ffd166;
+    --gold: #f4b400;
+    --gold-dark: #b8860b;
+    
+    --txt: #f5f7ff;
+    --muted: #b0b8d9;
+    --acc: #89b4ff;
+    --acc2: #50e3c2;
+    
+    --ok: #57d185;
+    --warn: var(--gold-light);
+    --danger: #ff7a7a;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    margin: 0;
+    min-height: 100svh;
+    font-family: Inter, system-ui, Segoe UI, Arial;
+    color: var(--txt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* Watermark background menggunakan div yang sebenarnya */
+  .watermark-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      url('/images/MMMB.png') center / 250px repeat,
+      radial-gradient(1200px 800px at 8% 12%, rgba(27, 42, 85, 0.8) 0%, transparent 60%),
+      radial-gradient(1000px 700px at 88% 0%, rgba(24, 54, 92, 0.7) 0%, transparent 60%),
+      linear-gradient(160deg, var(--bg), var(--bg2));
+    z-index: -1;
+    opacity: 0.3;
+  }
+  
+  /* Fallback jika gambar logo tidak ditemukan */
+  .watermark-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='100' y='100' font-family='Arial, sans-serif' font-size='16' font-weight='bold' text-anchor='middle' fill='%23f4b400' fill-opacity='0.05'%3EPT MEGA%3C/text%3E%3Ctext x='100' y='120' font-family='Arial, sans-serif' font-size='12' text-anchor='middle' fill='%23f4b400' fill-opacity='0.05'%3EMENARA MAS%3C/text%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    display: none;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      var(--gold-light) 20%, 
+      var(--gold) 50%, 
+      var(--gold-light) 80%, 
+      transparent 100%
+    );
+    z-index: 100;
+    opacity: 0.5;
+  }
+  
+  .frame {
+    width: min(920px, 100%);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .shell {
+    backdrop-filter: blur(20px) saturate(180%);
+    background: linear-gradient(
+      180deg, 
+      rgba(18, 28, 55, 0.9) 0%,
+      rgba(10, 18, 40, 0.85) 100%
+    );
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.2),
+      rgba(244, 180, 0, 0.4),
+      rgba(120, 92, 48, 0.2)
+    ) 1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 
+      0 30px 100px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(244, 180, 0, 0.1),
+      inset 0 0 20px rgba(244, 180, 0, 0.05);
+    position: relative;
+  }
+  
+  .shell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      var(--gold) 20%,
+      var(--gold-light) 50%,
+      var(--gold) 80%,
+      transparent
+    );
+    opacity: 0.6;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px;
+    background: linear-gradient(
+      90deg, 
+      rgba(8, 20, 49, 0.95) 0%,
+      rgba(15, 34, 70, 0.95) 100%
+    );
+    border-bottom: 1px solid;
+    border-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(244, 180, 0, 0.3) 50%,
+      transparent 100%
+    ) 1;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(244, 180, 0, 0.2),
+      transparent
+    );
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    object-fit: contain;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  
+  .sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  
+  .badge {
+    font-size: 12px;
+    color: #1a1a2e;
+    background: linear-gradient(
+      90deg, 
+      var(--gold-dark),
+      var(--gold),
+      var(--gold-light)
+    );
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 4px 12px rgba(244, 180, 0, 0.2),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+  
+  main {
+    padding: 22px;
+    display: grid;
+    gap: 18px;
+    position: relative;
+  }
+  
+  .grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+    padding: 0 7px;
+    position: relative;
+  }
+  
+  .card {
+    background: linear-gradient(
+      180deg, 
+      rgba(20, 30, 60, 0.8) 0%,
+      rgba(12, 22, 48, 0.6) 100%
+    );
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.1),
+      rgba(244, 180, 0, 0.2),
+      rgba(120, 92, 48, 0.1)
+    ) 1;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 0 0 1px rgba(244, 180, 0, 0.05);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Watermark di dalam card */
+  .card-watermark {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 80px;
+    height: 30px;
+    background-image: url('/images/MMMB.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center right;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* Watermark teks di seluruh card */
+  .card-watermark-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .card-watermark-text span {
+    position: absolute;
+    color: rgba(244, 180, 0, 0.03);
+    font-size: 12px;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    white-space: nowrap;
+  }
+  
+  .card-watermark-text span:nth-child(1) { top: 20%; left: -30%; }
+  .card-watermark-text span:nth-child(2) { top: 40%; left: -10%; }
+  .card-watermark-text span:nth-child(3) { top: 60%; left: -50%; }
+  .card-watermark-text span:nth-child(4) { top: 80%; left: -20%; }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(244, 180, 0, 0.1),
+      inset 0 0 30px rgba(244, 180, 0, 0.03);
+  }
+  
+  .editable-title {
+    font-size: 20px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed rgba(244, 180, 0, 0.3);
+    width: 100%;
+    padding: 2px 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .editable-title:focus {
+    border-bottom: 2px solid var(--gold);
+    outline: none;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(244, 180, 0, 0.15);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .row:last-child {
+    border-bottom: none;
+  }
+  
+  .label {
+    color: #c7d6ff;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .label::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transition: width 0.3s ease;
+  }
+  
+  .row:hover .label::after {
+    width: 100%;
+  }
+  
+  .val {
+    font-size: 20px;
+    font-weight: 800;
+  }
+  
+  .value-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .value-col {
+    flex: 1;
+    text-align: center;
+    padding: 0 4px;
+  }
+  
+  .editable-input {
+    background: rgba(10, 20, 40, 0.5);
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.3),
+      rgba(244, 180, 0, 0.4),
+      rgba(120, 92, 48, 0.3)
+    ) 1;
+    border-radius: 10px;
+    color: var(--txt);
+    font-size: 20px;
+    font-weight: 800;
+    width: 100%;
+    text-align: center;
+    padding: 10px 8px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .editable-input:focus {
+    outline: none;
+    box-shadow: 
+      0 0 0 2px rgba(244, 180, 0, 0.2),
+      inset 0 0 20px rgba(244, 180, 0, 0.05);
+    border: 1px solid var(--gold);
+  }
+  
+  .accent { color: var(--gold-light); }
+  .ok { 
+    color: #50e3c2;
+    background: rgba(80, 227, 194, 0.05);
+  }
+  .warn { color: var(--gold); }
+  .danger { color: var(--danger); }
+  
+  .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .item, .editable-item {
+    background: rgba(20, 30, 60, 0.5);
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.1),
+      rgba(244, 180, 0, 0.2),
+      rgba(120, 92, 48, 0.1)
+    ) 1;
+    border-radius: 14px;
+    padding: 12px;
+    font-size: 12px;
+    color: #cfe1ff;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .editable-item {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+  }
+  
+  .item:hover, .editable-item:focus {
+    background: rgba(30, 40, 70, 0.6);
+    border-color: var(--gold);
+  }
+  
+  .note {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .btn {
+    all: unset;
+    cursor: pointer;
+    padding: 14px 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+  
+  .btn:hover::before {
+    transform: translateX(100%);
+  }
+  
+  .btn.primary {
+    background: linear-gradient(
+      90deg, 
+      var(--gold-dark),
+      var(--gold),
+      var(--gold-light)
+    );
+    color: #1a1a2e;
+    box-shadow: 
+      0 10px 28px rgba(244, 180, 0, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+  
+  .btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 14px 36px rgba(244, 180, 0, 0.4),
+      inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  }
+  
+  .btn.ghost {
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.3),
+      rgba(244, 180, 0, 0.4),
+      rgba(120, 92, 48, 0.3)
+    ) 1;
+    color: var(--gold-light);
+    background: rgba(13, 24, 50, 0.6);
+  }
+  
+  .btn.ghost:hover {
+    background: rgba(244, 180, 0, 0.1);
+    border-color: var(--gold);
+  }
+  
+  .btn.add {
+    background: linear-gradient(
+      135deg,
+      rgba(30, 40, 70, 0.9),
+      rgba(20, 30, 60, 0.9)
+    );
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.3),
+      rgba(244, 180, 0, 0.4),
+      rgba(120, 92, 48, 0.3)
+    ) 1;
+    color: var(--gold-light);
+    font-size: 12px;
+    padding: 10px 16px;
+    margin-top: 10px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn.copy {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    background: linear-gradient(
+      135deg,
+      rgba(30, 40, 70, 0.9),
+      rgba(20, 30, 60, 0.9)
+    );
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.3),
+      rgba(244, 180, 0, 0.4),
+      rgba(120, 92, 48, 0.3)
+    ) 1;
+    color: var(--gold-light);
+    font-size: 12px;
+    padding: 10px 16px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn.screenshot {
+    position: absolute;
+    top: 20px;
+    right: 120px;
+    z-index: 10;
+    background: linear-gradient(
+      135deg,
+      rgba(30, 40, 70, 0.9),
+      rgba(20, 30, 60, 0.9)
+    );
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.3),
+      rgba(244, 180, 0, 0.4),
+      rgba(120, 92, 48, 0.3)
+    ) 1;
+    color: var(--gold-light);
+    font-size: 12px;
+    padding: 10px 16px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn.add:hover, .btn.screenshot:hover, .btn.copy:hover {
+    background: rgba(244, 180, 0, 0.1);
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+  
+  footer {
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid;
+    border-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(244, 180, 0, 0.2) 50%,
+      transparent 100%
+    ) 1;
+    color: var(--muted);
+    font-size: 12px;
+    background: linear-gradient(
+      90deg, 
+      rgba(10, 21, 46, 0.95) 0%,
+      rgba(6, 16, 39, 0.95) 100%
+    );
+    position: relative;
+  }
+  
+  /* Watermark di footer */
+  .footer-watermark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 20px;
+    background-image: url('/images/MMMB.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  
+  .status {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 
+      0 0 12px var(--gold),
+      0 0 24px rgba(244, 180, 0, 0.3);
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+  .qr {
+    width: 100px;
+    height: 100px;
+    border-radius: 14px;
+    border: 2px dashed;
+    border-image: linear-gradient(
+      135deg,
+      var(--gold-dark),
+      var(--gold),
+      var(--gold-light)
+    ) 1;
+    display: grid;
+    place-items: center;
+    color: #89a5db;
+    font-size: 10px;
+    user-select: none;
+    overflow: hidden;
+    background: rgba(20, 30, 60, 0.5);
+    position: relative;
+    margin: 16px auto;
+  }
+  
+  .qr::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(244, 180, 0, 0.05),
+      transparent
+    );
+    animation: shine 3s infinite;
+  }
+  
+  @keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  }
+  
+  .qr img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .wm {
+    position: absolute;
+    inset: auto 16px 16px auto;
+    font-size: 11px;
+    color: rgba(244, 180, 0, 0.15);
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(
+      135deg,
+      rgba(20, 30, 60, 0.95),
+      rgba(10, 20, 40, 0.95)
+    );
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(120, 92, 48, 0.3),
+      rgba(244, 180, 0, 0.4),
+      rgba(120, 92, 48, 0.3)
+    ) 1;
+    padding: 16px 32px;
+    border-radius: 12px;
+    color: var(--txt);
+    font-weight: 600;
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(244, 180, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    min-width: 200px;
+    text-align: center;
+  }
+  
+  .toast.show {
+    opacity: 1;
+  }
+  
+  /* Modern scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(10, 20, 40, 0.5);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--gold-dark), var(--gold));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(var(--gold), var(--gold-light));
+  }
+</style>
+</head>
+<body>
+
+<!-- Watermark background -->
+<div class="watermark-bg"></div>
+
+<div class="frame">
+  <button class="btn add" onclick="addRow()">+ Tambah Baris</button>
+  <button class="btn screenshot" onclick="captureScreenshot()">Ambil Screenshot</button>
+  <button class="btn copy" onclick="copyToClipboard()">Salin ke Clipboard</button>
+  
+  <div class="shell" role="region" aria-label="Statement Preview Template" id="shell-to-copy">
+    <header>
+      <div class="brand">
+        <img src="/images/NEXX.png" class="logo" alt="NEXX Logo">
+        <div>
+          <h1>Neex Corporation</h1>
+          <div class="sub">Never Ending Excellence</div>
+        </div>
+      </div>
+      <span class="badge">Wynn Data Statistic</span>
+    </header>
+
+    <main>
+      <section class="grid">
+        <div class="card">
+          <!-- Watermark di dalam card -->
+          <div class="card-watermark"></div>
+          <div class="card-watermark-text">
+            <span>PT MEGA MENARA MAS</span>
+            <span>PT MEGA MENARA MAS</span>
+            <span>PT MEGA MENARA MAS</span>
+            <span>PT MEGA MENARA MAS</span>
+          </div>
+          
+          <input type="text" class="editable-title" value="SESI TRADING">
+          
+          <div class="row">
+            <div class="label" style="flex:1; text-align:center">MODAL</div>
+            <div class="label" style="flex:1; text-align:center">PROFIT</div>
+            <div class="label" style="flex:1; text-align:center">PENARIKAN</div>
+          </div>
+          
+          <div class="value-row" id="first-row">
+            <div class="value-col">
+              <input type="text" class="editable-input accent" id="modal" value="Rp100.000" oninput="calculateProfit(this)">
+            </div>
+            <div class="value-col">
+              <input type="text" class="editable-input warn" id="profit-percent" value="30%" oninput="calculateProfit(this)">
+            </div>
+            <div class="value-col">
+              <input type="text" class="editable-input ok" id="penarikan" value="Rp130.000" readonly>
+            </div>
+          </div>
+
+          <div id="additional-rows">
+            <!-- Additional rows will be added here -->
+          </div>
+
+          <p class="note">
+            Data Trading yang dikeluarkan oleh sistem secara otomatis dan memiliki <strong>keterbatasan kuota</strong>, Segera daftarkan data trading yang paling diminati untuk mendapatkan hasil profit bersama Analyst dan penarikan sesuai data system penarikan.
+          </p>
+        </div>
+
+        <div class="card">
+          <!-- Watermark di dalam card kedua -->
+          <div class="card-watermark"></div>
+          <div class="card-watermark-text">
+            <span>PT MEGA MENARA MAS</span>
+            <span>PT MEGA MENARA MAS</span>
+            <span>PT MEGA MENARA MAS</span>
+            <span>PT MEGA MENARA MAS</span>
+          </div>
+          
+          <p class="note">Pilih Modal Sesuai Kemampuan. Semakin besar modal, potensi hasil ikut meningkat.</p>
+          <p class="note">Konsultasikan rencana investasi dengan Analyst. Perlindungan dana nasabah mengacu pada surat jaminan perusahaan.</p>
+          <div class="row">
+            <span class="label">Syarat & Ketentuan Berlaku</span>
+          </div>
+          <div class="qr" aria-hidden="true">
+            <img src="/images/QR.png" alt="QR Code">
+          </div>
+          <p class="note">Ringkasan investasi ini di khususkan untuk nasabah PT Mega Menara Mas Berjangka.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <!-- Watermark di footer -->
+      <div class="footer-watermark"></div>
+      <div class="status">
+        <span class="dot" aria-hidden="true"></span>
+        Mega Menara Mas Berjangka
+      </div>
+      <div>© 2026 Wynn Trading System • Neex Corps</div>
+    </footer>
+  </div>
+  
+  <div class="wm">© 2026 Wynn Trading System • Neex Corps</div>
+</div>
+
+<div class="toast" id="toast">Terkopi ke clipboard!</div>
+
+<!-- Include html2canvas library -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+  function formatNumber(num) {
+    return 'Rp' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  
+  function calculateProfit(inputElement) {
+    const row = inputElement.closest('.value-row');
+    const modalInput = row.querySelector('.accent');
+    const modalStr = modalInput.value.replace(/[^\d]/g, '');
+    const modal = parseFloat(modalStr) || 0;
+    
+    const profitInput = row.querySelector('.warn');
+    const profitPercentStr = profitInput.value.replace('%', '');
+    const profitPercent = parseFloat(profitPercentStr) || 0;
+    
+    const profitAmount = modal * (profitPercent / 100);
+    const penarikan = modal + profitAmount;
+    
+    modalInput.value = formatNumber(modal);
+    profitInput.value = profitPercent + '%';
+    row.querySelector('.ok').value = formatNumber(penarikan);
+  }
+  
+  function addRow() {
+    const additionalRows = document.getElementById('additional-rows');
+    const rowCount = additionalRows.children.length / 2 + 1;
+    
+    const newValueRow = document.createElement('div');
+    newValueRow.className = 'value-row';
+    newValueRow.innerHTML = `
+      <div class="value-col">
+        <input type="text" class="editable-input accent" value="Rp0" oninput="calculateProfit(this)">
+      </div>
+      <div class="value-col">
+        <input type="text" class="editable-input warn" value="0%" oninput="calculateProfit(this)">
+      </div>
+      <div class="value-col">
+        <input type="text" class="editable-input ok" value="Rp0" readonly>
+      </div>
+    `;
+    
+    additionalRows.appendChild(newValueRow);
+    
+    // Add currency formatting to new input
+    const newCurrencyInput = newValueRow.querySelector('.accent');
+    newCurrencyInput.addEventListener('input', handleCurrencyInput);
+    newCurrencyInput.addEventListener('input', function() {
+      calculateProfit(this);
+    });
+  }
+
+  function copyToClipboard() {
+    const shellElement = document.getElementById('shell-to-copy');
+    const range = document.createRange();
+    range.selectNode(shellElement);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        showToast('Terkopi ke clipboard!');
+      } else {
+        showToast('Gagal menyalin, coba lagi');
+      }
+    } catch (err) {
+      showToast('Gagal menyalin: ' + err);
+    }
+    
+    window.getSelection().removeAllRanges();
+  }
+
+  async function captureScreenshot() {
+    try {
+      showToast('Mengambil screenshot...');
+      
+      // Include watermark background in screenshot
+      const element = document.getElementById('shell-to-copy');
+      
+      // Clone the element to include background
+      const clonedElement = element.cloneNode(true);
+      
+      // Create a container for the screenshot
+      const container = document.createElement('div');
+      container.style.position = 'fixed';
+      container.style.top = '-9999px';
+      container.style.left = '-9999px';
+      container.style.width = '920px';
+      container.style.zIndex = '9999';
+      
+      // Add watermark background to container
+      const watermarkClone = document.querySelector('.watermark-bg').cloneNode(true);
+      watermarkClone.style.position = 'absolute';
+      watermarkClone.style.top = '0';
+      watermarkClone.style.left = '0';
+      watermarkClone.style.width = '100%';
+      watermarkClone.style.height = '100%';
+      watermarkClone.style.zIndex = '0';
+      
+      // Add cloned element to container
+      clonedElement.style.position = 'relative';
+      clonedElement.style.zIndex = '1';
+      clonedElement.style.background = 'none';
+      clonedElement.style.backdropFilter = 'none';
+      
+      container.appendChild(watermarkClone);
+      container.appendChild(clonedElement);
+      document.body.appendChild(container);
+      
+      // Capture screenshot
+      const canvas = await html2canvas(container, {
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        width: 920,
+        height: container.offsetHeight,
+        onclone: function(clonedDoc) {
+          // Ensure all styles are properly cloned
+          const shell = clonedDoc.querySelector('.shell');
+          if (shell) {
+            shell.style.borderRadius = '24px';
+            shell.style.overflow = 'hidden';
+          }
+        }
+      });
+      
+      // Remove temporary container
+      document.body.removeChild(container);
+      
+      canvas.toBlob(async (blob) => {
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              'image/png': blob
+            })
+          ]);
+          showToast('Screenshot disalin ke clipboard!');
+        } catch (err) {
+          console.error('Gagal menyalin ke clipboard:', err);
+          showToast('Gagal menyalin screenshot');
+          fallbackCopyImage(canvas);
+        }
+      }, 'image/png');
+      
+    } catch (err) {
+      console.error('Gagal mengambil screenshot:', err);
+      showToast('Gagal mengambil screenshot');
+    }
+  }
+
+  function fallbackCopyImage(canvas) {
+    const dataURL = canvas.toDataURL('image/png');
+    const tempInput = document.createElement('input');
+    document.body.appendChild(tempInput);
+    tempInput.value = dataURL;
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    showToast('URL gambar disalin (fallback)');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+  
+  function handleCurrencyInput(e) {
+    let value = e.target.value.replace(/[^0-9]/g, '');
+    if (value === '') value = '0';
+    e.target.value = 'Rp' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  
+  function handlePercentageInput(e) {
+    let value = e.target.value.replace(/[^0-9]/g, '');
+    if (value === '') value = '0';
+    e.target.value = value + '%';
+  }
+
+  // Function to check if background image loads successfully
+  function checkBackgroundImage() {
+    const testImage = new Image();
+    testImage.src = '/images/MMMB.png';
+    testImage.onload = function() {
+      console.log('Background logo loaded successfully');
+    };
+    testImage.onerror = function() {
+      console.log('Background logo failed to load, using fallback');
+      // Show the SVG fallback
+      const watermarkBg = document.querySelector('.watermark-bg');
+      watermarkBg.style.background = `url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='100' y='100' font-family='Arial, sans-serif' font-size='16' font-weight='bold' text-anchor='middle' fill='%23f4b400' fill-opacity='0.05'%3EPT MEGA%3C/text%3E%3Ctext x='100' y='120' font-family='Arial, sans-serif' font-size='12' text-anchor='middle' fill='%23f4b400' fill-opacity='0.05'%3EMENARA MAS%3C/text%3E%3C/svg%3E") center / 200px repeat, 
+      radial-gradient(1200px 800px at 8% 12%, rgba(27, 42, 85, 0.8) 0%, transparent 60%),
+      radial-gradient(1000px 700px at 88% 0%, rgba(24, 54, 92, 0.7) 0%, transparent 60%),
+      linear-gradient(160deg, var(--bg), var(--bg2))`;
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if background image loads
+    checkBackgroundImage();
+    
+    // Add currency formatting to all existing inputs
+    document.querySelectorAll('.accent').forEach(input => {
+      input.addEventListener('input', handleCurrencyInput);
+      input.addEventListener('input', function() {
+        calculateProfit(this);
+      });
+    });
+    
+    // Add percentage formatting to all existing percentage inputs
+    document.querySelectorAll('.warn').forEach(input => {
+      input.addEventListener('input', handlePercentageInput);
+      input.addEventListener('input', function() {
+        calculateProfit(this);
+      });
+    });
+
+    // Calculate initial values
+    const firstModalInput = document.querySelector('#first-row .accent');
+    calculateProfit(firstModalInput);
+  });
+</script>
+</body>
+</html>

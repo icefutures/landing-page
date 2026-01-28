@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero to Hero - Penghasilan Tambahan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Contact Container Styles */
+        .contact-container {
+            text-align: center;
+            padding: 40px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .contact-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .whatsapp-button {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+
+        /* Center Aligned Paragraphs */
+        .center-text {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .blue-bg {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .tiny-font {
+            font-size: 14px;
+        }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+            max-width: 800px;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .mySlides img {
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Dot indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 310px;
+        }
+
+        .links-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .footer-logo img {
+            max-width: 220px;
+            margin-bottom: 0px;
+        }
+
+        .social-links, .footer-links {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .social-links a, .footer-links a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        .social-links a:hover, .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .hr-style {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+            margin: 20px 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Image -->
+    <div style="text-align: center; margin: 20px 0;">
+        <img src="https://tk.idnads.pro/wp-content/uploads/2025/07/timothy2.jpg" alt="Main Banner" style="max-width: 849px; width: 100%; height: auto;">
+    </div>
+
+    <!-- First Contact Container -->
+    <div class="contact-container">
+        <div class="contact-header">Siap tambah penghasilan hingga 2 juta per hari?? Gabung sekarang dan wujudkan keuntungan nyata bersama kami!</div>
+        <a href="https://url02.xyz/a/ZStwqslv6645" class="whatsapp-button">
+            <i class="fab fa-whatsapp"></i> Hubungi Kami Via WhatsApp Sekarang!
+        </a>
+    </div>
+
+    <!-- Blue Background Paragraph -->
+    <p class="center-text blue-bg" style="font-weight: 700; line-height: 1.3; letter-spacing: 1px; text-transform: capitalize; text-decoration: none; font-size: 14px; font-style: normal;">
+        <strong>Gunakan ponsel anda di rumah dan dapatkan penghasilan tambahan Rp 800ribu hingga 2 juta perhari</strong>
+    </p>
+
+    <!-- Description Paragraphs -->
+    <p class="center-text tiny-font" style="color: #666;">
+        Dalam beberapa tahun terakhir, biaya hidup terus meningkat, sementara pendapatan tidak mengikuti. Kondisi ini membuat banyak dari kita merasa tertekan secara finansial. Namun, ada solusi. Bergabunglah dengan kami dan temukan peluang untuk mendapatkan penghasilan tambahan dari rumah. Dengan bimbingan dari para profesional kami, Anda dapat meraih keuntungan tanpa risiko yang besar.
+    </p>
+
+    <p class="center-text tiny-font" style="color: #777;">
+        Kami memberikan jaminan 100% uang kembali jika Anda tidak berhasil mendapatkan pendapatan atau mengalami kerugian. Jadi, jangan ragu lagi untuk memulai. Mari bersama-sama membangun masa depan finansial yang lebih stabil dan nyaman untuk Anda dan keluarga Anda.
+    </p>
+
+    <!-- Blue Background Paragraph -->
+    <p class="center-text blue-bg">
+        <strong><em>Saya telah membuktikan sendiri melalui platform ini saya telah menghasilkan penghasilan 23 juta / bulan, Anda bisa membuktikannya langsung</em></strong>
+    </p>
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="https://sands.idnads.pro/images/testimoni1.png" style="width:100%" onclick="openModal(this)">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://sands.idnads.pro/images/testimoni2.png" style="width:100%" onclick="openModal(this)">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://sands.idnads.pro/images/testimoni3.png" style="width:100%" onclick="openModal(this)">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://sands.idnads.pro/images/testimoni4.png" style="width:100%" onclick="openModal(this)">
+        </div>
+
+        <!-- Dot indicators -->
+        <div style="text-align:center; margin-top: 10px;">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+            <span class="dot" onclick="currentSlide(4)"></span> 
+        </div>
+    </div>
+
+    <!-- Second Contact Container -->
+    <div class="contact-container">
+        <div class="contact-header"></div>
+        <a href="https://url02.xyz/a/ZStwqslv6645" class="whatsapp-button">
+            <i class="fab fa-whatsapp"></i> Hubungi Kami Via WhatsApp Sekarang!
+        </a>
+    </div>
+
+    <!-- Modal for Image Popup -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="imgModal">
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="links-logo-container">
+            <div class="footer-logo">
+                <a href="/">
+                    <img src="https://x.idnads.pro/wp-content/uploads/2025/04/logo-zero-to-hero.png" alt="Logo">
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+            <div class="footer-links">
+                <a href="/kebijakan-privasi">Kebijakan Privasi</a>
+                <a href="/kebijakan-privasi">Syarat dan Ketentuan</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Alamat Kantor: C/o Amroollah S Nagar, Barhani Block Barahni Siddharth Nagar UP 272201 I</p>
+            <hr class="hr-style">
+            <p>© 2024 zerotohero.info. Hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Slideshow functionality
+        let slideIndex = 1;
+        let autoSlideInterval;
+
+        // Show the first slide
+        showSlides(slideIndex);
+
+        // Function to change slides
+        function plusSlides(n) {
+            clearInterval(autoSlideInterval);
+            showSlides(slideIndex += n);
+            startAutoSlide();
+        }
+
+        // Function to show specific slide
+        function currentSlide(n) {
+            clearInterval(autoSlideInterval);
+            showSlides(slideIndex = n);
+            startAutoSlide();
+        }
+
+        // Main slideshow function
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            
+            // Remove active class from all dots
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            // Show current slide and activate corresponding dot
+            slides[slideIndex - 1].style.display = "block";  
+            dots[slideIndex - 1].className += " active";
+        }
+
+        // Auto slide function
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                slideIndex++;
+                showSlides(slideIndex);
+            }, 3000);
+        }
+        startAutoSlide();
+
+        // Modal functions
+        function openModal(img) {
+            let modal = document.getElementById("myModal");
+            let modalImg = document.getElementById("imgModal");
+            modal.style.display = "block";
+            modalImg.src = img.src;
+        }
+
+        function closeModal() {
+            let modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            let modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

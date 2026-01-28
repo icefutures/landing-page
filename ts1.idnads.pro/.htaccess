@@ -1,0 +1,15 @@
+# Aktifkan mod_rewrite
+RewriteEngine On
+
+# Redirect ke bit.ly untuk URL "link"
+
+# Hilangkan ekstensi .php dan .html dari URL
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)/?$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^\.]+)/?$ $1.html [L]
+
+# Redirect untuk memaksa HTTPS (opsional, jika situs mendukung HTTPS)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

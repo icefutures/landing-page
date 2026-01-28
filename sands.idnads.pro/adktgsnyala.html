@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>NEEX Winner Generator – BLUE GOLD PREMIUM GLOW</title>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<style>
+
+    body {
+        background: #04060C;
+        font-family: "Poppins", sans-serif;
+        color: white;
+        padding: 25px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 34px;
+        margin-bottom: 30px;
+        font-weight: 800;
+        background: linear-gradient(90deg,#22C3FF,#FFE48A,#FFCF55);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px rgba(255,233,140,0.25);
+    }
+
+    /* INPUT BOX */
+    .box {
+        max-width: 560px;
+        margin: auto;
+        background: #0D111A;
+        padding: 22px;
+        border-radius: 16px;
+        border: 2px solid rgba(0,153,255,0.5);
+        box-shadow: 0 0 28px rgba(0,153,255,0.35);
+    }
+
+    textarea, input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        background: #111722;
+        border: 2px solid rgba(0,153,255,0.55);
+        color: white;
+        border-radius: 8px;
+        font-size: 13px;
+        box-shadow: inset 0 0 12px rgba(0,153,255,0.25);
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: linear-gradient(135deg,#0AB4FF,#4CC6FF,#FFE48A,#FFC84B);
+        color: black;
+        font-weight: 700;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        box-shadow: 0 0 22px rgba(255,200,80,0.4), 0 0 14px rgba(0,153,255,0.45);
+        transition: 0.15s;
+    }
+
+    button:hover {
+        filter: brightness(1.15);
+        transform: translateY(-1px);
+    }
+
+    /* -------- PREMIUM GLOW OUTER FRAME -------- */
+    .capture-box {
+        background: linear-gradient(145deg,#0AC0FF,#FFD15E);
+        border-radius: 16px;
+        display: inline-block;
+        margin: 40px auto 12px auto;
+
+        /* DOUBLE NEON GLOW */
+        box-shadow:
+            0 0 30px rgba(0,153,255,0.55),
+            0 0 50px rgba(255,200,80,0.55),
+            0 0 90px rgba(255,200,80,0.35),
+            0 0 60px rgba(0,153,255,0.35);
+
+        padding: 3px; /* sedikit padding untuk efek bingkai glowing */
+    }
+
+    /* CARD CONTENT */
+    .card {
+        width: 620px;
+        height: 310px;
+        background: #070A12;
+
+        background-image:
+            radial-gradient(circle at top center, rgba(255,235,160,0.28), transparent 55%),
+            radial-gradient(circle at center, rgba(0,153,255,0.12), transparent 65%);
+
+        border-radius: 14px;
+        overflow: hidden;
+        border: 3px solid rgba(255,210,120,0.55);
+        box-shadow:
+            inset 0 0 18px rgba(255,210,120,0.35),
+            inset 0 0 28px rgba(0,153,255,0.2);
+    }
+
+    .header {
+        height: 55px;
+        background: linear-gradient(90deg,#0A1220,#113056,#2E78B3,#FFD87C22,#FFCE6033);
+        border-bottom: 3px solid rgba(255,200,80,0.55);
+        font-size: 22px;
+        font-weight: 800;
+        text-align: center;
+        line-height: 55px;
+        letter-spacing: 1px;
+        color: #FFE9A9;
+        text-shadow:
+            0 0 8px rgba(255,230,150,0.45),
+            0 0 18px rgba(255,200,80,0.35);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* header shine */
+    .header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -80%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.28), transparent);
+        transform: skewX(-30deg);
+        animation: shine 3s infinite linear;
+    }
+
+    @keyframes shine {
+        0% { left: -80%; }
+        60% { left: 140%; }
+        100% { left: 140%; }
+    }
+
+    .content {
+        display: flex;
+        height: 255px;
+    }
+
+    /* IMAGE */
+    .image-box {
+        width: 50%;
+        border-right: 3px solid rgba(0,153,255,0.45);
+        box-shadow: inset -8px 0 14px rgba(0,153,255,0.25);
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* NAMES */
+    .names-box {
+        width: 50%;
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 4px;
+        overflow: hidden;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,224,140,0.06);
+        border: 1px solid rgba(0,153,255,0.35);
+        color: #FFE8A6;
+        font-weight: 700;
+        border-radius: 6px;
+        text-shadow: 0 0 6px rgba(255,224,120,0.45);
+        transition: 0.15s;
+        box-shadow:
+            inset 0 0 8px rgba(255,200,80,0.2),
+            inset 0 0 12px rgba(0,153,255,0.25);
+    }
+
+    /* Hover glowing */
+    .row:hover {
+        background: rgba(255,240,170,0.12);
+        box-shadow:
+            0 0 14px rgba(255,200,80,0.35),
+            inset 0 0 16px rgba(0,153,255,0.35);
+    }
+
+    .row-name {
+        flex: 1;
+        outline: none;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .add-row-btn, .copy-btn {
+        width: 620px;
+        margin: 6px auto;
+        padding: 10px 0;
+        background: linear-gradient(135deg,#16C0FF,#64D2FF,#FFE48A,#FFC84B);
+        color: black;
+        font-weight: 700;
+        text-align: center;
+        border-radius: 10px;
+        cursor: pointer;
+
+        box-shadow:
+            0 0 22px rgba(255,200,80,0.45),
+            0 0 18px rgba(0,153,255,0.45);
+
+        transition: 0.15s;
+    }
+
+    .add-row-btn:hover,
+    .copy-btn:hover {
+        filter: brightness(1.18);
+        transform: translateY(-1px);
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>NEEX — WINNER LIST (PREMIUM BLUE × GOLD GLOW)</h1>
+
+<div class="box">
+    <label>Masukkan semua nama:</label>
+    <textarea id="names" rows="6"></textarea>
+
+    <label>Jumlah pemenang tiap list:</label>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <input id="c1" type="number" value="5" min="1" max="9">
+        <input id="c2" type="number" value="5" min="1" max="9">
+        <input id="c3" type="number" value="5" min="1" max="9">
+        <input id="c4" type="number" value="5" min="1" max="9">
+        <input id="c5" type="number" value="5" min="1" max="9">
+        <input id="c6" type="number" value="5" min="1" max="9">
+        <input id="c7" type="number" value="5" min="1" max="9">
+        <input id="c8" type="number" value="5" min="1" max="9">
+        <input id="c9" type="number" value="5" min="1" max="9">
+        <input id="c10" type="number" value="5" min="1" max="9">
+    </div>
+
+    <label>Upload Gambar:</label>
+    <input type="file" id="imageUpload" accept="image/*">
+
+    <button onclick="generateAll()">Generate 10 List</button>
+</div>
+
+<div id="result"></div>
+
+<script>
+
+let imageData = "";
+
+document.getElementById("imageUpload").addEventListener("change", e => {
+    const r = new FileReader();
+    r.onload = ev => imageData = ev.target.result;
+    r.readAsDataURL(e.target.files[0]);
+});
+
+const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+
+async function copyCard(id) {
+    const el = document.getElementById("wrap"+id);  
+    const canvas = await html2canvas(el, { scale: 2 });
+    canvas.toBlob(async blob => {
+        await navigator.clipboard.write([
+            new ClipboardItem({ "image/png": blob })
+        ]);
+        alert("✔ Gambar berhasil disalin dengan efek premium glow!");
+    });
+}
+
+function addRow(cardId) {
+    const box = document.querySelector(`#${cardId} .names-box`);
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `<div class="row-name" contenteditable="true"></div>`;
+    box.appendChild(div);
+    autoResizePanels(cardId);
+}
+
+function autoResizePanels(cardId) {
+    const box = document.querySelector(`#${cardId} .names-box`);
+    const rows = box.querySelectorAll(".row");
+
+    const availableHeight = 255;
+    const count = rows.length;
+    const h = availableHeight / count;
+
+    rows.forEach(r => {
+        r.style.height = h + "px";
+        r.style.lineHeight = h + "px";
+        r.querySelector(".row-name").style.fontSize = (h * 0.45) + "px";
+    });
+}
+
+function generateAll() {
+
+    let names = document.getElementById("names").value
+        .split("\n").map(n=>n.trim()).filter(n=>n);
+
+    if (!names.length) return alert("Nama kosong!");
+    if (!imageData) return alert("Upload gambar!");
+
+    names = [...new Set(names)];
+
+    let need = 0;
+    for (let i=1;i<=10;i++) need += +document.getElementById("c"+i).value;
+    if (need > names.length) return alert("Nama tidak cukup!");
+
+    const shuffled = shuffle(names);
+    let pointer = 0;
+    let html = "";
+
+    for (let i=1;i<=10;i++) {
+
+        const count = +document.getElementById("c"+i).value;
+        const winners = shuffled.slice(pointer, pointer+count);
+        pointer += count;
+
+        let cardId = "card"+i;
+
+        html += `
+        <div class="capture-box" id="wrap${cardId}">
+            <div class="card" id="${cardId}">
+                <div class="header">PEMENANG EXCLUSIVE NO ${i}</div>
+                <div class="content">
+                    <div class="image-box"><img src="${imageData}"></div>
+                    <div class="names-box">
+        `;
+
+        for (let s=0;s<9;s++) {
+            let val = winners[s] ?? "";
+            html += `
+                <div class="row">
+                    <div class="row-name" contenteditable="true">${val}</div>
+                </div>
+            `;
+        }
+
+        html += `
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="add-row-btn" onclick="addRow('${cardId}')">+ ADD ROW</div>
+        <div class="copy-btn" onclick="copyCard('${cardId}')">COPY IMAGE LIST ${i}</div>
+        `;
+    }
+
+    document.getElementById("result").innerHTML = html;
+
+    setTimeout(() => {
+        for (let i=1;i<=10;i++) autoResizePanels("card"+i);
+    }, 80);
+}
+
+</script>
+
+</body>
+</html>

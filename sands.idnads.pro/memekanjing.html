@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sertifikat Nasabah Aktif - E*TRADE</title>
+
+<!-- html2canvas versi terbaru -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Cinzel:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ================= RESET ================= */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ================= BODY ================= */
+body{
+    background: linear-gradient(135deg, #0c1a2d, #1a3a5f);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* Animated background particles - dioptimalkan untuk screenshot */
+body.screenshot-mode::before{
+    opacity:0.5; /* Kurangi opacity saat screenshot */
+}
+
+/* ================= OUTER FRAME ================= */
+.certificate-wrapper{
+    width:100%;
+    max-width:1200px;
+    padding:25px;
+    border-radius:30px;
+    background: linear-gradient(145deg, #0c253a, #1a4a6e);
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(74, 144, 226, 0.2),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    position:relative;
+    overflow:hidden;
+    border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
+/* Premium border effect */
+.certificate-wrapper::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:30px;
+    padding:2px;
+    background:linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(74, 144, 226, 0.6) 50%, 
+        transparent 70%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    z-index:1;
+    pointer-events:none;
+}
+
+/* Corner decorations - dioptimalkan */
+.corner-decor{
+    position:absolute;
+    width:50px;
+    height:50px;
+    z-index:2;
+}
+.corner-decor.tl{top:15px;left:15px;border-top:3px solid rgba(16, 185, 129, 0.8);border-left:3px solid rgba(16, 185, 129, 0.8)}
+.corner-decor.tr{top:15px;right:15px;border-top:3px solid rgba(74, 144, 226, 0.8);border-right:3px solid rgba(74, 144, 226, 0.8)}
+.corner-decor.bl{bottom:15px;left:15px;border-bottom:3px solid rgba(74, 144, 226, 0.8);border-left:3px solid rgba(74, 144, 226, 0.8)}
+.corner-decor.br{bottom:15px;right:15px;border-bottom:3px solid rgba(16, 185, 129, 0.8);border-right:3px solid rgba(16, 185, 129, 0.8)}
+
+/* ================= INNER FRAME ================= */
+.certificate{
+    position:relative;
+    z-index:2;
+    border-radius:22px;
+    overflow:hidden;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    box-shadow: 
+        inset 0 0 40px rgba(255,255,255,0.9),
+        0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Premium watermark background - dioptimalkan */
+.certificate-inner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(74, 144, 226, 0.03) 0%, transparent 50%),
+        url("https://sands.idnads.pro/images/MMMB.png");
+    background-repeat:repeat, repeat, repeat;
+    background-size:auto, auto, 180px 180px;
+    opacity:0.12;
+    filter:grayscale(100%) contrast(120%);
+    pointer-events:none;
+    z-index:0;
+}
+
+/* Dashed border with gradient */
+.certificate::after{
+    content:"";
+    position:absolute;
+    inset:20px;
+    border:2px dashed transparent;
+    border-image:linear-gradient(45deg, rgba(16, 185, 129, 0.3), rgba(74, 144, 226, 0.3)) 1;
+    border-radius:12px;
+    pointer-events:none;
+    z-index:1;
+}
+
+/* ================= ISI ================= */
+.certificate-inner{
+    position:relative;
+    z-index:2;
+    background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(248, 250, 252, 0.98));
+    padding:60px 70px;
+    backdrop-filter: blur(1px);
+}
+
+/* ================= HEADER ================= */
+.header{
+    text-align:center;
+    margin-bottom:30px;
+    position:relative;
+}
+
+/* Logo NEEX di atas */
+.neex-logo-container{
+    margin-bottom:15px;
+}
+.neex-logo{
+    width:180px;
+    height:60px;
+    object-fit:contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.company-name{
+    font-size:16px;
+    font-weight:700;
+    color:#0c253a;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:5px;
+    position:relative;
+    display:inline-block;
+    padding-bottom:8px;
+}
+.company-name::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:80px;
+    height:2px;
+    background: linear-gradient(to right, transparent, #10b981, transparent);
+}
+.address{
+    font-size:13px;
+    color:#4a5568;
+    max-width:520px;
+    margin:10px auto 0;
+    line-height:1.6;
+    padding:10px 20px;
+    background:rgba(255,255,255,0.7);
+    border-radius:10px;
+    border:1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* ================= TITLE ================= */
+.title{
+    margin:40px 0 40px;
+    text-align:center;
+    font-size:42px;
+    font-weight:900;
+    color:#0c253a;
+    letter-spacing:3px;
+    font-family:'Cinzel', serif;
+    text-transform:uppercase;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position:relative;
+}
+.title::before{
+    content:"★";
+    position:absolute;
+    left:50%;
+    top:-25px;
+    transform:translateX(-50%);
+    color:#10b981;
+    font-size:24px;
+}
+.title::after{
+    content:"";
+    display:block;
+    width:200px;
+    height:4px;
+    background:linear-gradient(to right, transparent, #10b981, #4a90e2, transparent);
+    margin:15px auto;
+    border-radius:2px;
+}
+
+/* ================= CONTENT ================= */
+.content{
+    text-align:center;
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.content p{
+    font-size:18px;
+    color:#4a5568;
+    margin:10px 0;
+    font-weight:500;
+    text-align:center;
+    width: 100%;
+}
+.name{
+    font-size:44px;
+    font-weight:800;
+    color:#0c253a;
+    margin:25px 0;
+    padding:15px 40px;
+    display:inline-block;
+    position:relative;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(74, 144, 226, 0.05));
+    border-radius:15px;
+    border: 2px solid rgba(16, 185, 129, 0.2);
+    text-shadow: 0 2px 3px rgba(0,0,0,0.05);
+    text-align:center;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    width: auto;
+    min-width: 200px;
+}
+.name::before, .name::after{
+    content:"✧";
+    position:absolute;
+    color:#4a90e2;
+    font-size:20px;
+}
+.name::before{left:10px;top:50%;transform:translateY(-50%)}
+.name::after{right:10px;top:50%;transform:translateY(-50%)}
+
+.badge{
+    display:inline-block;
+    background: linear-gradient(135deg, #0c253a, #1a4a6e);
+    color:#fff;
+    padding:14px 35px;
+    border-radius:12px;
+    margin:25px 0;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:1px;
+    box-shadow: 0 6px 15px rgba(12, 37, 58, 0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    width: auto;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+.badge::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition:0.5s;
+}
+.badge:hover::before{
+    left:100%;
+}
+
+.company{
+    font-size:24px;
+    font-weight:700;
+    color:#0c253a;
+    margin:20px 0;
+    padding:15px 30px;
+    display:inline-block;
+    background:rgba(255,255,255,0.8);
+    border-radius:12px;
+    border:2px solid rgba(74, 144, 226, 0.3);
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+    text-align:center;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.status-container{
+    margin-top:35px;
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.status{
+    font-size:28px;
+    font-weight:800;
+    color:#10b981;
+    padding:18px 40px;
+    border-radius:15px;
+    display:inline-block;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(74, 144, 226, 0.1));
+    border: 3px solid #10b981;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.status::after{
+    content:"";
+    position:absolute;
+    top:-10px;
+    left:-10px;
+    right:-10px;
+    bottom:-10px;
+    background:linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+    z-index:0;
+    animation:shine 3s infinite;
+}
+@keyframes shine{
+    0%{transform:translateX(-100%)}
+    100%{transform:translateX(100%)}
+}
+
+/* ================= FOOTER ================= */
+.footer{
+    margin-top:90px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:end;
+    position:relative;
+}
+.footer::before{
+    content:"";
+    position:absolute;
+    top:-40px;
+    left:50%;
+    transform:translateX(-50%);
+    width:80%;
+    height:1px;
+    background:linear-gradient(to right, transparent, rgba(74, 144, 226, 0.3), transparent);
+}
+
+/* QR */
+.qr{
+    text-align:left;
+    position:relative;
+}
+.qr-container{
+    display:inline-block;
+    padding:12px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    border:2px solid rgba(74, 144, 226, 0.2);
+    position:relative;
+}
+.qr-container::before{
+    content:"SCAN HERE";
+    position:absolute;
+    top:-25px;
+    left:0;
+    font-size:11px;
+    font-weight:600;
+    color:#4a90e2;
+    letter-spacing:1px;
+}
+.qr img{
+    width:120px;
+    display:block;
+}
+.qr-caption{
+    margin-top:15px;
+    font-size:13px;
+    line-height:1.5;
+    color:#374151;
+    max-width:200px;
+}
+.qr-caption strong{
+    color:#0c253a;
+    font-size:14px;
+}
+
+/* SIGN */
+.sign{
+    text-align:right;
+    position:relative;
+}
+.signature-container{
+    display:inline-block;
+    text-align:center;
+}
+.signature-img{
+    width:200px;
+    display:block;
+    margin:0 auto 10px;
+    filter:drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+.signature-line{
+    width:280px;
+    height:2px;
+    background:linear-gradient(to right, transparent, #0c253a, transparent);
+    margin:25px auto 8px;
+}
+.signature-title{
+    font-size:14px;
+    color:#4a5568;
+    margin-bottom:5px;
+}
+.signature-name{
+    font-size:18px;
+    font-weight:800;
+    color:#0c253a;
+    letter-spacing:1px;
+}
+
+/* Approval Badge yang lebih miring */
+.approval-badge{
+    position:absolute;
+    top: -15px;
+    right: -10px;
+    background: linear-gradient(135deg, #10b981, #0c6b7d);
+    color:white;
+    padding: 6px 18px;
+    border-radius: 25px;
+    font-size: 11px;
+    font-weight: 700;
+    transform: rotate(12deg);
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.approval-badge::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    z-index: -1;
+}
+.approval-badge i{
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+/* ================= BUTTON ================= */
+.copy-btn{
+    position:fixed;
+    top:25px;
+    right:25px;
+    z-index:9999;
+    background: linear-gradient(135deg, #0c253a, #1a4a6e);
+    color:#fff;
+    border:none;
+    padding:14px 28px;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(12, 37, 58, 0.4);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:1px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:all 0.3s;
+    border:1px solid rgba(74, 144, 226, 0.3);
+}
+.copy-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(12, 37, 58, 0.5);
+    background: linear-gradient(135deg, #1a4a6e, #0c253a);
+}
+.copy-btn i{
+    font-size:18px;
+}
+.copy-btn:disabled{
+    opacity:0.7;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* Loading overlay */
+.loading-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
+    display:none;
+}
+.loading-spinner{
+    width:60px;
+    height:60px;
+    border:5px solid rgba(255,255,255,0.3);
+    border-radius:50%;
+    border-top-color:#4a90e2;
+    animation:spin 1s linear infinite;
+    margin-bottom:20px;
+}
+@keyframes spin{
+    100%{transform:rotate(360deg)}
+}
+.loading-text{
+    color:white;
+    font-size:18px;
+    font-weight:600;
+}
+
+/* Backup download link */
+.download-link{
+    display:none;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:992px){
+    .certificate-inner{padding:40px 35px}
+    .title{font-size:34px}
+    .name{font-size:36px; padding:12px 30px;}
+    .company{font-size:20px; padding:12px 20px;}
+    .status{font-size:24px; padding:15px 30px;}
+    .neex-logo{width:200px;height:55px}
+    .signature-img{width:180px;}
+    .signature-line{width:240px;}
+}
+
+@media(max-width:768px){
+    .certificate-wrapper{padding:15px}
+    .certificate-inner{padding:30px 25px}
+    .title{font-size:28px;letter-spacing:2px; margin:30px 0;}
+    .name{font-size:28px;padding:12px 25px; min-width: 150px;}
+    .badge{font-size:14px;padding:12px 25px; display: block; margin-left: auto; margin-right: auto;}
+    .company{font-size:18px; padding:12px 20px; margin:15px 0;}
+    .status{font-size:20px; padding:12px 25px; letter-spacing: 1px;}
+    .footer{
+        grid-template-columns:1fr;
+        gap:50px;
+        margin-top:60px;
+        justify-items: center;
+    }
+    .qr, .sign{
+        text-align:center;
+        width: 100%;
+    }
+    .qr-caption{
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    .qr-container{
+        display: block;
+        margin: 0 auto;
+        width: fit-content;
+    }
+    .qr-container::before{
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        text-align: center;
+    }
+    .signature-line{margin:25px auto 8px; width: 200px;}
+    .approval-badge{
+        position:relative;
+        display:inline-block;
+        margin-bottom:15px;
+        transform:rotate(5deg);
+        top:0;
+        right:0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .sign {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .copy-btn{
+        padding:12px 20px;
+        font-size:14px;
+        top: 15px;
+        right: 15px;
+    }
+    .neex-logo{width:140px;height:50px}
+    .address{
+        font-size: 12px;
+        padding: 8px 15px;
+        max-width: 90%;
+    }
+}
+
+@media(max-width:480px){
+    .certificate-inner{padding:25px 20px}
+    .title{font-size:24px; margin:25px 0;}
+    .name{font-size:24px;padding:10px 20px;}
+    .badge{font-size:13px;padding:10px 20px;}
+    .company{font-size:16px; padding:10px 15px;}
+    .status{font-size:18px; padding:10px 20px;}
+    .content p{font-size:16px;}
+    .neex-logo{width:120px;height:45px}
+    .company-name{font-size:14px;}
+    .copy-btn{
+        padding:10px 15px;
+        font-size:13px;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* MODE EDITABLE */
+.editable{
+    cursor:text;
+    outline:none;
+    position:relative;
+    transition:all 0.3s;
+}
+
+/* efek saat diklik */
+.editable:focus{
+    outline:none;
+    background:rgba(16, 185, 129, 0.08);
+    border-radius:10px;
+    box-shadow:0 0 0 3px rgba(16, 185, 129, 0.2);
+    transform:scale(1.01);
+}
+
+/* Certificate ID styling */
+.certificate-id{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    font-size:11px;
+    color:rgba(74, 85, 104, 0.6);
+    font-family:monospace;
+}
+
+/* Seal of approval */
+.seal{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.7) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0.04;
+    z-index:0;
+    pointer-events:none;
+}
+.seal i{
+    font-size:80px;
+    color:#0c253a;
+}
+
+/* Styles untuk mode screenshot (akan diterapkan saat screenshot) */
+.screenshot-optimized {
+    animation: none !important; /* Hentikan animasi */
+    cursor: default !important;
+}
+.screenshot-optimized .status::after {
+    animation: none !important; /* Hentikan animasi shine */
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Mengambil screenshot...</div>
+</div>
+
+<!-- Backup download link (hidden) -->
+<a id="downloadLink" class="download-link" download="sertifikat-etrade.png"></a>
+
+<button class="copy-btn" onclick="captureCertificate()" id="captureBtn">
+    <i class="fas fa-camera"></i> AMBIL SERTIFIKAT
+</button>
+
+<div class="certificate-wrapper" id="captureArea">
+    <!-- Corner decorations -->
+    <div class="corner-decor tl"></div>
+    <div class="corner-decor tr"></div>
+    <div class="corner-decor bl"></div>
+    <div class="corner-decor br"></div>
+    
+    <!-- Seal -->
+    <div class="seal">
+        <i class="fas fa-award"></i>
+    </div>
+    
+    <div class="certificate">
+        <div class="certificate-inner">
+
+            <div class="header">
+                <!-- Logo NEEX di atas -->
+                <div class="neex-logo-container">
+                    <img src="https://sands.idnads.pro/images/extrade1.png" class="neex-logo" crossorigin="anonymous">
+                </div>
+                
+                <div class="company-name">Mega Menara Mas Berjangka</div>
+                <div class="address">
+                    <i class="fas fa-map-marker-alt" style="margin-right:5px;"></i>
+                    Jl. DR. Ide Anak Agung Gde Agung Lot 5 #1, Menara Rajawali Lt.16, Jakarta Selatan 12950
+                </div>
+            </div>
+
+            <div class="title">SERTIFIKAT KEANGGOTAAN</div>
+
+            <div class="content">
+                <p>Dengan ini menyatakan bahwa</p>
+                <div class="name editable" contenteditable="true" id="namaNasabah">
+                    NAMA NASABAH
+                </div>
+
+                <div class="badge" id="nomorSertifikat">
+                    <i class="fas fa-certificate" style="margin-right:10px;"></i>
+                    Nomor : 00.000/TD-KI/XIII/2026
+                </div>
+
+                <p>Telah resmi terdaftar dan mengikuti program</p>
+                <div class="company">
+                    E*TRADE & PT. MEGA MENARA MAS BERJANGKA
+                </div>
+
+                <div class="status-container">
+                    <p id="mulaiTanggal">Berlaku efektif sejak tanggal -- dengan status</p>
+                    <div class="status editable" contenteditable="true" id="statusNasabah">
+                        NASABAH AKTIF
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <div class="qr">
+                    <div class="qr-container">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Dokumen-Sah-E*TRADE-dengan-Mega-Menara-Mas-Berjangka-2026&color=0066CC" crossorigin="anonymous">
+                    </div>
+                    <div class="qr-caption">
+                        <i class="fas fa-shield-check" style="color:#10b981;"></i>
+                        Disetujui & diverifikasi secara digital oleh<br>
+                        <strong>E*TRADE AUTHORITY</strong>
+                    </div>
+                </div>
+
+                <div class="sign">
+                    <div class="approval-badge">
+                        <i class="fas fa-check-circle"></i> TELAH DISETUJUI
+                    </div>
+                    <div class="signature-container">
+                        <div id="tanggalHariIni" style="font-weight:600;color:#0c253a;margin-bottom:20px;">Jakarta, --</div>
+                        
+                        <img src="/images/gas.png" class="signature-img" onerror="document.getElementById('signatureFallback').style.display='flex'; this.style.display='none';">
+                        <div class="signature-line"></div>
+                        <div class="signature-title">CFO Mega Menara Mas Berjangka</div>
+                        <div class="signature-name">INDRA GUNAWAN</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="certificate-id" id="certId">ID: E*TRADE-2026-XXXXX</div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+// Cache untuk performa
+let canvasCache = null;
+let lastCaptureTime = 0;
+const CAPTURE_COOLDOWN = 3000; // 3 detik cooldown
+
+// Preload gambar untuk menghindari masalah CORS
+function preloadImages() {
+    const images = [
+        'https://sands.idnads.pro/images/extrade1.png',
+        'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Dokumen-Sah-E*TRADE-dengan-Mega-Menara-Mas-Berjangka-2026&color=0066CC'
+    ];
+    
+    images.forEach(src => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = src;
+    });
+}
+
+// Fungsi optimasi untuk screenshot
+function optimizeForScreenshot() {
+    const captureArea = document.getElementById('captureArea');
+    
+    // Hentikan animasi
+    captureArea.classList.add('screenshot-optimized');
+    
+    // Nonaktifkan efek hover
+    const hoverElements = captureArea.querySelectorAll('*');
+    hoverElements.forEach(el => {
+        const originalTransition = el.style.transition;
+        el.style.transition = 'none';
+        
+        // Simpan untuk restore nanti
+        el.dataset.originalTransition = originalTransition;
+    });
+    
+    // Tambah class untuk body
+    document.body.classList.add('screenshot-mode');
+}
+
+// Restore setelah screenshot
+function restoreAfterScreenshot() {
+    const captureArea = document.getElementById('captureArea');
+    
+    // Hapus class optimasi
+    captureArea.classList.remove('screenshot-optimized');
+    
+    // Restore transisi
+    const elements = captureArea.querySelectorAll('*');
+    elements.forEach(el => {
+        if (el.dataset.originalTransition !== undefined) {
+            el.style.transition = el.dataset.originalTransition;
+            delete el.dataset.originalTransition;
+        }
+    });
+    
+    // Hapus class dari body
+    document.body.classList.remove('screenshot-mode');
+}
+
+// Fungsi utama untuk capture certificate
+async function captureCertificate() {
+    const now = Date.now();
+    const button = document.getElementById('captureBtn');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    
+    // Cek cooldown
+    if (now - lastCaptureTime < CAPTURE_COOLDOWN) {
+        showNotification('⚠️ Tunggu sebentar sebelum mengambil screenshot lagi', 'warning');
+        return;
+    }
+    
+    const originalText = button.innerHTML;
+    
+    // Nonaktifkan tombol dan tampilkan loading
+    button.disabled = true;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> MEMPROSES...';
+    loadingOverlay.style.display = 'flex';
+    
+    try {
+        // Optimasi elemen sebelum screenshot
+        optimizeForScreenshot();
+        
+        // Tunggu sejenak untuk memastikan render selesai
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        const target = document.getElementById('captureArea');
+        
+        // Konfigurasi html2canvas yang dioptimalkan
+        const canvas = await html2canvas(target, {
+            scale: 2, // Resolusi tinggi
+            useCORS: true, // Izinkan CORS
+            allowTaint: true, // Izinkan gambar eksternal
+            backgroundColor: '#ffffff',
+            logging: false, // Nonaktifkan logging
+            removeContainer: true,
+            windowWidth: target.scrollWidth,
+            windowHeight: target.scrollHeight,
+            foreignObjectRendering: false, // Nonaktifkan untuk kompatibilitas
+            imageTimeout: 10000, // Timeout 10 detik untuk gambar
+            onclone: function(clonedDoc) {
+                // Optimasi clone untuk screenshot
+                const clonedCaptureArea = clonedDoc.getElementById('captureArea');
+                if (clonedCaptureArea) {
+                    // Hilangkan efek hover pada clone
+                    const hoverElements = clonedCaptureArea.querySelectorAll('*');
+                    hoverElements.forEach(el => {
+                        el.style.transition = 'none';
+                        el.style.animation = 'none';
+                    });
+                }
+            }
+        });
+        
+        // Cache canvas untuk penggunaan berikutnya
+        canvasCache = canvas;
+        lastCaptureTime = Date.now();
+        
+        // Coba copy ke clipboard
+        try {
+            canvas.toBlob(async (blob) => {
+                if (navigator.clipboard && window.ClipboardItem) {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({ 'image/png': blob })
+                    ]);
+                    
+                    // Sukses
+                    showNotification('✅ Sertifikat berhasil disalin ke clipboard!', 'success');
+                } else {
+                    // Fallback untuk browser yang tidak support Clipboard API
+                    fallbackDownload(canvas);
+                }
+            });
+        } catch (clipboardError) {
+            console.warn('Clipboard API gagal:', clipboardError);
+            // Fallback ke download
+            fallbackDownload(canvas);
+        }
+        
+    } catch (error) {
+        console.error('Error capturing certificate:', error);
+        
+        // Coba metode alternatif dengan config yang lebih sederhana
+        try {
+            const target = document.getElementById('captureArea');
+            const canvas = await html2canvas(target, {
+                scale: 1.5,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+                logging: false
+            });
+            
+            fallbackDownload(canvas);
+            showNotification('✅ Sertifikat siap diunduh!', 'success');
+            
+        } catch (fallbackError) {
+            console.error('Fallback juga gagal:', fallbackError);
+            showNotification('❌ Gagal mengambil screenshot. Coba lagi.', 'error');
+        }
+        
+    } finally {
+        // Restore UI
+        restoreAfterScreenshot();
+        
+        // Enable button dan sembunyikan loading
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+            loadingOverlay.style.display = 'none';
+        }, 1000);
+    }
+}
+
+// Fallback download jika clipboard gagal
+function fallbackDownload(canvas) {
+    const downloadLink = document.getElementById('downloadLink');
+    const dataURL = canvas.toDataURL('image/png');
+    downloadLink.href = dataURL;
+    downloadLink.download = `sertifikat-etrade-${new Date().getTime()}.png`;
+    downloadLink.click();
+    
+    showNotification('📥 Sertifikat sedang diunduh...', 'info');
+}
+
+// Show notification dengan tipe
+function showNotification(message, type = 'info') {
+    // Hapus notifikasi sebelumnya jika ada
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    
+    // Styling berdasarkan tipe
+    let backgroundColor, icon;
+    switch(type) {
+        case 'success':
+            backgroundColor = 'linear-gradient(135deg, #10b981, #0c253a)';
+            icon = 'fas fa-check-circle';
+            break;
+        case 'warning':
+            backgroundColor = 'linear-gradient(135deg, #f59e0b, #0c253a)';
+            icon = 'fas fa-exclamation-triangle';
+            break;
+        case 'error':
+            backgroundColor = 'linear-gradient(135deg, #ef4444, #0c253a)';
+            icon = 'fas fa-times-circle';
+            break;
+        default:
+            backgroundColor = 'linear-gradient(135deg, #4a90e2, #0c253a)';
+            icon = 'fas fa-info-circle';
+    }
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 90px;
+        right: 25px;
+        background: ${backgroundColor};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        z-index: 10000;
+        font-weight: 600;
+        animation: slideIn 0.3s ease;
+        border-left: 4px solid rgba(255,255,255,0.3);
+        max-width: 350px;
+        word-wrap: break-word;
+    `;
+    
+    notification.innerHTML = `<i class="${icon}" style="margin-right:10px;"></i> ${message}`;
+    document.body.appendChild(notification);
+    
+    // Auto remove setelah 3 detik
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Generate certificate number
+function generateNomor(){
+    const prefix = Math.floor(Math.random()*90)+10;
+    const middle = Math.floor(Math.random()*9000)+1000;
+    const year = new Date().getFullYear();
+    return `${prefix}.${middle}/TD-KI/XIII/${year}`;
+}
+
+// Generate certificate ID
+function generateCertId(){
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+    let id = '';
+    for(let i = 0; i < 5; i++){
+        id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return `E*TRADE-${new Date().getFullYear()}-${id}`;
+}
+
+// Format tanggal Indonesia
+function formatTanggalIndonesia(date){
+    const bulan = [
+        "Januari","Februari","Maret","April","Mei","Juni",
+        "Juli","Agustus","September","Oktober","November","Desember"
+    ];
+
+    const hari = date.getDate();
+    const bulanNama = bulan[date.getMonth()];
+    const tahun = date.getFullYear();
+
+    return `${hari} ${bulanNama} ${tahun}`;
+}
+
+// Function to adjust badge position based on name width
+function adjustBadgePosition() {
+    const nameElement = document.getElementById('namaNasabah');
+    const badgeElement = document.getElementById('nomorSertifikat');
+    
+    if (!nameElement || !badgeElement) return;
+    
+    // Reset badge position
+    badgeElement.style.marginLeft = '0';
+    badgeElement.style.marginRight = '0';
+    badgeElement.style.display = 'block';
+    
+    // Untuk mobile devices, selalu center badge
+    if (window.innerWidth <= 768) {
+        badgeElement.style.marginLeft = 'auto';
+        badgeElement.style.marginRight = 'auto';
+        badgeElement.style.display = 'block';
+        return;
+    }
+    
+    const nameWidth = nameElement.offsetWidth;
+    
+    // Hanya adjust jika name sangat pendek
+    if (nameWidth < 150) {
+        badgeElement.style.marginLeft = 'auto';
+        badgeElement.style.marginRight = 'auto';
+        badgeElement.style.display = 'block';
+    } else {
+        badgeElement.style.display = 'inline-block';
+    }
+}
+
+// Preload images dan inisialisasi
+document.addEventListener("DOMContentLoaded", () => {
+    const hariIni = new Date();
+    
+    // Preload images untuk performa
+    preloadImages();
+    
+    // Set certificate number
+    document.getElementById("nomorSertifikat").innerHTML = 
+        `<i class="fas fa-certificate" style="margin-right:10px;"></i> Nomor : ${generateNomor()}`;
+    
+    // Set dates
+    document.getElementById("tanggalHariIni").innerText =
+        `Jakarta, ${formatTanggalIndonesia(hariIni)}`;
+    
+    document.getElementById("mulaiTanggal").innerText =
+        `Berlaku efektif sejak tanggal ${formatTanggalIndonesia(hariIni)} dengan status`;
+    
+    // Set certificate ID
+    document.getElementById("certId").innerText = `ID: ${generateCertId()}`;
+    
+    // Adjust badge position
+    setTimeout(adjustBadgePosition, 100);
+    
+    // Event listeners
+    const nameElement = document.getElementById('namaNasabah');
+    if (nameElement) {
+        nameElement.addEventListener('input', adjustBadgePosition);
+        nameElement.addEventListener('blur', adjustBadgePosition);
+    }
+    
+    window.addEventListener('resize', adjustBadgePosition);
+    
+    // Add styles for animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Tambah event untuk gambar tanda tangan jika error
+    const signatureImg = document.querySelector('.signature-img');
+    if (signatureImg) {
+        signatureImg.onerror = function() {
+            this.style.display = 'none';
+            const fallback = document.getElementById('signatureFallback');
+            if (fallback) fallback.style.display = 'flex';
+        };
+    }
+});
+</script>
+
+</body>
+</html>

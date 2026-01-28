@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Guardian - Platform Edukasi Investasi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17496817565"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-17496817565');
+    </script>
+    <style>
+        :root {
+            --primary: #2A5C82;
+            --secondary: #5CB85C;
+            --accent: #FFD700;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: var(--light);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1E3A5F 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="%23f8f9fa"/></svg>');
+            background-size: 50px 50px;
+            opacity: 0.1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .hero h5 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero h6 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-badge {
+            background: var(--secondary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(92,184,92,0.3);
+            animation: bounce 2s infinite;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease-in-out;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero-stat {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .hero-stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero-stat i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .hero-stat h3 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .hero-stat p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .cta-button {
+            background: var(--secondary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(92,184,92,0.3);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(92,184,92,0.5);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: rgba(42, 92, 130, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (min-width: 768px) {
+            .feature-card {
+                width: calc(50% - 30px);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .feature-card {
+                width: calc(33.333% - 30px);
+            }
+        }
+
+        /* Profit Calculator */
+        .profit-calc {
+            background: linear-gradient(135deg, var(--secondary) 0%, #4CAF50 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .calc-table {
+            max-width: 800px;
+            margin: 30px auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .calc-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+            background: var(--accent);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .guarantee h2 {
+            color: var(--dark);
+            margin-bottom: 40px;
+        }
+
+        .guarantee:before {
+            content: "★";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            color: var(--primary);
+        }
+
+        /* Testimonial Section */
+        .testimonial {
+            padding: 80px 20px;
+            background: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 0 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            flex: 0 0 calc(100% - 30px);
+            min-width: calc(100% - 30px);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .testimonial-card:after {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 80px;
+            color: var(--primary);
+            opacity: 0.1;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .testimonial-controls button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .testimonial-controls button:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .testimonial-dots .dot {
+            width: 12px;
+            height: 12px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .testimonial-dots .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(92,184,92,0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(92,184,92,0.5);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(92,184,92,0.3);
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 20px;
+            background-color: #f1f5f9;
+            text-align: center;
+        }
+        
+        .faq-section h2 {
+            color: var(--primary);
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 300px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .features,
+        .dark-mode .testimonial,
+        .dark-mode .faq-section,
+        .dark-mode .feature-card,
+        .dark-mode .testimonial-card,
+        .dark-mode .faq-item {
+            background: #1e1e1e !important;
+            color: #e0e0e0 !important;
+        }
+
+        .dark-mode .faq-question {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .hero-stat,
+        .dark-mode .calc-table {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .dark-mode-toggle:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .countdown-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            width: 90%;
+            max-width: 350px;
+            margin: 30px auto;
+        }
+
+        .countdown-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            width: 90px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .countdown-item small {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .responsive {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .price-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 350px;
+            border: 2px dashed var(--accent);
+        }
+
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 15px 0;
+        }
+
+        .profit-calc h2 {
+            margin-bottom: 30px;
+        }
+
+        .calc-table {
+            background: white;
+            color: var(--primary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .calc-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calc-table tr:nth-child(even) {
+            background: rgba(0,0,0,0.03);
+        }
+
+        .calc-table td {
+            padding: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .calc-table td:last-child {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .disclaimer {
+            background: rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px auto 0;
+            max-width: 800px;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+        
+        .disclaimer h4 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h5 {
+                font-size: 1.3rem;
+            }
+            
+            .hero h6 {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .hero-stat {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .countdown-item {
+                width: 70px;
+                padding: 15px;
+            }
+            
+            .countdown-item span {
+                font-size: 2rem;
+            }
+            
+            .testimonial-card {
+                margin: 0 10px;
+                flex: 0 0 calc(100% - 20px);
+                min-width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i> Mode Gelap
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://x.idnads.pro/wp-content/uploads/2025/06/1235.jpg" class="responsive" alt="Edukasi Investasi">
+
+        <h5>Tingkatkan Pengetahuan Investasi Anda Bersama Analyst Profesional</h5>
+        <h6>Pelajari strategi dan dapatkan edukasi tentang peluang investasi dari para ahli berpengalaman</h6>
+        
+        <div class="price-tag">
+            <h4>Mulai dengan Biaya Terjangkau!</h4>
+            <div class="price-amount">Rp100.000</div>
+            <p>Akses materi edukasi premium dengan biaya terjangkau</p>
+        </div>
+
+        <!-- Hero Stats -->
+        <p>Di era digital ini, memahami cara berinvestasi dengan benar adalah keterampilan yang sangat berharga. Dapatkan pengetahuan yang Anda butuhkan untuk membuat keputusan investasi yang lebih baik.</p>
+
+        <a href="https://url10.xyz/a/YspJfSdz4260" class="cta-button">
+            <i class="fas fa-book-open"></i> Pelajari Sekarang
+        </a>
+        
+        <div class="countdown-container">
+            <div class="countdown-title">
+                Penawaran Spesial Terbatas
+            </div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span id="minutes">07</span>
+                    <small>Menit</small>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <small>Detik</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="disclaimer">
+            <h4>Penting: Disclaimer Investasi</h4>
+            <p>Semua investasi mengandung risiko, termasuk kemungkinan kehilangan pokok investasi. Hasil kinerja masa lalu tidak menjamin hasil di masa depan. Edukasi yang kami berikan bertujuan untuk meningkatkan pemahaman Anda tentang investasi dan bukan merupakan janji atau jaminan return tertentu.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Prinsip Investasi Aman</h3>
+            <p>Pelajari cara mengelola risiko dan melindungi modal investasi Anda dengan pendekatan yang tepat</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Analisis Pasar</h3>
+            <p>Pahami cara menganalisis peluang investasi dan membaca tren pasar yang sedang berkembang</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3>Tim Analyst Berpengalaman</h3>
+            <p>Belajar dari profesional dengan pengalaman 5+ tahun di berbagai pasar finansial</p>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee">
+        <h2>Keunggulan Platform Kami</h2>
+        <div class="feature-card">
+            <h3>🏆 Materi Edukasi Terstruktur</h3>
+            <p>Kurikulum pembelajaran yang disusun secara sistematis untuk berbagai tingkat pengetahuan investasi</p>
+        </div>
+        
+        <div class="feature-card">
+            <h3>💼 Pembelajaran Praktis</h3>
+            <p>Belajar melalui studi kasus nyata dan simulasi kondisi pasar yang relevan</p>
+        </div>
+        
+        <div class="feature-card">
+            <h3>📊 Laporan Transparan</h3>
+            <p>Analisis dan pembahasan yang jelas tentang berbagai instrumen investasi</p>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial">
+        <h2>Apa Kata Peserta Kami?</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial-card">
+                <h3>"Pemahaman Investasi Meningkat"</h3>
+                <p>Sejak bergabung dengan platform ini, saya lebih memahami cara menganalisis peluang investasi dengan lebih baik dan membuat keputusan yang lebih informed.</p>
+                <p><strong>- Andi, Bandung</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>"Pembimbingan yang Membantu"</h3>
+                <p>Tim analyst sangat membantu dalam menjelaskan konsep-konsep investasi yang rumit menjadi mudah dimengerti, bahkan untuk pemula sekalipun.</p>
+                <p><strong>- Siti, Jakarta</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>"Materi Edukasi Berkualitas"</h3>
+                <p>Materi yang diberikan sangat relevan dengan kondisi pasar saat ini dan mudah dipraktikkan. Saya merasa lebih percaya diri dalam mengambil keputusan investasi.</p>
+                <p><strong>- Budi, Surabaya</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>"Wawasan yang Lebih Luas"</h3>
+                <p>Platform ini membuka wawasan saya tentang berbagai instrumen investasi yang sebelumnya tidak saya pahami dengan baik.</p>
+                <p><strong>- Rina, Medan</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>"Edukasi yang Praktis"</h3>
+                <p>Pembelajaran yang diberikan sangat praktis dan langsung dapat diaplikasikan. Sangat recommended untuk yang ingin belajar investasi.</p>
+                <p><strong>- Agus, Yogyakarta</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>"Analyst Ramah dan Responsif"</h3>
+                <p>Tim analystnya sangat ramah dan selalu siap membantu menjawab pertanyaan. Saya merasa sangat terbantu dengan bimbingan mereka.</p>
+                <p><strong>- Dewi, Semarang</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <h3>"Investasi dalam Pengetahuan"</h3>
+                <p>Bergabung dengan platform ini adalah investasi terbaik untuk pengetahuan finansial saya. Kini saya lebih memahami bagaimana mengelola portofolio dengan baik.</p>
+                <p><strong>- Fajar, Makassar</strong></p>
+            </div>
+        </div>
+        <div class="testimonial-controls">
+            <button onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="testimonial-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
+            <span class="dot" onclick="goToSlide(4)"></span>
+            <span class="dot" onclick="goToSlide(5)"></span>
+            <span class="dot" onclick="goToSlide(6)"></span>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="hero" style="background: var(--primary); padding: 80px 20px;">
+        <h2>Tingkatkan Literasi Investasi Anda Sekarang!</h2>
+        <p>Dapatkan akses ke materi edukasi premium dan bimbingan dari analyst profesional</p>
+        <a href="https://url10.xyz/a/YspJfSdz4260" class="cta-button">
+            <i class="fas fa-graduation-cap"></i> Akses Materi Edukasi
+        </a>
+        
+        <div class="disclaimer">
+            <h4>Penting: Edukasi Bukan Janji Profit</h4>
+            <p>Platform ini menyediakan edukasi dan pengetahuan tentang investasi, bukan janji atau jaminan keuntungan tertentu. Keputusan investasi adalah tanggung jawab masing-masing individu dan harus dilakukan dengan pertimbangan yang matang.</p>
+        </div>
+    </section>
+	
+    <section class="faq-section">
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Apakah platform ini aman?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Kami berkomitmen menyediakan lingkungan belajar yang aman dan informatif. Fokus kami adalah pada edukasi dan peningkatan pemahaman investasi, bukan skema investasi tertentu.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Benarkah bisa mulai dengan Rp100.000?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Ya, Anda dapat mengakses materi edukasi premium kami dengan biaya terjangkau. Ini adalah biaya untuk akses edukasi, bukan modal investasi.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Apakah ada jaminan profit?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Tidak ada jaminan profit dalam investasi. Platform kami menyediakan edukasi untuk membantu Anda membuat keputusan investasi yang lebih informed, tetapi hasil investasi bergantung pada banyak faktor termasuk kondisi pasar.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Berapa lama saya bisa mengakses materi?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Anda akan mendapatkan akses penuh ke materi edukasi selama 30 hari setelah pendaftaran. Selama periode tersebut, Anda dapat mempelajari semua materi yang disediakan.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Bagaimana cara bergabung?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Anda bisa bergabung dengan mengklik tombol "Pelajari Sekarang" di atas dan mengikuti petunjuk yang diberikan. Setelah proses registrasi, Anda akan mendapatkan akses ke platform edukasi kami.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Apakah ada batasan usia untuk bergabung?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Platform edukasi kami terbuka untuk semua usia di atas 17 tahun. Untuk peserta di bawah 18 tahun, disarankan untuk mendapatkan persetujuan dari orang tua atau wali.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Testimonial Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-card');
+        const dots = document.querySelectorAll('.testimonial-dots .dot');
+        const slider = document.querySelector('.testimonial-slider');
+        let slideInterval;
+
+        function getCardsPerSlide() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 768) return 2;
+            return 1;
+        }
+
+        function showSlide(index) {
+            const cardsPerSlide = getCardsPerSlide();
+            const maxSlide = Math.ceil(slides.length / cardsPerSlide) - 1;
+
+            if (index > maxSlide) index = 0;
+            if (index < 0) index = maxSlide;
+
+            const offset = -index * 100;
+            slider.style.transform = `translateX(${offset}%)`;
+            currentSlide = index;
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            const cardsPerSlide = getCardsPerSlide();
+            const maxSlide = Math.ceil(slides.length / cardsPerSlide) - 1;
+            showSlide(currentSlide + 1 > maxSlide ? 0 : currentSlide + 1);
+        }
+
+        function prevSlide() {
+            const cardsPerSlide = getCardsPerSlide();
+            const maxSlide = Math.ceil(slides.length / cardsPerSlide) - 1;
+            showSlide(currentSlide - 1 < 0 ? maxSlide : currentSlide - 1);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(slideInterval);
+        }
+
+        startAutoSlide();
+
+        slider.addEventListener('mouseenter', stopAutoSlide);
+        slider.addEventListener('mouseleave', startAutoSlide);
+
+        window.addEventListener('resize', () => {
+            showSlide(currentSlide);
+        });
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            const text = document.querySelector('.dark-mode-toggle');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                text.innerHTML = '<i class="fas fa-sun"></i> Mode Terang';
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                text.innerHTML = '<i class="fas fa-moon"></i> Mode Gelap';
+            }
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const allFAQ = document.querySelectorAll('.faq-item');
+            const clickedItem = element.parentElement;
+            
+            allFAQ.forEach(item => {
+                if (item !== clickedItem) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            clickedItem.classList.toggle('active');
+        }
+
+        // Countdown Timer
+        let countdownTime = 7 * 60 * 1000;
+
+        function startCountdown() {
+            const minutesElement = document.getElementById("minutes");
+            const secondsElement = document.getElementById("seconds");
+
+            const countdownInterval = setInterval(() => {
+                const minutes = Math.floor(countdownTime / (1000 * 60));
+                const seconds = Math.floor((countdownTime % (1000 * 60)) / 1000);
+
+                minutesElement.innerText = minutes < 10 ? `0${minutes}` : minutes;
+                secondsElement.innerText = seconds < 10 ? `0${seconds}` : seconds;
+
+                countdownTime -= 1000;
+
+                if (countdownTime < 0) {
+                    clearInterval(countdownInterval);
+                    resetCountdown();
+                }
+            }, 1000);
+        }
+
+        function resetCountdown() {
+            countdownTime = 7 * 60 * 1000;
+            startCountdown();
+        }
+
+        startCountdown();
+    </script>
+</body>
+</html>

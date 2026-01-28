@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+    <title>Sands Data Statistic Analytic Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4a6cf7;
+            --primary-light: #6b8aff;
+            --primary-dark: #3451b2;
+            --secondary: #8f9bb3;
+            --accent: #7366ff;
+            --light: #f7f9ff;
+            --dark: #1a1d2b;
+            --success: #2ecc71;
+            --danger: #ff6b6b;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a7c0fd 0%, #c2e9fb 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding-bottom: 2rem;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary) !important;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+            background: rgba(74, 108, 247, 0.1);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-bottom: none;
+            border-radius: 16px 16px 0 0 !important;
+            padding: 1.2rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success) 0%, #25a25a 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger) 0%, #ee5a52 100%);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(74, 108, 247, 0.2);
+            color: var(--text-primary);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(74, 108, 247, 0.25);
+            color: var(--text-primary);
+        }
+
+        .text-red {
+            color: var(--danger) !important;
+            font-weight: 600;
+        }
+
+        #notification {
+            display: none;
+            background: var(--success);
+            color: white;
+            padding: 12px 24px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.5s ease, fadeOut 0.5s ease 1.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .graph-container {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(44, 62, 80, 0.2), transparent);
+            border: none;
+            margin: 20px 0;
+        }
+
+        .data-row {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .data-row:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(74, 108, 247, 0.3);
+        }
+
+        #screenshot-target {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        h2 {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0;
+        }
+
+        .black-text {
+            color: var(--text-primary);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modern scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Floating elements */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Improved transitions */
+        * {
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .container-fluid.p-5 {
+            padding: 2rem !important;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(246, 249, 255, 0.9) 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .icon-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(74, 108, 247, 0.1);
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(74, 108, 247, 0.2);
+        }
+
+        .bg-blur {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .container {
+          position: relative;
+          text-align: black;
+          color: black;
+        }
+        
+        .bottom-right {
+          position: absolute;
+          top: 10%;
+          right: 30%;
+        }
+        
+        .bottom-left {
+          position: absolute;
+          top: 70%;
+          right: 34%;
+          font-weight: bold;
+          color: #333;
+        }
+        
+        /* Styles for screenshot mode */
+        .screenshot-mode .form-control {
+            background: transparent;
+            border: none;
+            padding-left: 0;
+            appearance: none;
+            box-shadow: none;
+            color: var(--text-primary) !important;
+        }
+        
+        .screenshot-mode input[readonly] {
+            background: transparent !important;
+        }
+        
+        .span-value {
+            display: none;
+            color: var(--text-primary);
+            padding: 0.375rem 0.75rem;
+        }
+        
+        /* Improved buy option styling */
+        .buy-option-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .buy-option-label {
+            font-weight: bold;
+            margin-right: 8px;
+            color: var(--text-primary);
+        }
+        
+        .buy-option-select {
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            color: var(--text-primary);
+            padding: 4px;
+            border-radius: 4px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+        }
+        
+        .buy-option-select:focus {
+            outline: none;
+            background-color: rgba(74, 108, 247, 0.1);
+        }
+        
+        .buy-value-display {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--danger);
+            margin-top: 4px;
+        }
+        
+        .analyst-input {
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-bottom: 1px solid #ddd !important;
+            background: transparent;
+            border-radius: 0;
+            padding-left: 0;
+            margin-top: -5px;
+        }
+        
+        .analyst-input:focus {
+            box-shadow: none;
+            border-bottom: 1px solid var(--primary) !important;
+        }
+        
+        .data-count-input {
+            width: 50px;
+            background-color: #f8f9fa;
+            color: var(--danger);
+            border: 1px solid #dee2e6;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-tools me-2"></i>Tools Weihu
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNav" style="">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="gantirugi.html">
+                            <i class="fas fa-file-contract me-1"></i> Form Surat Garansi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gantirugi-bp.html">
+                            <i class="fas fa-file-signature me-1"></i> Form Surat Garansi BP
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <i class="fas fa-chart-line me-1"></i> Sands Data Statistic
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="notification" style="display: none;">
+        <i class="fas fa-check-circle me-2"></i> Screenshot copied to clipboard!
+    </div>
+    <div class="container-fluid p-5">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Sands Data Statistic</h2>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="copyScreenshot()">
+                        <i class="fas fa-copy me-1"></i> Copy
+                    </button>
+                    <button class="btn btn-success" onclick="addRow()">
+                        <i class="fas fa-plus me-1"></i> Tambah Baris
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="form-group">
+                                    <span class="text-secondary"><i class="far fa-calendar me-1"></i> Tanggal:</span>
+                                    <span id="date" class="fw-bold text-primary">8/26/2025</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="form-group">
+                                    <span class="text-secondary"><i class="far fa-clock me-1"></i> Waktu:</span>
+                                    <span id="time" class="fw-bold text-primary">8:42:49 AM</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="session" class="text-secondary"><i class="fas fa-hashtag me-1"></i> Sesi</label>
+                                    <input type="text" class="form-control" name="session" id="session" value="0001" onkeyup="updateSession()" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-card">
+                    <div class="card-body">
+                        <h4 class="section-title"><i class="fas fa-table me-2"></i>Data Input</h4>
+                        <div class="row" id="data-section">
+                            <div class="data-row row align-items-end">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" class="text-secondary"><i class="fas fa-money-bill-wave me-1"></i> Modal</label>
+                                        <input type="number" class="form-control modall" oninput="calculateBuy(this)" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" class="text-secondary"><i class="fas fa-percentage me-1"></i> Profit (%)</label>
+                                        <input type="number" class="form-control profit" name="profit" id="profit" oninput="calculateBuy(this)" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" class="text-secondary"><i class="fas fa-dice me-1"></i> Pilih Angka :</label>
+                                        <input type="text" class="form-control number1" name="number1" id="number1" oninput="updateGraphContent()" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="" class="text-secondary"><i class="fas fa-shopping-cart me-1"></i> Buy</label>
+                                        <input type="text" class="form-control buy" name="buy" id="buy" readonly oninput="updateGraphContent()" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-danger btn-sm mt-4" onclick="deleteRow(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body" id="screenshot-target">
+                <div class="row">
+                    <h2 class="mb-4"><i class="fas fa-chart-line me-2"></i>Wynn Data Statistic</h2>
+                    <div class="graph-container col-lg-8 col-sm-12">
+                        <canvas id="graph" class="graph" height="300" width="640"></canvas>
+                    </div>
+                    <div class="col-lg-4 mt-4 mt-lg-0">
+                        <div class="stat-card h-100">
+                            <div class="card-body bg-white text-black" style="height: 100%; border-radius: 8px;">
+                                <img src="https://sands.idnads.pro/images/Neex-logo.png" style="width: 200px;" class="mb-2 floating mx-auto d-block" alt="Neex Logo">
+                                <div class="row align-items-center mb-3">
+                                    <div class="col-6">
+                                        <input type="number" class="data-count-input text-red" id="data-count" value="1" oninput="updateDataDescription()">
+                                        (<span class="text-red fw-bold" id="data-description">Satu</span>) <span class="black-text">Lembar Data</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="black-text">Sesi :</span> <span class="text-red fw-bold" id="session-value">202508260001</span>
+                                    </div>
+                                </div>
+                                <hr class="divider">
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <span class="black-text">Pilih Angka:</span>
+                                        <div class="text-red fw-bold fs-5 mt-1" id="graph-pilih-angka">5</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="buy-option-container">
+                                            <span class="buy-option-label">Beli:</span>
+                                            <select id="buy-option" class="buy-option-select" onchange="updateGraphContent()">
+                                                <option value="senilai">Senilai</option>
+                                                <option value="sejumlah">Sejumlah</option>
+                                            </select>
+                                        </div>
+                                        <div class="buy-value-display" id="graph-buy-value">600</div>
+                                    </div>
+                                </div>
+                                <hr class="divider">
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="black-text">Nama Analyst:</label>
+                                            <input type="text" class="form-control analyst-input" name="analyst-name" id="analyst-name" placeholder="Serlina Alpiliyani">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="black-text">Tanggal : </span>
+                                        <span id="current-date" class="text-red fw-bold">8/26/2025</span>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center">
+                                        <img src="https://sands.idnads.pro/images/QR.png" alt="QR Code" style="width:20%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    
+    <script>
+        // All JavaScript functions remain exactly the same
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString();
+            const date = now.toLocaleDateString();
+            document.getElementById('time').innerText = time;
+            document.getElementById('date').innerText = date;
+            document.getElementById('current-date').innerText = date;
+        }
+
+        function updateSession() {
+            var value = $('#session').val();
+            const now = new Date();
+            const session = now.getFullYear() + ("0" + (now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2) + value;
+            document.getElementById('session-value').innerText = session;
+        }
+
+        function calculateBuy(inputElement) {
+            const dataRow = inputElement.closest('.data-row');
+            const modall = parseFloat(dataRow.querySelector('.modall').value) || 0;
+            const profitPercentage = parseFloat(dataRow.querySelector('.profit').value) || 0;
+            const profitAmount = (modall * profitPercentage) / 100;
+            const buyAmount = profitAmount / (3.5 - 1);
+            dataRow.querySelector('.buy').value = buyAmount.toFixed();
+            updateGraphContent();
+        }
+
+        function addRow() {
+            const dataSection = document.getElementById('data-section');
+            const newRow = document.createElement('div');
+            newRow.classList.add('data-row', 'row', 'align-items-end');
+            newRow.innerHTML = `
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="" class="text-secondary"><i class="fas fa-money-bill-wave me-1"></i> Modal</label>
+                        <input type="number" class="form-control modall" oninput="calculateBuy(this)" placeholder="">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="" class="text-secondary"><i class="fas fa-percentage me-1"></i> Profit (%)</label>
+                        <input type="number" class="form-control profit" name="profit" id="profit" oninput="calculateBuy(this)" placeholder="">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="" class="text-secondary"><i class="fas fa-dice me-1"></i> Pilih Angka :</label>
+                        <input type="text" class="form-control number1" name="number1" id="number1" oninput="updateGraphContent()" placeholder="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="" class="text-secondary"><i class="fas fa-shopping-cart me-1"></i> Buy</label>
+                        <input type="text" class="form-control buy" name="buy" id="buy" readonly oninput="updateGraphContent()" placeholder="">
+                    </div>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-danger btn-sm mt-4" onclick="deleteRow(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            dataSection.appendChild(newRow);
+        }
+
+        function deleteRow(button) {
+            const dataRow = button.closest('.data-row');
+            dataRow.remove();
+            updateGraphContent();
+        }
+
+        // Improved copyScreenshot function
+        async function copyScreenshot() {
+            try {
+                // Add screenshot mode class to body
+                document.body.classList.add('screenshot-mode');
+                
+                // Hide buttons and other elements that shouldn't be in the screenshot
+                const buttons = document.querySelectorAll('button');
+                buttons.forEach(btn => btn.style.display = 'none');
+                
+                // Replace inputs with spans for cleaner look
+                const inputs = document.querySelectorAll('input, select');
+                inputs.forEach(input => {
+                    const span = document.createElement('span');
+                    span.className = 'span-value';
+                    span.innerText = input.value;
+                    span.style.display = 'inline-block';
+                    span.style.width = input.offsetWidth + 'px';
+                    span.style.height = input.offsetHeight + 'px';
+                    span.style.padding = '0.375rem 0.75rem';
+                    input.parentNode.insertBefore(span, input);
+                    input.style.display = 'none';
+                });
+                
+                // Wait for DOM to update
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                // Capture the screenshot
+                const element = document.getElementById('screenshot-target');
+                const canvas = await html2canvas(element, {
+                    backgroundColor: '#a7c0fd',
+                    useCORS: true,
+                    scale: 2,
+                    logging: false
+                });
+                
+                // Convert canvas to blob
+                canvas.toBlob(async (blob) => {
+                    try {
+                        // Copy to clipboard
+                        await navigator.clipboard.write([
+                            new ClipboardItem({ 'image/png': blob })
+                        ]);
+                        
+                        // Show success notification
+                        showNotification();
+                    } catch (err) {
+                        console.error('Failed to copy image: ', err);
+                        alert('Failed to copy image to clipboard. Please try again.');
+                    }
+                    
+                    // Restore the UI
+                    restoreUI();
+                });
+            } catch (err) {
+                console.error('Error in copyScreenshot: ', err);
+                alert('An error occurred while taking the screenshot. Please try again.');
+                restoreUI();
+            }
+        }
+
+        function restoreUI() {
+            // Remove screenshot mode
+            document.body.classList.remove('screenshot-mode');
+            
+            // Show buttons again
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => btn.style.display = '');
+            
+            // Remove spans and show inputs again
+            const spans = document.querySelectorAll('.span-value');
+            spans.forEach(span => {
+                const input = span.nextElementSibling;
+                if (input && input.tagName.toLowerCase() === 'input') {
+                    input.style.display = '';
+                }
+                span.remove();
+            });
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        function updateGraphContent() {
+            const pilihAngka = document.querySelector('.number1').value;
+            const buyValue = document.querySelector('.buy').value;
+
+            document.getElementById('graph-pilih-angka').innerText = pilihAngka;
+            document.getElementById('graph-buy-value').innerText = buyValue;
+
+            const buyLabel = $('#buy-option').val() === 'senilai' ? 'Beli Senilai:' : 'Beli Sejumlah:';
+            document.getElementById('buy').innerText = buyLabel;
+
+            document.getElementById('graph-pilih-angka').classList.toggle('red-text', pilihAngka !== '');
+            document.getElementById('graph-buy-value').classList.toggle('red-text', buyValue !== '');
+        }
+
+        function numberToWords(number) {
+            const words = ["Nol", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan"];
+            return words[number] || "";
+        }
+
+        function updateDataDescription() {
+            const count = parseInt(document.getElementById('data-count').value, 10);
+            document.getElementById('data-description').innerText = numberToWords(count);
+        }
+
+        setInterval(updateTime, 1000);
+        updateSession();
+        updateTime();
+        updateDataDescription();
+
+        // Generate random data for the graph with smooth transitions
+        function getRandomData(length = 100, max = 100) {
+            return Array.from({ length }, () => Math.floor(Math.random() * max));
+        }
+
+        // Initial data
+        let dataL = getRandomData();
+        let dataV = getRandomData();
+        let dataS = getRandomData();
+
+        const ctx = document.getElementById('graph').getContext('2d');
+
+        // Create gradient for each line
+        function createGradient(ctx, color) {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, color);
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0.1)');
+            return gradient;
+        }
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                datasets: [
+                    {
+                        label: 'Trend 1',
+                        borderColor: createGradient(ctx, 'rgba(255, 99, 132, 1)'),
+                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 6,
+                        pointHoverBackgroundColor: 'rgba(255, 99, 132, 1)',
+                        pointHoverBorderColor: '#fff',
+                        pointHitRadius: 10,
+                        pointBorderWidth: 2,
+                        data: dataL.slice(0, 10),
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Trend 2',
+                        borderColor: createGradient(ctx, 'rgba(54, 162, 235, 1)'),
+                        backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 6,
+                        pointHoverBackgroundColor: 'rgba(54, 162, 235, 1)',
+                        pointHoverBorderColor: '#fff',
+                        pointHitRadius: 10,
+                        pointBorderWidth: 2,
+                        data: dataV.slice(0, 10),
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Trend 3',
+                        borderColor: createGradient(ctx, 'rgba(75, 192, 192, 1)'),
+                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 6,
+                        pointHoverBackgroundColor: 'rgba(75, 192, 192, 1)',
+                        pointHoverBorderColor: '#fff',
+                        pointHitRadius: 10,
+                        pointBorderWidth: 2,
+                        data: dataS.slice(0, 10),
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: 'black',
+                            font: {
+                                size: 12,
+                                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                            },
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 12
+                        },
+                        padding: 10,
+                        usePointStyle: true,
+                        cornerRadius: 4,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: 'black',
+                            font: {
+                                size: 11,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: 'black',
+                            font: {
+                                size: 11,
+                                weight: 'bold'
+                            }
+                        },
+                        beginAtZero: true
+                    }
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'easeOutQuart'
+                },
+                elements: {
+                    line: {
+                        cubicInterpolationMode: 'monotone'
+                    }
+                }
+            }
+        });
+
+        setInterval(() => {
+            const randomIndex = Math.floor(Math.random() * 3);
+            const randomValue = Math.floor(Math.random() * 100);
+
+            if (randomIndex === 0) {
+                dataL.push(randomValue);
+                dataL.shift();
+                chart.data.datasets[0].data = dataL.slice(0, 10);
+            } else if (randomIndex === 1) {
+                dataV.push(randomValue);
+                dataV.shift();
+                chart.data.datasets[1].data = dataV.slice(0, 10);
+            } else {
+                dataS.push(randomValue);
+                dataS.shift();
+                chart.data.datasets[2].data = dataS.slice(0, 10);
+            }
+
+            chart.update();
+        }, 1000);
+    </script>
+</body>
+</html>

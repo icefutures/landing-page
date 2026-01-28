@@ -1,0 +1,731 @@
+<html lang="id"><head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surat Jaminan Ganti Rugi Digital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+      /* Tambahkan style navbar custom di sini */
+    .navbar-custom {
+      background: linear-gradient(135deg, #1e3a8a, #1e40af) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-custom .navbar-brand,
+    .navbar-custom .nav-link {
+      color: white !important;
+    }
+    
+    .navbar-custom .nav-link:hover {
+      color: #bfdbfe !important;
+    }
+    
+    .navbar-custom .nav-link.active {
+      font-weight: 600;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    
+    .navbar-toggler-custom {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .navbar-toggler-icon-custom {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+        .content-wrapper {
+      padding-top: 20px;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+      margin: 0;
+      padding: 20px;
+      color: #334155;
+    }
+    
+    .toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .action-btn {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 180px;
+      justify-content: center;
+    }
+    
+    .action-btn.print {
+      background: linear-gradient(135deg, #4b5563, #1f2937);
+    }
+    
+    .action-btn.screenshot {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+    
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .action-btn:active {
+      transform: translateY(0);
+    }
+    
+    .letter-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .letter-header {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      padding: 30px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    
+    .letter-header:after {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: white;
+      transform: skewY(-2deg);
+      z-index: 1;
+    }
+    
+    .letter-header h1 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+    
+    .letter-header p {
+      margin: 8px 0 0;
+      opacity: 0.9;
+      font-size: 14px;
+    }
+    
+    .letter-body {
+      padding: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .letter-content {
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    
+    .client-info {
+      background: #f8fafc;
+      border-left: 4px solid #2563eb;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .info-row {
+      display: flex;
+      margin-bottom: 6px;
+    }
+    
+    .info-label {
+      font-weight: 500;
+      min-width: 150px;
+      color: #64748b;
+    }
+    
+    .info-value {
+      font-weight: 500;
+      color: #1e293b;
+    }
+    
+    .highlight {
+      background: #eff6ff;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid #dbeafe;
+    }
+    
+    .highlight p {
+      margin: 8px 0;
+        text-align: justify;
+  text-justify: inter-word;
+    }
+    .highlight1 p {
+    text-align: justify;
+  text-justify: inter-word;
+    }
+    
+    .approval-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 30px;
+      padding: 0 40px;
+    }
+    
+    .logo-section {
+      text-align: left;
+    }
+    
+    .approval-section {
+      text-align: right;
+    }
+    
+    .company-logo {
+      height: 60px;
+    }
+    
+    .approval-stamp {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #f0fdf4;
+      border: 1px dashed #86efac;
+      border-radius: 8px;
+      text-align: center;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 10;
+      position: relative;
+    }
+    
+    .approval-stamp p {
+      margin: 0;
+      font-weight: 500;
+      color: #166534;
+      font-size: 14px;
+    }
+    
+    .approval-qr {
+      width: 80px;
+      margin-top: 8px;
+    }
+    
+    .watermark {
+      position: absolute;
+      opacity: 0.03;
+      font-size: 150px;
+      font-weight: bold;
+      color: #2563eb;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+    
+    .letter-footer {
+      padding: 15px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+    
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .loading-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #2563eb;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    .loading-text {
+      font-size: 18px;
+      color: #2563eb;
+      font-weight: 500;
+    }
+    
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .toast.show {
+      opacity: 1;
+    }
+    
+    .edit-mode .info-value {
+      display: none;
+    }
+    
+    .edit-mode .info-input {
+      display: block !important;
+    }
+    
+    .info-input {
+      display: none;
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .edit-btn {
+      background: #f59e0b;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @media print {
+      body {
+        background: none;
+        padding: 15px;
+      }
+      
+      .toolbar {
+        display: none;
+      }
+      
+      .letter-container {
+        box-shadow: none;
+        margin: 0;
+        border-radius: 0;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+      }
+      
+      .loading-overlay {
+        display: none !important;
+      }
+      
+      .letter-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .letter-body {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar Responsif -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container-fluid">
+      <button class="navbar-toggler navbar-toggler-custom" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Surat Jaminan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tugastugas">List Tugas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/suratevent">Surat Event</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="content-wrapper">
+  <div class="toolbar">
+    <button class="action-btn screenshot" id="takeScreenshot">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+      </svg>
+      Salin Screenshot
+    </button>
+    <button class="edit-btn" id="toggleEdit">Edit Data</button>
+  </div>
+  
+  <div class="toolbar">
+    <button class="action-btn" id="downloadPdf">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+      </svg>
+      Unduh PDF
+    </button>
+    
+    <button class="action-btn print" id="printDocument">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"></path>
+        <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"></path>
+      </svg>
+      Cetak Dokumen
+    </button>
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Menyiapkan screenshot...</div>
+  </div>
+
+  <div class="toast" id="toastMessage">Screenshot berhasil disalin ke clipboard!</div>
+
+  <div class="letter-container" id="letterContent">
+    <div class="letter-header">
+      <h1>SURAT JAMINAN GANTI RUGI</h1>
+      <p id="documentNumber">Nomor Dokumen: MFX/2025/GUA/15370</p>
+    </div>
+    
+    <div class="letter-body">
+      <div class="watermark">JAMINAN</div>
+      
+      <div class="letter-content">
+        <p>Kepada Yth. Nasabah Mandiri Investindo Futures,</p>
+        
+        <p>Dengan ini sistem mencatat dan memberikan jaminan resmi terhadap akun dengan data sebagai berikut:</p>
+        
+        <div class="client-info">
+          <div class="info-row">
+            <div class="info-label">Alamat Email:</div>
+            <div class="info-value">Email</div>
+            <input type="email" class="info-input" value="Email">
+          </div>
+          <div class="info-row">
+            <div class="info-label">Saldo Aktif:</div>
+            <div class="info-value">Rp 0</div>
+            <input type="text" class="info-input" value="Rp 0"><span class="badge">AKTIF</span>
+          </div>
+        </div>
+        
+        <div class="highlight">
+          <p>Surat peserta ini merupakan surat pernyataan bahwa nasabah yang bersangkutan mengikuti TRADING EXCLUSIVE pada waktu dan modal awal yang telah tertera pada surat peserta trading exclusive ini</p>
+          
+          <p>Apabila nasabah memenangkan salah satu nomor TRADING EXCLUSIVE maka nasabah wajib mengerjakan dan menyelesaikannya untuk menerima hak profit sebesar yang telah di menangkan sesuai nomor kemenangan, dan apabila kurang beruntung tidak memenangkannya maka nasabah akan mengerjakan sesi trading biasa dengan profit sebesar 30%</p>
+        </div>
+        </div>
+        
+        <div class="approval-container">
+          <div class="logo-section">
+            <img src="/images/Neex-logo.png" alt="NEEX Logo" class="company-logo" crossorigin="anonymous">
+          </div>     
+          <div class="approval-section">
+            <div class="approval-stamp" style="display: inline-block; visibility: visible; opacity: 1;">
+              <p>DISETUJUI OTOMATIS</p>
+              <p>Oleh Sistem Mandiri Futures</p>
+              <img src="/images/QRR.png" alt="QR Code Approval" class="approval-qr" crossorigin="anonymous">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+    <div class="letter-footer">
+      <p>Dokumen digital ini sah dan tercatat dalam sistem Mandiri Investindo Futures • <span id="printTimestamp">Dicetak otomatis pada 25 Agustus 2025 pukul 10:36 WIB</span></p>
+      <p>Segala data dilindungi dengan enkripsi standar industri dan audit sistem berkala</p>
+    </div>
+  </div>
+
+  <script>
+    // Function to format date in Indonesian
+    function formatIndonesianDate(date) {
+      const months = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      ];
+      
+      const day = date.getDate();
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      
+      return `Dicetak otomatis pada ${day} ${month} ${year} pukul ${hours}:${minutes} WIB`;
+    }
+
+    // Function untuk generate nomor dokumen acak
+    function generateDocumentNumber() {
+      const prefix = "MFX";
+      const year = new Date().getFullYear();
+      const type = "GUA";
+      const randomNum = Math.floor(10000 + Math.random() * 9000); // 4 digit acak
+      return `${prefix}/${year}/${type}/${randomNum}`;
+    }
+
+    // Update timestamp when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const now = new Date();
+      
+      // Generate dan set nomor dokumen
+      const docNumberElement = document.getElementById('documentNumber');
+      docNumberElement.textContent = `Nomor Dokumen: ${generateDocumentNumber()}`;
+      
+      // Update timestamp
+      const timestampElement = document.getElementById('printTimestamp');
+      timestampElement.textContent = formatIndonesianDate(now);
+      
+      // Perbaikan inisialisasi data
+      document.querySelector('.info-value').textContent = "";
+      document.querySelectorAll('.info-value')[2].textContent = "Rp 0";
+    });
+    
+    // PDF Download Function
+    document.getElementById('downloadPdf').addEventListener('click', function() {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.classList.add('active');
+      
+      const element = document.getElementById('letterContent');
+      
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'Surat_Jaminan_Mandiri_Futures.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 1.5,
+          logging: false,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#FFFFFF',
+          letterRendering: true,
+          onclone: function(clonedDoc) {
+            clonedDoc.getElementById('letterContent').style.boxShadow = 'none';
+          }
+        },
+        jsPDF: { 
+          unit: 'mm', 
+          format: 'a4', 
+          orientation: 'portrait',
+          hotfixes: ['px_scaling']
+        }
+      };
+      
+      // Generate PDF
+      html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+        setTimeout(function() {
+          loadingOverlay.classList.remove('active');
+        }, 1000);
+      }).catch(function(error) {
+        console.error('PDF generation error:', error);
+        loadingOverlay.classList.remove('active');
+        alert('Gagal membuat PDF. Silakan coba lagi.');
+      });
+    });
+    
+    // Print Function - langsung print tanpa loading
+    document.getElementById('printDocument').addEventListener('click', function() {
+      // Update timestamp sebelum cetak
+      const now = new Date();
+      const timestampElement = document.getElementById('printTimestamp');
+      timestampElement.textContent = formatIndonesianDate(now);
+      
+      // Trigger print
+      setTimeout(function() {
+        window.print();
+      }, 200);
+    });
+
+    // Toggle edit mode
+    document.getElementById('toggleEdit').addEventListener('click', function() {
+      const clientInfo = document.querySelector('.client-info');
+      const isEditMode = clientInfo.classList.toggle('edit-mode');
+      
+      this.textContent = isEditMode ? 'Simpan Perubahan' : 'Edit Data';
+      
+      if (!isEditMode) {
+        // Simpan perubahan
+        document.querySelectorAll('.info-input').forEach(input => {
+          if (input.tagName === 'INPUT') {
+            input.previousElementSibling.textContent = input.value;
+          } else if (input.tagName === 'SELECT') {
+            const selectedValue = input.options[input.selectedIndex].value;
+            input.previousElementSibling.innerHTML = selectedValue + 
+              (selectedValue.includes('Trading') ? '<span class="badge">AKTIF</span>' : '');
+          }
+        });
+      }
+    });
+
+    // Format input saldo
+    document.querySelector('.info-input[type="text"]').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value) {
+        value = 'Rp ' + parseInt(value).toLocaleString('id-ID');
+      }
+      e.target.value = value;
+    });
+    
+    // Fungsi untuk menampilkan toast message
+    function showToast(message) {
+      const toast = document.getElementById('toastMessage');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Fungsi untuk memastikan gambar sudah dimuat
+    async function preloadImages() {
+      const images = document.querySelectorAll('img');
+      const promises = Array.from(images).map(img => {
+        if (img.complete) return Promise.resolve();
+        
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      });
+      
+      return Promise.all(promises);
+    }
+
+    // Fungsi utama untuk screenshot ke clipboard - VERSI PERBAIKAN
+    document.getElementById('takeScreenshot').addEventListener('click', async function() {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.classList.add('active');
+      
+      try {
+        // 1. Pastikan semua gambar sudah dimuat
+        await preloadImages();
+        
+        // 2. Force render approval stamp
+        const approvalStamp = document.querySelector('.approval-stamp');
+        if (approvalStamp) {
+          approvalStamp.style.display = 'inline-block';
+          approvalStamp.style.visibility = 'visible';
+          approvalStamp.style.opacity = '1';
+        }
+        
+        // 3. Ambil screenshot dengan html2canvas
+        const canvas = await html2canvas(document.getElementById('letterContent'), {
+          scale: 2,
+          useCORS: true,
+          allowTaint: false,
+          logging: true,
+          backgroundColor: '#FFFFFF',
+          onclone: (clonedDoc) => {
+            // Pastikan semua elemen terlihat
+            const stamp = clonedDoc.querySelector('.approval-stamp');
+            if (stamp) {
+              stamp.style.display = 'inline-block';
+              stamp.style.visibility = 'visible';
+              stamp.style.opacity = '1';
+            }
+            
+            // Handle gambar dengan CORS
+            const images = clonedDoc.querySelectorAll('img');
+            images.forEach(img => {
+              img.crossOrigin = 'Anonymous';
+            });
+          }
+        });
+        
+        // 4. Konversi ke blob dan salin ke clipboard
+        canvas.toBlob(async (blob) => {
+          try {
+            await navigator.clipboard.write([
+              new ClipboardItem({ 'image/png': blob })
+            ]);
+            showToast('Screenshot berhasil disalin ke clipboard!');
+          } catch (err) {
+            console.error('Gagal menyalin ke clipboard:', err);
+            // Fallback download
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'Surat_Jaminan.png';
+            link.click();
+            showToast('Screenshot diunduh karena clipboard tidak tersedia');
+          }
+        }, 'image/png');
+        
+      } catch (error) {
+        console.error('Gagal mengambil screenshot:', error);
+        showToast('Gagal mengambil screenshot. Coba di browser lain.');
+      } finally {
+        loadingOverlay.classList.remove('active');
+      }
+    });
+  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</div></body></html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembar Data Statistic</title>
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Card Design */
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* Form Styling */
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+            border-color: #2c3e50;
+        }
+
+        /* CHART SECTION */
+        .chart-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.03);
+            border: 1px solid #e9ecef;
+            height: 380px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Floating Badge in Chart */
+        .chart-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.95);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 10;
+            border: 1px solid #eee;
+        }
+
+        /* Right Side Info */
+        .info-panel {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            border: 1px solid #e9ecef;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .info-label { color: #6c757d; }
+        .info-val { font-weight: 600; color: #2c3e50; text-align: right; }
+        .text-accent { color: #3d64ff; }
+
+        .btn-action {
+            border-radius: 8px;
+            font-size: 13px;
+            padding: 8px 15px;
+        }
+
+        /* QR Code Upload Area */
+        .qr-upload-area {
+            width: 100px;
+            height: 100px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px dashed #ced4da;
+            transition: all 0.3s;
+        }
+        .qr-upload-area:hover {
+            border-color: var(--primary);
+            background-color: #e2e6ea;
+        }
+        .qr-upload-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; /* Hidden by default */
+        }
+
+        /* Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 999;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="main-card">
+            <!-- Header -->
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-bold"><i class="fas fa-chart-pie me-2"></i>Lembar Data Sesi</h5>
+                <div>
+                    <button class="btn btn-light btn-sm text-dark btn-action" onclick="copyScreen()"><i class="fas fa-camera"></i> SS</button>
+                    <button class="btn btn-success btn-sm text-white btn-action" onclick="alert('Demo Mode')"><i class="fas fa-plus"></i> Tambah</button>
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Row 1: Tanggal, Sesi, DAN NAMA ANALYST -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <label class="fw-bold mb-1">Tanggal (Otomatis)</label>
+                        <input type="text" id="dateDisplay" class="form-control bg-light" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fw-bold mb-1">Sesi</label>
+                        <input type="text" id="sessionInput" class="form-control" placeholder="Masukkan Sesi..." oninput="updateInfo()">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fw-bold mb-1">Nama Analyst</label>
+                        <input type="text" id="analystInput" class="form-control" placeholder="Nama Anda..." oninput="updateInfo()">
+                    </div>
+                </div>
+
+                <!-- Row 2: Input Data -->
+                <div class="bg-white p-3 rounded mb-4 border">
+                    <h6 class="text-muted mb-3"><i class="fas fa-pen me-1"></i> Parameter</h6>
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <label>Modal</label>
+                            <input type="number" class="form-control" id="inputModal" value="0" oninput="calcBuy()">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Profit (%)</label>
+                            <input type="number" class="form-control" id="inputProfit" value="30" oninput="calcBuy()">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Asset</label>
+                            <input type="text" class="form-control" id="inputAsset" value="Asset" oninput="updateInfo()">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Nilai Pembelian</label>
+                            <input type="text" class="form-control bg-white" id="inputBuy" oninput="copyBuyToInfo()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Chart & Info -->
+                <div class="row" id="screenshotArea">
+                    <!-- Chart Area -->
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <div class="chart-box" id="chartWrapper">
+                            <div class="chart-badge">
+                                <span id="badgeAsset">ASSET</span> &bull; 
+                                <span id="badgePrice">0.00</span>
+                            </div>
+                            <canvas id="candleChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Info Area -->
+                    <div class="col-lg-4">
+                        <div class="info-panel">
+                            <div class="text-center mb-4">
+                                <i class="fas fa-chart-line fa-3x text-primary opacity-50"> LVS</i>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Sesi</span>
+                                <span class="info-val" id="infoSession">--</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Asset</span>
+                                <span class="info-val text-accent" id="infoAsset">--</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Nilai Pembelian</span>
+                                <span class="info-val text-accent" id="infoBuy">--</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Analyst</span>
+                                <span class="info-val" id="infoAnalyst">--</span>
+                            </div>
+
+                            <div class="info-item">
+                                <span class="info-label">Tanggal</span>
+                                <span class="info-val" id="infoDate">--</span>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <!-- Input File Hidden -->
+                                <input type="file" id="qrInput" hidden accept="image/*" onchange="previewQR(event)">
+                                
+                                <!-- Area Klik QR -->
+                                <div class="qr-upload-area" onclick="document.getElementById('qrInput').click()" title="Klik untuk Upload QR">
+                                    <i id="qrIcon" class="fas fa-qrcode fa-2x text-secondary"></i>
+                                    <img id="qrImage" src="" alt="QR Code">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">Screenshot berhasil disalin!</div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+
+        const canvas = document.getElementById('candleChart');
+        const ctx = canvas.getContext('2d');
+        const wrapper = document.getElementById('chartWrapper');
+        
+        const GREEN = '#00c853'; 
+        const RED = '#ff1744';
+
+        let dataPoints = [];
+        let candlesTotal = 60;
+        let price = 150;
+
+        
+        function init() {
+            const d = new Date();
+            const dateStr = d.toLocaleDateString('id-ID');
+            document.getElementById('dateDisplay').value = dateStr;
+            document.getElementById('infoDate').innerText = dateStr;
+
+            generateData();
+            
+            setTimeout(() => {
+                resizeAndDraw();
+            }, 100);
+
+            window.addEventListener('resize', resizeAndDraw);
+            
+            updateInfo();
+            calcBuy(); 
+
+            setInterval(updateChart, 1000);
+        }
+
+        
+        function resizeAndDraw() {
+            const w = wrapper.offsetWidth;
+            const h = wrapper.offsetHeight;
+            if(w === 0 || h === 0) return;
+
+            canvas.width = w;
+            canvas.height = h;
+            drawChart();
+        }
+
+        function generateData() {
+            dataPoints = [];
+            for(let i=0; i<candlesTotal; i++) {
+                const isUp = (i % 2 === 0);
+                const volatility = 4 + Math.random() * 6;
+                const open = price;
+                let close, high, low;
+
+                if(isUp) {
+                    close = open + (Math.random() * volatility);
+                } else {
+                    close = open - (Math.random() * volatility);
+                }
+                
+                high = Math.max(open, close) + Math.random() * 2;
+                low = Math.min(open, close) - Math.random() * 2;
+
+                dataPoints.push({open, close, high, low, isUp});
+                price = close;
+            }
+        }
+
+        function drawChart() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let minP = Math.min(...dataPoints.map(d => d.low));
+            let maxP = Math.max(...dataPoints.map(d => d.high));
+            const range = maxP - minP;
+            const padding = range * 0.1;
+
+            const toY = (val) => {
+                return canvas.height - ((val - (minP - padding)) / (range + padding*2)) * canvas.height;
+            }
+
+            ctx.strokeStyle = '#eeeeee';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for(let i=1; i<5; i++) {
+                const y = (canvas.height / 5) * i;
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+            }
+            ctx.stroke();
+
+            const slotWidth = canvas.width / candlesTotal;
+            const candleWidth = slotWidth * 0.7;
+            const gap = slotWidth * 0.15;
+
+            dataPoints.forEach((d, i) => {
+                const x = i * slotWidth + gap;
+                const yOpen = toY(d.open);
+                const yClose = toY(d.close);
+                const yHigh = toY(d.high);
+                const yLow = toY(d.low);
+                const color = d.isUp ? GREEN : RED;
+
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 1;
+                ctx.moveTo(x + candleWidth/2, yHigh);
+                ctx.lineTo(x + candleWidth/2, yLow);
+                ctx.stroke();
+
+                ctx.fillStyle = color;
+                let bodyH = Math.abs(yClose - yOpen);
+                let bodyY = Math.min(yOpen, yClose);
+                if(bodyH < 1) bodyH = 1; 
+                ctx.fillRect(x, bodyY, candleWidth, bodyH);
+            });
+
+            const last = dataPoints[dataPoints.length -1];
+            document.getElementById('badgePrice').innerText = last.close.toFixed(2);
+            document.getElementById('badgePrice').style.color = last.isUp ? GREEN : RED;
+        }
+
+        function updateChart() {
+            dataPoints.shift();
+            const last = dataPoints[dataPoints.length-1];
+            const open = last.close;
+            const isUp = Math.random() > 0.5;
+            const vol = 3 + Math.random() * 5;
+            let close = isUp ? open + Math.random()*vol : open - Math.random()*vol;
+            let high = Math.max(open, close) + Math.random();
+            let low = Math.min(open, close) - Math.random();
+            dataPoints.push({open, close, high, low, isUp});
+            drawChart();
+        }
+
+        function updateInfo() {
+            const asset = document.getElementById('inputAsset').value;
+            const session = document.getElementById('sessionInput').value;
+            const analyst = document.getElementById('analystInput').value;
+
+            document.getElementById('badgeAsset').innerText = asset.toUpperCase();
+            document.getElementById('infoAsset').innerText = asset.toUpperCase();
+            document.getElementById('infoSession').innerText = session || '-';
+            document.getElementById('infoAnalyst').innerText = analyst || '-';
+        }
+
+        function calcBuy() {
+            const modal = parseFloat(document.getElementById('inputModal').value) || 0;
+            const profit = parseFloat(document.getElementById('inputProfit').value) || 0;
+            
+            const buy = (modal * (profit/100)) / 2.5;
+            const buyFormatted = Math.round(buy).toLocaleString();
+
+            document.getElementById('inputBuy').value = buyFormatted;
+            document.getElementById('infoBuy').innerText = buyFormatted;
+        }
+
+        function copyBuyToInfo() {
+            const val = document.getElementById('inputBuy').value;
+            document.getElementById('infoBuy').innerText = val || '-';
+        }
+
+        function previewQR(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('qrImage');
+                    const icon = document.getElementById('qrIcon');
+                    
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    
+                    icon.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function copyScreen() {
+            const el = document.getElementById('screenshotArea');
+            html2canvas(el, { scale: 2, useCORS: true }).then(canvas => {
+                canvas.toBlob(blob => {
+                    const item = new ClipboardItem({'image/png': blob});
+                    navigator.clipboard.write([item]).then(() => {
+                        showToast();
+                    });
+                });
+            });
+        }
+
+        function showToast() {
+            const x = document.getElementById("toast");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+
+        window.addEventListener('load', init);
+
+    </script>
+</body>
+</html>
