@@ -51,13 +51,57 @@ function redirectWithQuery($url, $excludeParams = []) {
 $ipAddress = getClientIP();
 $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
 
+// Check for token parameter first to enforce single-use links
+$token = $_GET['t'] ?? null;
+
+if ($token) {
+    // Validate token signature
+    if (!$db->validateTokenSignature($token)) {
+        // Invalid token signature or expired
+        redirectWithQuery($config['expired_page'], []);
+    }
+
+    // Check if token already used
+    if ($db->isTokenUsed($token)) {
+        // Token already consumed
+        redirectWithQuery($config['expired_page'], []);
+    }
+
+    // Token is valid and not used yet -> consume it
+    $sessionId = $db->consumeToken($token, $ipAddress, $userAgent);
+
+    if (!$sessionId) {
+        // Failed to consume token (race condition?)
+        redirectWithQuery($config['expired_page'], []);
+    }
+
+    // Set session cookie
+    $cookieName = $config['session_cookie_name'];
+    $cookieExpiry = time() + $config['session_lifetime'];
+    setcookie(
+        $cookieName,
+        $sessionId,
+        [
+            'expires' => $cookieExpiry,
+            'path' => '/',
+            'domain' => '',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]
+    );
+
+    // Redirect to same URL without 't' parameter (preserve other params like utm_*, fbclid, gclid)
+    redirectWithQuery('/invest', ['t']);
+}
+
 // Check for existing session cookie
 $cookieName = $config['session_cookie_name'];
 $hasValidSession = false;
 
 if (isset($_COOKIE[$cookieName])) {
     $sessionId = $_COOKIE[$cookieName];
-    
+
     if ($db->validateSession($sessionId, $ipAddress, $userAgent)) {
         $hasValidSession = true;
     } else {
@@ -72,54 +116,11 @@ if ($hasValidSession) {
     if (rand(1, 100) === 1) {
         $db->cleanup();
     }
-    
+
     // Include the landing page HTML
     include __DIR__ . '/landing-page.php';
     exit;
 }
 
-// No valid session, check for token parameter
-$token = $_GET['t'] ?? null;
-
-if (!$token) {
-    // No token and no valid session -> redirect to expired
-    redirectWithQuery($config['expired_page'], []);
-}
-
-// Validate token signature
-if (!$db->validateTokenSignature($token)) {
-    // Invalid token signature or expired
-    redirectWithQuery($config['expired_page'], []);
-}
-
-// Check if token already used
-if ($db->isTokenUsed($token)) {
-    // Token already consumed
-    redirectWithQuery($config['expired_page'], []);
-}
-
-// Token is valid and not used yet -> consume it
-$sessionId = $db->consumeToken($token, $ipAddress, $userAgent);
-
-if (!$sessionId) {
-    // Failed to consume token (race condition?)
-    redirectWithQuery($config['expired_page'], []);
-}
-
-// Set session cookie
-$cookieExpiry = time() + $config['session_lifetime'];
-setcookie(
-    $cookieName,
-    $sessionId,
-    [
-        'expires' => $cookieExpiry,
-        'path' => '/',
-        'domain' => '',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Lax'
-    ]
-);
-
-// Redirect to same URL without 't' parameter (preserve other params like utm_*, fbclid, gclid)
-redirectWithQuery('/invest', ['t']);
+// No token and no valid session -> redirect to expired
+redirectWithQuery($config['expired_page'], []);
