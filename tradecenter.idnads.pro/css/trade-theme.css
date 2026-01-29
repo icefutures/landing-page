@@ -92,6 +92,11 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.trade-section .trade-button,
+.trade-section .trade-outline {
+    font-size: 1.02rem;
+}
+
 .trade-button {
     background: linear-gradient(120deg, var(--trade-accent), #fb7185);
     color: #0b1120;
