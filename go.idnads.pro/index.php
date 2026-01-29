@@ -17,8 +17,8 @@
                 <h1 class="hero-title">Siap tambah penghasilan hingga 2 juta per hari?</h1>
                 <p class="hero-lead">Gabung bersama komunitas kami, dapatkan strategi yang teruji, dan raih hasil lebih konsisten dari rumah.</p>
                 <div class="hero-actions">
-                    <button class="button button-primary" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20bergabung%20di%20Profit%20Guardian', '_blank')">Daftar Sekarang</button>
-                    <button class="button button-ghost" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20konsultasi%20dulu%20tentang%20program%20ini', '_blank')">Konsultasi Gratis</button>
+                    <button class="button button-primary" onclick="window.open('https://hw.url668.com/s/F-02ZYwZN', '_blank')">Daftar Sekarang</button>
+                    <button class="button button-ghost" onclick="window.open('https://hw.url668.com/s/F-02ZYwZN', '_blank')">Konsultasi Gratis</button>
                 </div>
                 <div class="hero-card">
                     <strong>Garansi 100% Pendampingan</strong>
@@ -90,19 +90,19 @@
                     <h3>Paket Basic</h3>
                     <p class="package-price">Rp100.000</p>
                     <p>Untuk Anda yang ingin mulai secara bertahap dan minim risiko.</p>
-                    <button class="button button-ghost" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Paket%20Basic', '_blank')">Daftar Sekarang</button>
+                    <button class="button button-ghost" onclick="window.open('https://hw.url668.com/s/F-02ZYwZN', '_blank')">Daftar Sekarang</button>
                 </div>
                 <div class="package featured">
                     <h3>Paket Silver</h3>
                     <p class="package-price">Rp500.000</p>
                     <p>Favorit member karena sudah termasuk analisa mingguan.</p>
-                    <button class="button button-primary" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Paket%20Silver', '_blank')">Daftar Sekarang</button>
+                    <button class="button button-primary" onclick="window.open('https://hw.url668.com/s/F-02ZYwZN', '_blank')">Daftar Sekarang</button>
                 </div>
                 <div class="package">
                     <h3>Paket Gold</h3>
                     <p class="package-price">Rp1.000.000</p>
                     <p>Fokus pada target lebih tinggi dengan pendampingan intensif.</p>
-                    <button class="button button-ghost" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Paket%20Gold', '_blank')">Daftar Sekarang</button>
+                    <button class="button button-ghost" onclick="window.open('https://hw.url668.com/s/F-02ZYwZN', '_blank')">Daftar Sekarang</button>
                 </div>
             </div>
         </section>
@@ -197,8 +197,8 @@
             <h2>Siap memulai penghasilan tambahan hari ini?</h2>
             <p>Klik tombol di bawah untuk konsultasi gratis dan mulai perjalanan Anda.</p>
             <div class="hero-actions" style="justify-content: center;">
-                <button class="button button-primary" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20mulai%20sekarang', '_blank')">Mulai Sekarang</button>
-                <button class="button button-ghost" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20butuh%20info%20lebih%20lanjut', '_blank')">Tanya Admin</button>
+                <button class="button button-primary" onclick="window.open('https://hw.url668.com/s/F-02ZYwZN', '_blank')">Mulai Sekarang</button>
+                <button class="button button-ghost" onclick="window.open('https://hw.url668.com/s/F-02ZYwZN', '_blank')">Tanya Admin</button>
             </div>
         </section>
 
