@@ -57,7 +57,9 @@ function showSlides(n) {
     
     // Show current slide and activate corresponding dot
     slides[slideIndex - 1].style.display = "block";  
-    dots[slideIndex - 1].className += " active";
+    if (dots[slideIndex - 1]) {
+        dots[slideIndex - 1].className += " active";
+    }
 }
 
 /**
