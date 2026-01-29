@@ -20,7 +20,7 @@ body {
     background: radial-gradient(circle at top, #0f172a 0%, #0b1120 55%, #020617 100%);
     color: var(--trade-text);
     line-height: 1.6;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .trade {
@@ -48,9 +48,16 @@ body {
 }
 
 .trade-hero-content h1 {
-    font-size: clamp(1.7rem, 2.4vw, 2.35rem);
+    font-size: clamp(1.55rem, 2.2vw, 2.05rem);
     margin-bottom: 12px;
     line-height: 1.25;
+}
+
+.trade-lead {
+    font-size: 1rem;
+    color: var(--trade-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
 }
 
 .trade-tag {
@@ -128,7 +135,7 @@ body {
 }
 
 .trade-price {
-    font-size: 1.8rem;
+    font-size: 1.55rem;
     font-weight: 700;
     color: #fde68a;
 }
@@ -149,6 +156,7 @@ body {
     padding: 18px;
     border-radius: 18px;
     font-weight: 600;
+    font-size: 0.95rem;
 }
 
 .trade-carousel {
@@ -196,7 +204,7 @@ body {
 }
 
 .trade-cta h2 {
-    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-size: clamp(1.3rem, 2vw, 1.75rem);
     margin-bottom: 14px;
     line-height: 1.3;
 }

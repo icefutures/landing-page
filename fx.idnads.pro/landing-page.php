@@ -24,7 +24,8 @@
             </div>
             <div class="hero-content">
                 <p class="hero-badge">Zero to Hero</p>
-                <h1 class="hero-title">Siap tambah penghasilan hingga 2 juta per hari?? Gabung sekarang dan wujudkan keuntungan nyata bersama kami!</h1>
+                <h1 class="hero-title">Siap tambah penghasilan hingga 2 juta per hari??</h1>
+                <p class="hero-lead">Gabung sekarang dan wujudkan keuntungan nyata bersama kami!</p>
                 <div class="hero-actions">
                     <button class="btn btn-primary" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20program%20ini', '_blank')">
                         <i class="fab fa-whatsapp"></i> Hubungi Kami Via WhatsApp Sekarang!

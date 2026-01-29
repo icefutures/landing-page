@@ -24,7 +24,8 @@
             </div>
             <div class="trade-hero-content">
                 <p class="trade-tag">Program Penghasilan Tambahan</p>
-                <h1>Siap tambah penghasilan hingga 2 juta per hari?? Gabung sekarang dan wujudkan keuntungan nyata bersama kami!</h1>
+                <h1>Siap tambah penghasilan hingga 2 juta per hari??</h1>
+                <p class="trade-lead">Gabung sekarang dan wujudkan keuntungan nyata bersama kami!</p>
                 <p class="trade-highlight"><strong>Gunakan ponsel anda di rumah dan dapatkan penghasilan tambahan Rp 800ribu hingga 2 juta perhari</strong></p>
                 <button class="trade-button" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20program%20ini', '_blank')">
                     <i class="fab fa-whatsapp"></i> Hubungi Kami Via WhatsApp Sekarang!
