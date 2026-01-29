@@ -82,10 +82,11 @@ slides.forEach((slide) => {
 // Scroll to top
 if (scrollTopButton) {
     const toggleScrollButton = () => {
-        scrollTopButton.classList.toggle('is-visible', window.scrollY > 300);
+        scrollTopButton.classList.toggle('is-visible', window.scrollY > 200);
     };
 
-    window.addEventListener('scroll', toggleScrollButton);
+    window.addEventListener('scroll', toggleScrollButton, { passive: true });
+    window.addEventListener('load', toggleScrollButton);
     toggleScrollButton();
 
     scrollTopButton.addEventListener('click', () => {
