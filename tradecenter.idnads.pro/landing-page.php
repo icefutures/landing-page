@@ -109,10 +109,6 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="links-logo-container">
-            <div class="footer-logo">
-                <img src="/images/modalinv2.jpg" alt="Logo">
-            </div>
-            
             <div class="social-links">
                 <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
                 <a href="#"><i class="fab fa-twitter"></i> Twitter</a>

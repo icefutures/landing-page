@@ -123,10 +123,6 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="links-logo-container">
-            <div class="footer-logo">
-                <img src="https://go.idnads.pro/img/modalinv2.png" alt="Logo">
-            </div>
-            
             <div class="social-links">
                 <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
                 <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
