@@ -1,5 +1,7 @@
 RewriteEngine On
 
+Options -Indexes
+
 RewriteRule ^$ /index.php [L]
 
 RewriteCond %{REQUEST_URI} ^/(css|js|img|images|cgi-bin|\.well-known)(/|$) [NC]
