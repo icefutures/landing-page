@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="hero-media">
-                <img src="https://go.idnads.pro/images/modalinv2.jpg" alt="Zero to Hero Banner" class="hero-image">
+                <img src="https://fx.idnads.pro/images/modalinv2.jpg" alt="Zero to Hero Banner" class="hero-image">
             </div>
         </section>
 
