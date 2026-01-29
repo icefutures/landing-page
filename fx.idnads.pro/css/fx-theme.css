@@ -20,23 +20,24 @@ body {
     font-family: 'Poppins', sans-serif;
     background: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 45%, #ffffff 100%);
     color: var(--fx-dark);
-    line-height: 1.7;
+    line-height: 1.6;
+    font-size: 16px;
 }
 
 .page {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 48px 20px 80px;
+    padding: 40px 18px 64px;
 }
 
 .hero {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 36px;
+    gap: 28px;
     align-items: center;
     background: #ffffff;
     border-radius: var(--fx-radius);
-    padding: 40px;
+    padding: 32px;
     box-shadow: var(--fx-shadow);
     position: relative;
     overflow: hidden;
@@ -65,23 +66,24 @@ body {
     background: rgba(79, 70, 229, 0.12);
     color: var(--fx-primary);
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .hero-title {
     font-size: clamp(1.8rem, 2.8vw, 2.6rem);
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    line-height: 1.25;
 }
 
 .hero-actions {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 14px;
 }
 
 .hero-note {
-    padding: 14px 18px;
+    padding: 12px 16px;
     background: #eef2ff;
     border-radius: 16px;
     font-weight: 600;
@@ -96,24 +98,25 @@ body {
 }
 
 .hero-image {
-    width: min(420px, 100%);
+    width: min(380px, 100%);
     border-radius: 18px;
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.2);
 }
 
 .section {
-    margin-top: 60px;
+    margin-top: 48px;
 }
 
 .section-header {
     text-align: center;
     max-width: 720px;
-    margin: 0 auto 36px;
+    margin: 0 auto 28px;
 }
 
 .section-title {
     font-size: clamp(1.6rem, 2.2vw, 2.2rem);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    line-height: 1.3;
 }
 
 .section-subtitle {
@@ -129,12 +132,12 @@ body {
 .package-card {
     background: #ffffff;
     border-radius: 20px;
-    padding: 28px;
+    padding: 24px;
     border: 1px solid var(--fx-border);
     box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
 .package-card.featured {
@@ -149,7 +152,7 @@ body {
 }
 
 .package-amount {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--fx-primary);
 }
@@ -190,25 +193,25 @@ body {
 .story-card {
     background: #ffffff;
     border-radius: 20px;
-    padding: 32px;
+    padding: 26px;
     box-shadow: var(--fx-shadow);
     display: grid;
-    gap: 16px;
+    gap: 12px;
     color: var(--fx-dark);
 }
 
 .quote-card {
     background: linear-gradient(120deg, rgba(79, 70, 229, 0.12), rgba(14, 165, 233, 0.12));
-    padding: 26px;
+    padding: 20px;
     border-radius: 18px;
     text-align: center;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .slideshow-container {
     background: #ffffff;
-    padding: 18px;
+    padding: 14px;
     border-radius: 20px;
     box-shadow: var(--fx-shadow);
 }
@@ -225,13 +228,13 @@ body {
 
 .dots-container {
     text-align: center;
-    margin-top: 16px;
+    margin-top: 12px;
 }
 
 .dot {
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
     background-color: rgba(79, 70, 229, 0.2);
     border-radius: 50%;
     display: inline-block;
@@ -245,14 +248,15 @@ body {
 .section-cta .cta-card {
     background: #0f172a;
     color: #fff;
-    padding: 32px;
+    padding: 28px;
     border-radius: 22px;
     text-align: center;
 }
 
 .cta-title {
     font-size: clamp(1.5rem, 2.3vw, 2.1rem);
-    margin-bottom: 18px;
+    margin-bottom: 14px;
+    line-height: 1.3;
 }
 
 .modal {
