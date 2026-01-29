@@ -13,8 +13,12 @@ function openModal(img) {
     if (!modal || !modalImg) {
         return;
     }
+    const src = typeof img === "string" ? img : img?.src;
+    if (!src) {
+        return;
+    }
     modal.style.display = "block";
-    modalImg.src = img.src;
+    modalImg.src = src;
 }
 
 /**
