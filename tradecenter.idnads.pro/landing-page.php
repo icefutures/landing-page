@@ -20,7 +20,7 @@
     <main class="trade">
         <section class="trade-hero">
             <div class="trade-hero-media">
-                <img src="https://go.idnads.pro/img/modalinv2.png" alt="Zero to Hero Banner">
+                <img src="/images/modalinv2.jpg" alt="Zero to Hero Banner">
             </div>
             <div class="trade-hero-content">
                 <p class="trade-tag">Program Penghasilan Tambahan</p>
@@ -72,13 +72,13 @@
         <section class="trade-section">
             <div class="trade-carousel">
                 <div class="mySlides">
-                    <img src="https://go.idnads.pro/img/modalinv2.png" alt="Testimonial 1" onclick="openModal(this.src)">
+                    <img src="/images/testimonial/testi1.jpg" alt="Testimonial 1" onclick="openModal(this.src)">
                 </div>
                 <div class="mySlides">
-                    <img src="https://go.idnads.pro/img/modalinv2.png" alt="Testimonial 2" onclick="openModal(this.src)">
+                    <img src="/images/testimonial/testi2.jpg" alt="Testimonial 2" onclick="openModal(this.src)">
                 </div>
                 <div class="mySlides">
-                    <img src="https://go.idnads.pro/img/modalinv2.png" alt="Testimonial 3" onclick="openModal(this.src)">
+                    <img src="/images/testimonial/testi3.jpg" alt="Testimonial 3" onclick="openModal(this.src)">
                 </div>
 
                 <div class="dots-container">
@@ -109,7 +109,7 @@
     <footer class="site-footer">
         <div class="links-logo-container">
             <div class="footer-logo">
-                <img src="https://go.idnads.pro/img/modalinv2.png" alt="Logo">
+                <img src="/images/modalinv2.jpg" alt="Logo">
             </div>
             
             <div class="social-links">
