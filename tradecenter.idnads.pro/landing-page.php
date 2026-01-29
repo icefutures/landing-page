@@ -73,13 +73,13 @@
         <section class="trade-section">
             <div class="trade-carousel">
                 <div class="mySlides">
-                    <img src="/images/testimonial/testi1.jpg" alt="Testimonial 1" onclick="openModal(this.src)">
+                    <img src="/images/testimonial/testi1.jpg" alt="Testimonial 1" onclick="openModal(this)">
                 </div>
                 <div class="mySlides">
-                    <img src="/images/testimonial/testi2.jpg" alt="Testimonial 2" onclick="openModal(this.src)">
+                    <img src="/images/testimonial/testi2.jpg" alt="Testimonial 2" onclick="openModal(this)">
                 </div>
                 <div class="mySlides">
-                    <img src="/images/testimonial/testi3.jpg" alt="Testimonial 3" onclick="openModal(this.src)">
+                    <img src="/images/testimonial/testi3.jpg" alt="Testimonial 3" onclick="openModal(this)">
                 </div>
 
                 <div class="dots-container">
