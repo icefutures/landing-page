@@ -103,7 +103,7 @@
     <!-- Modal for Image Popup -->
     <div id="myModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="img01">
+        <img class="modal-content" id="imgModal">
     </div>
 
     <!-- Footer -->
