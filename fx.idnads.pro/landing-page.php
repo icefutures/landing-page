@@ -19,6 +19,9 @@
 <body>
     <main class="page">
         <section class="hero">
+            <div class="hero-media">
+                <img src="https://fx.idnads.pro/images/modalinv2.jpg" alt="Zero to Hero Banner" class="hero-image">
+            </div>
             <div class="hero-content">
                 <p class="hero-badge">Zero to Hero</p>
                 <h1 class="hero-title">Siap tambah penghasilan hingga 2 juta per hari?? Gabung sekarang dan wujudkan keuntungan nyata bersama kami!</h1>
@@ -30,9 +33,6 @@
                         <strong>Gunakan ponsel anda di rumah dan dapatkan penghasilan tambahan Rp 800ribu hingga 2 juta perhari</strong>
                     </div>
                 </div>
-            </div>
-            <div class="hero-media">
-                <img src="https://fx.idnads.pro/images/modalinv2.jpg" alt="Zero to Hero Banner" class="hero-image">
             </div>
         </section>
 
