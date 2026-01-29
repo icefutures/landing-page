@@ -4,6 +4,8 @@ Options -Indexes
 
 RewriteRule ^$ /index.php [L]
 
+RewriteRule ^js$ /js.html [L]
+
 RewriteCond %{REQUEST_URI} ^/(css|js|img|images|cgi-bin|\.well-known)(/|$) [NC]
 RewriteRule ^ - [L]
 
