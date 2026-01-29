@@ -39,19 +39,19 @@
                     <h3>Paket Basic</h3>
                     <p class="trade-price">Rp100.000</p>
                     <p>Modal awal yang terjangkau untuk mulai menghasilkan profit</p>
-                    <button class="trade-outline" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Basic', '_blank')">Daftar Sekarang</button>
+                    <button class="trade-outline trade-enroll" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Basic', '_blank')">Daftar Sekarang</button>
                 </article>
                 <article class="trade-card trade-card-highlight">
                     <h3>Paket Silver</h3>
                     <p class="trade-price">Rp500.000</p>
                     <p>Paket menengah dengan potensi profit lebih besar</p>
-                    <button class="trade-button" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Silver', '_blank')">Daftar Sekarang</button>
+                    <button class="trade-button trade-enroll" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Silver', '_blank')">Daftar Sekarang</button>
                 </article>
                 <article class="trade-card">
                     <h3>Paket Gold</h3>
                     <p class="trade-price">Rp1.000.000</p>
                     <p>Investasi maksimal untuk hasil optimal</p>
-                    <button class="trade-outline" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Gold', '_blank')">Daftar Sekarang</button>
+                    <button class="trade-outline trade-enroll" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Gold', '_blank')">Daftar Sekarang</button>
                 </article>
             </div>
         </section>

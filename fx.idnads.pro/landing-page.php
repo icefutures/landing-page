@@ -47,19 +47,19 @@
                     <h3 class="package-title">Paket Basic</h3>
                     <p class="package-amount">Rp100.000</p>
                     <p class="package-description">Modal awal yang terjangkau untuk mulai menghasilkan profit</p>
-                    <button class="btn btn-outline" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Basic', '_blank')">Daftar Sekarang</button>
+                    <button class="btn btn-outline btn-enroll" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Basic', '_blank')">Daftar Sekarang</button>
                 </article>
                 <article class="package-card featured">
                     <h3 class="package-title">Paket Silver</h3>
                     <p class="package-amount">Rp500.000</p>
                     <p class="package-description">Paket menengah dengan potensi profit lebih besar</p>
-                    <button class="btn btn-primary" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Silver', '_blank')">Daftar Sekarang</button>
+                    <button class="btn btn-primary btn-enroll" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Silver', '_blank')">Daftar Sekarang</button>
                 </article>
                 <article class="package-card">
                     <h3 class="package-title">Paket Gold</h3>
                     <p class="package-amount">Rp1.000.000</p>
                     <p class="package-description">Investasi maksimal untuk hasil optimal</p>
-                    <button class="btn btn-outline" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Gold', '_blank')">Daftar Sekarang</button>
+                    <button class="btn btn-outline btn-enroll" onclick="window.open('https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Gold', '_blank')">Daftar Sekarang</button>
                 </article>
             </div>
         </section>

@@ -186,6 +186,11 @@ body {
     font-size: 1.02rem;
 }
 
+.btn-enroll {
+    font-size: 1.08rem;
+    letter-spacing: 0.2px;
+}
+
 .btn-primary {
     background: linear-gradient(120deg, var(--fx-primary), var(--fx-secondary));
     color: #fff;

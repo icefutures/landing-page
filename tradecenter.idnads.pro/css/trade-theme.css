@@ -97,6 +97,11 @@ body {
     font-size: 1.02rem;
 }
 
+.trade-enroll {
+    font-size: 1.08rem;
+    letter-spacing: 0.2px;
+}
+
 .trade-button {
     background: linear-gradient(120deg, var(--trade-accent), #fb7185);
     color: #0b1120;
