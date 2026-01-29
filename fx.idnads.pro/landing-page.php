@@ -84,16 +84,16 @@
             </div>
             <div class="slideshow-container">
                 <div class="mySlides">
-                    <img src="https://fx.idnads.pro/images/testimonnial/testi1.jpg" alt="Testimonial 1" onclick="openModal(this.src)">
+                    <img src="https://fx.idnads.pro/images/testimonial/testi1.jpg" alt="Testimonial 1" onclick="openModal(this.src)">
                 </div>
                 <div class="mySlides">
-                    <img src="https://fx.idnads.pro/images/testimonnial/testi2.jpg" alt="Testimonial 2" onclick="openModal(this.src)">
+                    <img src="https://fx.idnads.pro/images/testimonial/testi2.jpg" alt="Testimonial 2" onclick="openModal(this.src)">
                 </div>
                 <div class="mySlides">
-                    <img src="https://fx.idnads.pro/images/testimonnial/testi3.jpg" alt="Testimonial 3" onclick="openModal(this.src)">
+                    <img src="https://fx.idnads.pro/images/testimonial/testi3.jpg" alt="Testimonial 3" onclick="openModal(this.src)">
                 </div>
                 <div class="mySlides">
-                    <img src="https://fx.idnads.pro/images/testimonnial/testi4.jpg" alt="Testimonial 4" onclick="openModal(this.src)">
+                    <img src="https://fx.idnads.pro/images/testimonial/testi4.jpg" alt="Testimonial 4" onclick="openModal(this.src)">
                 </div>
                 <div class="dots-container">
                     <span class="dot" onclick="currentSlide(1)"></span>
