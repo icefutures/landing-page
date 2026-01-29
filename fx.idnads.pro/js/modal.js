@@ -9,7 +9,10 @@
  */
 function openModal(img) {
     let modal = document.getElementById("myModal");
-    let modalImg = document.getElementById("imgModal");
+    let modalImg = document.getElementById("img01") || document.getElementById("imgModal");
+    if (!modal || !modalImg) {
+        return;
+    }
     modal.style.display = "block";
     modalImg.src = img.src;
 }
@@ -19,6 +22,9 @@ function openModal(img) {
  */
 function closeModal() {
     let modal = document.getElementById("myModal");
+    if (!modal) {
+        return;
+    }
     modal.style.display = "none";
 }
 
@@ -29,7 +35,7 @@ function initModal() {
     // Close modal when clicking outside the image
     window.onclick = function(event) {
         let modal = document.getElementById("myModal");
-        if (event.target == modal) {
+        if (modal && event.target == modal) {
             modal.style.display = "none";
         }
     }
