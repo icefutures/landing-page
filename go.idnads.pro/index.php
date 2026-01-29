@@ -212,6 +212,8 @@
         <img src="" alt="Preview" data-modal-img>
     </div>
 
+    <button class="scroll-top" data-scroll-top aria-label="Kembali ke atas">↑</button>
+
     <script src="/js/landing.js"></script>
 </body>
 </html>

@@ -56,6 +56,7 @@ faqItems.forEach((item) => {
 const modal = document.querySelector('[data-modal]');
 const modalImg = document.querySelector('[data-modal-img]');
 const modalClose = document.querySelector('[data-modal-close]');
+const scrollTopButton = document.querySelector('[data-scroll-top]');
 
 function openModal(src) {
     if (!modal || !modalImg || !src) return;
@@ -77,3 +78,17 @@ slides.forEach((slide) => {
     const img = slide.querySelector('img');
     img?.addEventListener('click', () => openModal(img.currentSrc || img.src));
 });
+
+// Scroll to top
+if (scrollTopButton) {
+    const toggleScrollButton = () => {
+        scrollTopButton.classList.toggle('is-visible', window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', toggleScrollButton);
+    toggleScrollButton();
+
+    scrollTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
